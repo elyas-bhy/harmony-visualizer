@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Harmony Visualizer</title>
+	<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+	<link href="./css/fonts.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" href="./css/reset-min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="./css/design.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="./css/finger.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<script src="./js/jquery.min.js"></script><style type="text/css"></style>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+	<script type="text/javascript" src="./js/jquery.spinner.js"></script>
+	
+	<script src="./js/util.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/mapping.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="wrapper" class="ontop">
+		<header>
+			<div id="header">
+				<h1>Harmony<span>Visualizer</span></h1>
+				<h2>code contribution flows across repositories</h2>
+			</div>
+		</header>
+		<div class="canvas_container">
+			<canvas id="flows" width="940" class="datamovin" height="auto" style="cursor: pointer;"></canvas>
+			<div id="src_title" class="ititle" style="display: none;"></div>
+			<div id="dst_title" class="ititle" style="display: none;"></div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+
+		<div id="src_info" class="info"></div>
+		<div id="dst_info" class="info" style="left: 745px;"></div>
+		
+		<div id="contents" class="ontop" style="height: auto;">
+			<div class="par">
+				<h4>Visualizing code contribution in software repositories</h4>
+				<br>
+				<p>
+					<strong>HarmonyVisualizer</strong> is an experimental project in data visualization created in the context of a course work.
+					<br><br>
+					The current version of <strong>HarmonyVisualizer</strong> is based on a HTML5 toolkit for the creation of flow charts called data<strong>movin</strong>, developped by Carlo Zapponi. <br>This prototype is based on his website <a href="http://peoplemov.in/">peoplemov.in</a>.
+					<br><br>
+					
+				</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		
+		
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<script src="./js/DataMovin.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/DataMovinInteractions.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/finger.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/flows.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>
