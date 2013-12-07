@@ -58,10 +58,10 @@
 								dm_interactions.init(datamovin);
 								
 								dm_interactions.registerMouseEvents({
-									'click':showCountryInfo,
-									'mouseover':showCountryName,
-									'mouseout':hideCountryName,
-									//'document_scrollwheel':hideCountryName,
+									'click':showEntityInfo,
+									'mouseover':showEntityName,
+									'mouseout':hideEntityName,
+									//'document_scrollwheel':hideEntityName,
 									'processing':handleProcessing
 								});
 								
@@ -70,20 +70,20 @@
 									switch(connection[0]){
 										case '#f':
 											datamovin.drawOutFlow(connection[1],true);
-											var goToCountry=datamovin.getPointInfo(connection[1],'src');
-											showCountryInfo(goToCountry,null,true);
+											var goToEntity=datamovin.getPointInfo(connection[1],'src');
+											showEntityInfo(goToEntity,null,true);
 											Finger.init(false);
 										break;
 										case '#t':
 											datamovin.drawInFlow(connection[1],true);
-											var goToCountry=datamovin.getPointInfo(connection[1],'dst');
-											showCountryInfo(goToCountry,null,true);
+											var goToEntity=datamovin.getPointInfo(connection[1],'dst');
+											showEntityInfo(goToEntity,null,true);
 											Finger.init(false);
 										break;
 										case '#c':
 											datamovin.drawFlowFromTo(connection[1],connection[2],true);
-											var goToCountry=datamovin.getPointInfo(connection[1],'src');
-											showCountryInfo(goToCountry,connection[2],true);
+											var goToEntity=datamovin.getPointInfo(connection[1],'src');
+											showEntityInfo(goToEntity,connection[2],true);
 											Finger.init(false);
 										break;
 										default:
@@ -98,11 +98,11 @@
 							
 							
 							/*
-							var country_index=0;
+							var entity_index=0;
 							(function drawConnections(){
-								if(country_index<mapping.length) {
-									drawFromConnections(mapping[country_index]);
-									country_index++;
+								if(entity_index<mapping.length) {
+									drawFromConnections(mapping[entity_index]);
+									entity_index++;
 									setTimeout(drawConnections,1000);
 								}
 							}());
@@ -114,12 +114,12 @@
 				$("<div/>").attr("class","alert").html("Unfortunately your browser does not support <span>HTML5</span>.<br/>Please upgrade to a modern browser to fully enjoy <span>people<strong>movin</strong></span>").prependTo("#contents").fadeIn(1000);
 			}
 		}
-		function showCountryName(country_info){
+		function showEntityName(entity_info){
 
-			if(country_info && country_info.type) {
-				if(country_info.type=='src') {
+			if(entity_info && entity_info.type) {
+				if(entity_info.type=='src') {
 					
-					$("#src_title").html(window.mapping[country_info.name]).show();
+					$("#src_title").html(window.mapping[entity_info.name]).show();
 					$("#dst_title").hide();
 					if(contents.hasClass("ontop")) {
 						//console.log($("#src_title"),$("#src_title").outerWidth())
@@ -131,12 +131,12 @@
 					
 					
 					position={
-						top:(country_info.y+country_info.h/2-$("#src_title").height()/2)+"px",
+						top:(entity_info.y+entity_info.h/2-$("#src_title").height()/2)+"px",
 						left:left
 					};
 					
 					last={
-						country:country_info.name,
+						entity:entity_info.name,
 						el:"#src_title",
 						direction:'src',
 						pos:position
@@ -144,10 +144,10 @@
 					
 				} else {
 					
-					$("#dst_title").html(window.mapping[country_info.name]).show();
+					$("#dst_title").html(window.mapping[entity_info.name]).show();
 					$("#src_title").hide();
 					position={
-						top:(country_info.y+country_info.h/2-$("#dst_title").height()/2)+"px"
+						top:(entity_info.y+entity_info.h/2-$("#dst_title").height()/2)+"px"
 					};
 					if(contents.hasClass("ontop")) {
 						position.left=170+600;
@@ -158,7 +158,7 @@
 					}
 
 					last={
-						country:country_info.name,
+						entity:entity_info.name,
 						el:"#dst_title",
 						direction:'dst',
 						pos:position
@@ -166,14 +166,14 @@
 					
 				}
 				
-				$(last.el).attr("rel",((last.direction=='src')?'from_':'to_')+last.country).show().css(last.pos).show();
+				$(last.el).attr("rel",((last.direction=='src')?'from_':'to_')+last.entity).show().css(last.pos).show();
 			} else {
 				last=null;
-				hideCountryName(this);
+				hideEntityName(this);
 				
 			}
 		}
-		function hideCountryName(e){
+		function hideEntityName(e){
 			var relTarget=e.relatedTarget || e.toElement;
 			if(!relTarget || (relTarget && relTarget.className && relTarget.className!='ititle'))
 				$(".ititle").hide();	
@@ -181,40 +181,40 @@
 		function handleMouseMove(e){
 			var relTarget=e.relatedTarget || e.toElement;
 		}
-		function showCountryInfo(country_info,other,animate){
+		function showEntityInfo(entity_info,other,animate){
 			Finger.remove();
 			$(".info").hide();
-			if(country_info==-1){
+			if(entity_info==-1){
 				window.location.hash="!";
 				//contents.show();
 				showContents();
 				return 0;
 			}
-			if(country_info){
+			if(entity_info){
 				//contents.hide();
 				hideContents();
 				$(".ititle").hide();
-				getCountryInfo(country_info.name,country_info.type,country_info.x,country_info.y+country_info.h/2+10,other,animate);
+				getEntityInfo(entity_info.name,entity_info.type,entity_info.x,entity_info.y+entity_info.h/2+10,other,animate);
 				if(!other) {
-					if(country_info.type=='src') {
-						window.location.hash="f_"+country_info.name;
+					if(entity_info.type=='src') {
+						window.location.hash="f_"+entity_info.name;
 					} else {
-						window.location.hash="t_"+country_info.name;
+						window.location.hash="t_"+entity_info.name;
 					}
 				} else {
-					var goToCountry=datamovin.getPointInfo(other,'dst');
-					getCountryInfo(goToCountry.name,goToCountry.type,goToCountry.x,goToCountry.y+goToCountry.h/2+10,country_info.name);
-					window.location.hash="c_"+country_info.name+"_"+other;
+					var goToEntity=datamovin.getPointInfo(other,'dst');
+					getEntityInfo(goToEntity.name,goToEntity.type,goToEntity.x,goToEntity.y+goToEntity.h/2+10,entity_info.name);
+					window.location.hash="c_"+entity_info.name+"_"+other;
 				}
 			} else {
 				window.location.hash="!";
 			}
 		}
-		function getCountryInfo(country,direction,x,y,other,animate){
+		function getEntityInfo(entity,direction,x,y,other,animate){
 			$.ajax({
 				url:$info_host,
 				data:{
-					c:country,
+					c:entity,
 					src:(direction=='src'?1:0),
 					o:(other?other:'')
 				},
@@ -278,7 +278,7 @@
 				}
 				return false;
 			});
-			function manageLIClik(li,country,direction){
+			function manageLIClik(li,entity,direction){
 				
 				var dir=(direction=='to')?'dst':'src',
 					data=datamovin.getCurrent()[(direction=='to')?'src':'dst'];
@@ -288,23 +288,23 @@
 					li.addClass("sel");
 					if(direction=='to') {
 						datamovin.clean();
-						datamovin.drawFlowFromTo(data[0],country,true);
-						window.location.hash="c_"+data[0]+"_"+country;
+						datamovin.drawFlowFromTo(data[0],entity,true);
+						window.location.hash="c_"+data[0]+"_"+entity;
 					} else {
-						datamovin.drawFlowFromTo(country,data[0],true);
-						window.location.hash="c_"+country+"_"+data[0];
+						datamovin.drawFlowFromTo(entity,data[0],true);
+						window.location.hash="c_"+entity+"_"+data[0];
 					}
-					var info = datamovin.getPointInfo(country,dir);
-					getCountryInfo(country,dir,info.x,info.y+info.h/2+10,data[0]);
+					var info = datamovin.getPointInfo(entity,dir);
+					getEntityInfo(entity,dir,info.x,info.y+info.h/2+10,data[0]);
 				} else {
 
-					var goToCountry=datamovin.getPointInfo(country,dir);
+					var goToEntity=datamovin.getPointInfo(entity,dir);
 					var scrolling={
-						scrollTop:goToCountry.y+"px"
+						scrollTop:goToEntity.y+"px"
 					};
 					if(!vertical){
 						scrolling={
-							scrollLeft:goToCountry.x+"px"
+							scrollLeft:goToEntity.x+"px"
 						};
 					}
 					$('html,body').animate(scrolling,1000);
@@ -318,11 +318,11 @@
 				
 				var $this=$(this);
 				
-				var country=this.id.split("_")
-				if(country[0]=='to'){
-					manageLIClik($this,country[1],country[0]);
+				var entity=this.id.split("_")
+				if(entity[0]=='to'){
+					manageLIClik($this,entity[1],entity[0]);
 				} else {
-					manageLIClik($this,country[1],country[0]);
+					manageLIClik($this,entity[1],entity[0]);
 				}
 				
 				
@@ -334,12 +334,12 @@
 				$(".info ul li a.sel").removeClass("sel");
 				
 				var $this=$(this),
-					country=this.id.split("_");
+					entity=this.id.split("_");
 					
-				if(country[0]=='to'){
-					datamovin.drawInFlow(country[1],true);
+				if(entity[0]=='to'){
+					datamovin.drawInFlow(entity[1],true);
 				} else {
-					datamovin.drawOutFlow(country[1],true);
+					datamovin.drawOutFlow(entity[1],true);
 				}
 
 				window.location.hash=$this.attr("href");
@@ -354,20 +354,20 @@
 				e.preventDefault();
 				var $this=$(this);
 				
-				var country=$this.attr("rel").split("_");
+				var entity=$this.attr("rel").split("_");
 				if(!$("#"+$this.attr("rel")).is(":visible")){
-					if(country[0]=='to'){
+					if(entity[0]=='to'){
 						handleProcessing('start','dst');
 						setTimeout(function tm(){
-							datamovin.drawInFlow(country[1],true);
-							showCountryInfo(datamovin.getPointInfo(country[1],'dst'));
+							datamovin.drawInFlow(entity[1],true);
+							showEntityInfo(datamovin.getPointInfo(entity[1],'dst'));
 							setTimeout(function ttm(){handleProcessing('end','dst');},250);
 						},100);
 					} else {
 						handleProcessing('start','src');
 						setTimeout(function tm(){
-							datamovin.drawOutFlow(country[1],true);
-							showCountryInfo(datamovin.getPointInfo(country[1],'src'));
+							datamovin.drawOutFlow(entity[1],true);
+							showEntityInfo(datamovin.getPointInfo(entity[1],'src'));
 							setTimeout(function ttm(){handleProcessing('end','src');},250);
 						},100);
 					}
@@ -380,18 +380,18 @@
 				e.preventDefault();
 				Finger.remove();
 				if($("#contents").css("opacity")==1) {
-					var country=this.id.split("_");
+					var entity=this.id.split("_");
 					
 					
-					if(country[0]=='from') {
-						datamovin.drawOutFlow(country[1],true);
-						showCountryInfo(datamovin.getPointInfo(country[1],'src'),null,true);
-					} else if(country[0]=='to') {
-						datamovin.drawInFlow(country[1],true);
-						showCountryInfo(datamovin.getPointInfo(country[1],'dst'),null,true);
+					if(entity[0]=='from') {
+						datamovin.drawOutFlow(entity[1],true);
+						showEntityInfo(datamovin.getPointInfo(entity[1],'src'),null,true);
+					} else if(entity[0]=='to') {
+						datamovin.drawInFlow(entity[1],true);
+						showEntityInfo(datamovin.getPointInfo(entity[1],'dst'),null,true);
 					} else {
-						datamovin.drawFlowFromTo(country[1],country[2],true);
-						showCountryInfo(datamovin.getPointInfo(country[1],'src'),country[2],true);
+						datamovin.drawFlowFromTo(entity[1],entity[2],true);
+						showEntityInfo(datamovin.getPointInfo(entity[1],'src'),entity[2],true);
 					}
 										
 					window.location.hash=this.href.split("#")[1];
