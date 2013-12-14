@@ -1,13 +1,13 @@
 var mapping={
-	"D1":"alpha",
-	"D2":"bravo",
-	"D3":"charlie",
-	"D4":"delta",
-	"D5":"echo",
-	"D6":"foxtrot",
-	"D7":"golf",
-	"D8":"hotel",
-	"D9":"india",
+	"D1":"Alpha",
+	"D2":"Bravo",
+	"D3":"Charlie",
+	"D4":"Delta",
+	"D5":"Echo",
+	"D6":"Foxtrot",
+	"D7":"Golf",
+	"D8":"Hotel",
+	"D9":"India",
 
 	"M1":"com.app.generic",
 	"M2":"com.app.io",
@@ -16,5 +16,14 @@ var mapping={
 	"M5":"com.app.stats",
 	"M6":"com.app.test",
 	"M7":"com.app.trace",
-	"M8":"com.app.util"
+	"M8":"com.app.util",
+
+	"D":"Developpers",
+	"M":"Modules",
+	"PC":"Commits (%)",
+	"DAF":"DAF",
+	"MAF":"MAF",
+	"NBI":"Items",
+	"NBC":"Contributions",
+	"TPC":"Total commits (%)",
 }

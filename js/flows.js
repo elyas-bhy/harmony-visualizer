@@ -1,9 +1,9 @@
 (function($){
 	
-	var $host="data/flows.json"
-		$info_host="data/details.html";
+	var $host = "data/flows.json"
+		$info_host = "data/popup.json";
 	
-	var Flows=new function(){
+	var Flows = new function() {
 		
 		var contents=$("#contents");
 		
@@ -210,53 +210,99 @@
 				window.location.hash="!";
 			}
 		}
-		function getEntityInfo(entity,direction,x,y,other,animate){
+
+		function getEntityInfo(entity,direction,x,y,other,animate) {
 			$.ajax({
-				url:$info_host,
-				data:{
-					c:entity,
-					src:(direction=='src'?1:0),
-					o:(other?other:'')
+				url:  $info_host,
+				data: {
+					c:   entity,
+					src: (direction == 'src' ? 1 : 0),
+					o:   (other ? other : '')
 				},
-				type:'POST',
-				dataType: 'html',
-				success: function(html){
-					var position={}
-					
-					if(vertical) {
-						if(direction=='src') {
-							left=$("#flows").position().left+margins.left-$("#"+direction+"_info").outerWidth();
+				type: 'GET',
+				dataType: 'json',
+				success: function(data) {
+
+					var html = "";
+
+					if (null != data[entity]) {
+
+						var rel, title;
+						if (direction == 'src' ? 1 : 0) {
+							rel = "to_";
+							reverseRel = "from_";
+							contractedRel = "f_";
+							side = "modules";
 						} else {
-							left=$("#flows").position().left+x+20;//+margins.right;//x-$("#"+direction+"_info").outerWidth();
+							rel = "from_";
+							reverseRel = "to_";
+							contractedRel = "t_";
+							side = "developpers";
+						}
+
+						html = '<h2><a href="#' + contractedRel + entity + '" id="' + reverseRel + entity + '" title="' + mapping[entity] + '">' + mapping[entity] + '</a></h2>'
+						+ '<a href="#" class="close" rel="' + rel + entity + '">hide</a>'
+
+						for (var key in items = data[entity]) {
+							if (key != "relations") {
+								html += '<h3>' + mapping[key] + ': <b>' + items[key] + '</b></h3>';
+							}
+						}
+
+						html += '<h5>Top ' + side + '</h5>'
+							+ '<ul>';
+						var k = 1;
+						for (var key in relations = data[entity]["relations"]) {
+							html += '<li class="p' + k%2 + '">'
+								+ '<a href="#c_' + entity + '_' + key + '" id="' + rel + key + '" class="il">'
+								+ '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>'
+								+ '<span class="val">' + relations[key] + '</span>'
+								+ '</a>'
+								+ '</li>';
+							k++;
+						}
+						html += '</ul>';
+					}
+
+
+					var position = {}
+					
+					if (vertical) {
+						if (direction == 'src') {
+							left = $("#flows").position().left + margins.left - $("#" + direction + "_info").outerWidth();
+						} else {
+							left = $("#flows").position().left + x + 20; // + margins.right; // x - $("#" + direction + "_info").outerWidth();
 						} 
-						position={
-							top:(y+80)+"px",
-							left:left
+						position = {
+							top:  (y + 80) + "px",
+							left: left
 						};
 					} else {
-						position={
-							left:(x-205)+"px",
-							top:(y+80+((direction=='src')?15:-340))+"px"
+						position = {
+							left: (x - 205) + "px",
+							top:  (y + 80 + ((direction == 'src') ? 15 : -340)) + "px"
 						};
 					}
 					//$(".info").hide();
-					$("#"+direction+"_info").show().html(html).css(position);
+					if (html != "")
+						$("#" + direction + "_info").show().html(html).css(position);
 					
 					
-					if(animate){
-						var scrolling={
-							scrollTop:y+"px"
+					if (animate) {
+						var scrolling = {
+							scrollTop: y + "px"
 						};
-						if(!datamovin.getOrientation()=='horizontal'){
-							scrolling={
-								scrollLeft:x+"px"
+						if (!datamovin.getOrientation() == 'horizontal') {
+							scrolling = {
+								scrollLeft: x + "px"
 							};
 						}
-						$('html,body').animate(scrolling,1000);
+						$('html,body').animate(scrolling, 1000);
 					}
 				}
 			});
 		}
+
 		function initDOM(){
 			
 			contents=$("#contents");

@@ -36,7 +36,7 @@ var Colors=function(){
 		try {
 			return rgb[i][0]+","+rgb[i][1]+","+rgb[i][2];
 		} catch(e) {
-			console.error(i)
+			//console.error(i);
 			i=0;
 			return rgb[i][0]+","+rgb[i][1]+","+rgb[i][2];
 		}
