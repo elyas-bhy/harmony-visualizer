@@ -1,8 +1,10 @@
 package com.analysis.focus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -18,17 +20,20 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
+	private List<Distribution> distributions;
 	private HashMap<String,Component> components;
 	private HashMap<String,Contributor> contributors;
 
 	public FocusAnalysis() {
 		super();
+		distributions = new ArrayList<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
 
 	public FocusAnalysis(AnalysisConfiguration config, Dao dao, Properties properties) {
 		super(config, dao, properties);
+		distributions = new ArrayList<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
@@ -52,8 +57,7 @@ public class FocusAnalysis extends AbstractAnalysis {
 				
 				// Increment contributions once for each affected component
 				for (Component cm : cc) {
-					c.setContributions(c.getContributions() + 1);
-					c.addComponent(cm.getId());
+					c.addComponent(cm);
 					cm.setContributions(cm.getContributions() + 1);
 				}
 			}
@@ -65,8 +69,24 @@ public class FocusAnalysis extends AbstractAnalysis {
 			component.updateContribProportion(totalCommits);
 		}
 		
+		int contribs;
+		String componentId;
+		for (Contributor contributor : contributors.values()) {
+			contributor.updateContribProportion(totalCommits);
+			for (Entry<String,Integer> entry : contributor.getContributionMap().entrySet()) {
+				componentId = entry.getKey();
+				contribs = entry.getValue();
+				Distribution d = new Distribution(contributor.getAuthorId(), componentId);
+				d.setContributions(contribs);
+				d.setQprime((double)contribs / (double)contributor.getContributions());
+				d.setRprime((double)contribs / (double)components.get(componentId).getContributions());
+				distributions.add(d);
+			}
+		}
+		
 		HarmonyLogger.info(contributors.values().toString());
 		HarmonyLogger.info(components.values().toString());
+		HarmonyLogger.info(distributions.toString());
 	}
 	
 	/**

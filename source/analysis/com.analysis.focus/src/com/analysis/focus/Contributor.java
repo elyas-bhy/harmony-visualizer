@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Contributor {
@@ -13,13 +14,19 @@ public class Contributor {
 	@GeneratedValue
 	private int id;
 	
+	// Key: component ID
+	// Value: contributions made by this contributor
+	// towards the specified component
+	@Transient
+	private HashMap<String,Integer> contributionMap;
+	
 	private String authorId;
 	private double daf;
 	private int contributions;
-	private HashMap<Integer,Focus> focus; // key: componentId
+	private double contribProportion;
 	
 	public Contributor() {
-		focus = new HashMap<>();
+		contributionMap = new HashMap<>();
 	}
 	
 	public Contributor(String authorId) {
@@ -59,23 +66,43 @@ public class Contributor {
 		this.contributions = contributions;
 	}
 
-	public HashMap<Integer, Focus> getFocus() {
-		return focus;
+	public double getContribProportion() {
+		return contribProportion;
 	}
 
-	public void setFocus(HashMap<Integer, Focus> focus) {
-		this.focus = focus;
+	public void setContribProportion(double proportion) {
+		this.contribProportion = proportion;
 	}
 	
-	public void addComponent(Integer componentId) {
-		focus.put(componentId, new Focus());
+	public void updateContribProportion(int totalContributions) {
+		contribProportion = (double)contributions / (double)totalContributions;
+	}
+	
+	public HashMap<String,Integer> getContributionMap() {
+		return contributionMap;
+	}
+
+	public void setContributionMap(HashMap<String,Integer> contributionMap) {
+		this.contributionMap = contributionMap;
+	}
+	
+	public void addComponent(Component component) {
+		String id = component.getName();
+		if (contributionMap.containsKey(id)) {
+			Integer count = contributionMap.get(id);
+			contributionMap.put(id, count + 1);
+		} else {
+			contributionMap.put(id, 1);
+		}
+		++contributions;
 	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getSimpleName());
 		sb.append("[Contributions: " + contributions);
-		sb.append(", focus: " + focus.values().toString());
+		sb.append(", contribProportion: " + contribProportion);
+		sb.append(", components: " + contributionMap.values().toString());
 		sb.append("]");
 		return sb.toString();
 	}
