@@ -64,7 +64,8 @@ public class FocusAnalysis extends AbstractAnalysis {
 			contributors.put(author.getNativeId(), c);
 		}
 		
-		int totalCommits = src.getEvents().size(); // A
+		// Update contributions percentage for all components
+		int totalCommits = src.getEvents().size();
 		for (Component component : components.values()) {
 			component.updateContribProportion(totalCommits);
 		}
@@ -73,6 +74,8 @@ public class FocusAnalysis extends AbstractAnalysis {
 		String componentId;
 		for (Contributor contributor : contributors.values()) {
 			contributor.updateContribProportion(totalCommits);
+			
+			// Calculate the distribution of the contributor's contributions
 			for (Entry<String,Integer> entry : contributor.getContributionMap().entrySet()) {
 				componentId = entry.getKey();
 				contribs = entry.getValue();
@@ -97,6 +100,11 @@ public class FocusAnalysis extends AbstractAnalysis {
 		return components.get(extractPrefix(item));
 	}
 	
+	/**
+	 * Returns the prefix of the item's path
+	 * @param item
+	 * @return
+	 */
 	private String extractPrefix(Item item) {
 		String prefix = item.getNativeId();
 		if (prefix.lastIndexOf('/') != -1) {
@@ -107,6 +115,10 @@ public class FocusAnalysis extends AbstractAnalysis {
 		return prefix;
 	}
 	
+	/**
+	 * Assigns the provided items to their respective components
+	 * @param items
+	 */
 	private void initComponents(List<Item> items) {
 		HarmonyLogger.info("Extracting components");
 		for (Item item : items) {
