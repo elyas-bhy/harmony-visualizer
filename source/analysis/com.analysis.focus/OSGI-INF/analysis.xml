@@ -4,5 +4,5 @@
 	<service>
 		<provide interface="fr.labri.harmony.core.analysis.Analysis"/>
 	</service>
-	<property name="persistence-unit" type="String" value="focusanalysis"/>
+	<property name="persistence-unit" type="String" value="focus"/>
 </scr:component> 
