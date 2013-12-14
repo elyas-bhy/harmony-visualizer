@@ -253,9 +253,15 @@
 							+ '<ul>';
 						var k = 1;
 						for (var key in relations = data[entity]["relations"]) {
-							html += '<li class="p' + k%2 + '">'
-								+ '<a href="#c_' + entity + '_' + key + '" id="' + rel + key + '" class="il">'
-								+ '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>'
+							html += '<li class="p' + k%2 + '">';
+
+							if (direction == 'src' ? 1 : 0) {
+								html += '<a href="#c_' + entity + '_' + key + '" id="' + rel + key + '" class="il">';
+							} else {
+								html += '<a href="#c_' + key + '_' + entity + '" id="' + rel + key + '" class="il">';
+							}
+
+							html += '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>';
 								+ '<span class="val">' + relations[key] + '</span>'
 								+ '</a>'
 								+ '</li>';
