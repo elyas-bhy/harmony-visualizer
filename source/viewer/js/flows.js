@@ -211,6 +211,17 @@
 			}
 		}
 
+		function sortByValue(tab) {
+			var keys = []; for(var key in tab) keys.push(key);
+			var sortedKeys = keys.sort(function(a,b) { return tab[b]-tab[a] });
+
+			var res = {};
+			for (var k = 0; k < sortedKeys.length; ++k) {
+				res[sortedKeys[k]] = tab[sortedKeys[k]];
+			}
+			return res;
+		}
+
 		function getEntityInfo(entity,direction,x,y,other,animate) {
 			$.ajax({
 				url:  $info_host,
@@ -252,7 +263,7 @@
 						html += '<h5>Top ' + side + '</h5>'
 							+ '<ul>';
 						var k = 1;
-						for (var key in relations = data[entity]["relations"]) {
+						for (var key in relations = sortByValue(data[entity]["relations"])) {
 							html += '<li class="p' + k%2 + '">';
 
 							if (direction == 'src' ? 1 : 0) {
@@ -261,7 +272,7 @@
 								html += '<a href="#c_' + key + '_' + entity + '" id="' + rel + key + '" class="il">';
 							}
 
-							html += '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>';
+							html += '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>'
 								+ '<span class="val">' + relations[key] + '</span>'
 								+ '</a>'
 								+ '</li>';
