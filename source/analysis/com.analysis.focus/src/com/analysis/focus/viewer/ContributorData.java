@@ -36,7 +36,7 @@ public class ContributorData implements VisualizerData {
 		properties.put("DAF", daf);
 	}
 	
-	public void putRelations(Map<String,Double> relations) {
+	public void putRelations(Map<String,Integer> relations) {
 		properties.put("relations", relations);
 	}
 	

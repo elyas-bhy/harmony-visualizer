@@ -36,7 +36,7 @@ public class ComponentData implements VisualizerData {
 		properties.put("MAF", maf);
 	}
 	
-	public void putRelations(Map<String,Double> relations) {
+	public void putRelations(Map<String,Integer> relations) {
 		properties.put("relations", relations);
 	}
 	

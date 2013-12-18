@@ -2,7 +2,6 @@ package com.analysis.focus.viewer;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,33 +31,20 @@ public class VisualizerDataWriter {
 	
 	private void initMapping() {
 		int i = 1;
-		for (Contributor contributor : contributors.values()) {
-			mapping.put(contributor.getName(), "D" + i);
-			++i;
-		}
-		i = 1;
 		for (Component component : components.values()) {
 			mapping.put(component.getName(), "M" + i);
+			++i;
+		}
+
+		i = 1;
+		for (Contributor contributor : contributors.values()) {
+			mapping.put(contributor.getName(), "D" + i);
 			++i;
 		}
 	}
 
 	public void generateRelations() {
-		ContributorData cdata;
-		for (Contributor contributor : contributors.values()) {
-			cdata = new ContributorData(contributor.getName());
-			cdata.putComponents(contributor.getContributionMap().size());
-			cdata.putNumContributions(contributor.getContributions());
-			cdata.putProportionContributions(contributor.getContribProportion());
-			cdata.putDaf(0);
-			Map<String,Double> relations = new LinkedHashMap<>();
-			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), new Double(Math.round(entry.getValue().getQprime() * 100)));
-			}
-			cdata.putRelations(relations);
-			data.put(mapping.get(contributor.getName()), cdata);
-		}
-		
+		Double d;
 		ComponentData mdata;
 		for (Component component : components.values()) {
 			mdata = new ComponentData(component.getName());
@@ -66,12 +52,29 @@ public class VisualizerDataWriter {
 			mdata.putNumContributions(component.getContributions());
 			mdata.putItems(component.getItems().size());
 			mdata.putMaf(0);
-			Map<String,Double> relations = new LinkedHashMap<>();
+			Map<String,Integer> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), new Double(Math.round(entry.getValue().getQprime() * 100)));
+				d = new Double(Math.round(entry.getValue().getQprime() * 100));
+				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
 			mdata.putRelations(relations);
 			data.put(mapping.get(component.getName()), mdata);
+		}
+		
+		ContributorData cdata;
+		for (Contributor contributor : contributors.values()) {
+			cdata = new ContributorData(contributor.getName());
+			cdata.putComponents(contributor.getContributionMap().size());
+			cdata.putNumContributions(contributor.getContributions());
+			cdata.putProportionContributions(new Double(Math.round(contributor.getContribProportion() * 100)));
+			cdata.putDaf(0);
+			Map<String,Integer> relations = new LinkedHashMap<>();
+			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
+				d = new Double(Math.round(entry.getValue().getQprime() * 100));
+				relations.put(mapping.get(entry.getKey()), d.intValue());
+			}
+			cdata.putRelations(relations);
+			data.put(mapping.get(contributor.getName()), cdata);
 		}
 		
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
