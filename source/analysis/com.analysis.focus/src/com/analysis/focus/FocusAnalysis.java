@@ -3,6 +3,7 @@ package com.analysis.focus;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
@@ -21,8 +22,8 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
-	private HashMap<String,Component> components;
-	private HashMap<String,Contributor> contributors;
+	private Map<String,Component> components;
+	private Map<String,Contributor> contributors;
 
 	public FocusAnalysis() {
 		super();
@@ -80,7 +81,6 @@ public class FocusAnalysis extends AbstractAnalysis {
 				componentId = entry.getKey();
 				Distribution d = entry.getValue();
 				contribs = d.getContributions();
-				//d.setContributions(contribs);
 				d.setQprime((double)contribs / (double)contributor.getContributions());
 				d.setRprime((double)contribs / (double)components.get(componentId).getContributions());
 			}

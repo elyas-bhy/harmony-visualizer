@@ -2,7 +2,6 @@ package com.analysis.focus.viewer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,12 +16,12 @@ import com.google.gson.GsonBuilder;
 
 public class VisualizerDataWriter {
 
-	private HashMap<String,String> mapping;
-	private HashMap<String,VisualizerData> data;
-	private HashMap<String,Contributor> contributors;
-	private HashMap<String,Component> components;
+	private Map<String,String> mapping;
+	private Map<String,VisualizerData> data;
+	private Map<String,Contributor> contributors;
+	private Map<String,Component> components;
 	
-	public VisualizerDataWriter(HashMap<String,Contributor> contributors, HashMap<String,Component> components) {
+	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components) {
 		this.mapping = new LinkedHashMap<>();
 		this.data = new LinkedHashMap<>();
 		this.contributors = contributors;
@@ -53,7 +52,7 @@ public class VisualizerDataWriter {
 			cdata.putDaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime());
+				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime() * 100);
 			}
 			cdata.putRelations(relations);
 			data.put(mapping.get(contributor.getAuthorId()), cdata);
@@ -68,7 +67,7 @@ public class VisualizerDataWriter {
 			mdata.putMaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime());
+				relations.put(mapping.get(entry.getKey()), entry.getValue().getRprime() * 100);
 			}
 			mdata.putRelations(relations);
 			data.put(mapping.get(component.getName()), mdata);
