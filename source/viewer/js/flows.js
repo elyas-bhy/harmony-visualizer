@@ -236,7 +236,7 @@
 
 					var html = "";
 
-					if (null != data[entity]) {
+					if (null != data[entity]["properties"]) {
 
 						var rel, title;
 						if (direction == 'src' ? 1 : 0) {
@@ -254,7 +254,7 @@
 						html = '<h2><a href="#' + contractedRel + entity + '" id="' + reverseRel + entity + '" title="' + mapping[entity] + '">' + mapping[entity] + '</a></h2>'
 						+ '<a href="#" class="close" rel="' + rel + entity + '">hide</a>'
 
-						for (var key in items = data[entity]) {
+						for (var key in items = data[entity]["properties"]) {
 							if (key != "relations") {
 								html += '<h3>' + mapping[key] + ': <b>' + items[key] + '</b></h3>';
 							}
@@ -263,7 +263,7 @@
 						html += '<h5>Top ' + side + '</h5>'
 							+ '<ul>';
 						var k = 1;
-						for (var key in relations = sortByValue(data[entity]["relations"])) {
+						for (var key in relations = sortByValue(data[entity]["properties"]["relations"])) {
 							html += '<li class="p' + k%2 + '">';
 
 							if (direction == 'src' ? 1 : 0) {
