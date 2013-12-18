@@ -1,12 +1,22 @@
 package com.analysis.focus;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
+
+import com.analysis.focus.viewer.ComponentData;
+import com.analysis.focus.viewer.ContributorData;
+import com.analysis.focus.viewer.VisualizerData;
+import com.google.gson.Gson;
 
 import fr.labri.harmony.core.analysis.AbstractAnalysis;
 import fr.labri.harmony.core.config.model.AnalysisConfiguration;
@@ -20,20 +30,23 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
-	private List<Distribution> distributions;
+	private HashMap<String,VisualizerData> data;
+	private HashMap<String,Distribution> distributions;
 	private HashMap<String,Component> components;
 	private HashMap<String,Contributor> contributors;
 
 	public FocusAnalysis() {
 		super();
-		distributions = new ArrayList<>();
+		data = new LinkedHashMap<>();
+		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
 
 	public FocusAnalysis(AnalysisConfiguration config, Dao dao, Properties properties) {
 		super(config, dao, properties);
-		distributions = new ArrayList<>();
+		data = new LinkedHashMap<>();
+		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
@@ -43,6 +56,7 @@ public class FocusAnalysis extends AbstractAnalysis {
 		HarmonyLogger.info("Starting FocusAnalysis, with " + src.getItems().size() + " items to analyze.");
 		initComponents(src.getItems());
 		
+		int totalContributions = 0;
 		for (Author author : src.getAuthors()) {
 			Contributor c = new Contributor(author.getNativeId());
 			
@@ -58,22 +72,24 @@ public class FocusAnalysis extends AbstractAnalysis {
 				// Increment contributions once for each affected component
 				for (Component cm : cc) {
 					c.addComponent(cm);
-					cm.setContributions(cm.getContributions() + 1);
+					cm.addContributor(c);
+					++totalContributions;
 				}
 			}
 			contributors.put(author.getNativeId(), c);
 		}
 		
 		// Update contributions percentage for all components
-		int totalCommits = src.getEvents().size();
 		for (Component component : components.values()) {
-			component.updateContribProportion(totalCommits);
+			component.updateContribProportion(totalContributions);
+			dao.saveData(getPersitenceUnitName(), component, src);
 		}
 		
 		int contribs;
 		String componentId;
 		for (Contributor contributor : contributors.values()) {
-			contributor.updateContribProportion(totalCommits);
+			contributor.updateContribProportion(totalContributions);
+			dao.saveData(getPersitenceUnitName(), contributor, src);
 			
 			// Calculate the distribution of the contributor's contributions
 			for (Entry<String,Integer> entry : contributor.getContributionMap().entrySet()) {
@@ -83,13 +99,49 @@ public class FocusAnalysis extends AbstractAnalysis {
 				d.setContributions(contribs);
 				d.setQprime((double)contribs / (double)contributor.getContributions());
 				d.setRprime((double)contribs / (double)components.get(componentId).getContributions());
-				distributions.add(d);
+				distributions.put(contributor.getAuthorId(), d);
+				dao.saveData(getPersitenceUnitName(), d, src);
 			}
 		}
+
+		generateJsonData();
+	}
+	
+	private void generateJsonData() {
+		int i = 1;
+		ContributorData cdata;
+		for (Contributor contributor : contributors.values()) {
+			cdata = new ContributorData();
+			cdata.putComponents(contributor.getContributionMap().size());
+			cdata.putNumContributions(contributor.getContributions());
+			cdata.putProportionContributions(contributor.getContribProportion());
+			cdata.putDaf(0);
+			cdata.putRelations(new LinkedHashMap<String,Double>());
+			data.put("D" + i, cdata);
+			++i;
+		}
 		
-		HarmonyLogger.info(contributors.values().toString());
-		HarmonyLogger.info(components.values().toString());
-		HarmonyLogger.info(distributions.toString());
+		i = 1;
+		ComponentData mdata;
+		for (Component component : components.values()) {
+			mdata = new ComponentData();
+			mdata.putContributors(component.getContributionMap().size());
+			mdata.putNumContributions(component.getContributions());
+			mdata.putItems(component.getItems().size());
+			mdata.putMaf(0);
+			mdata.putRelations(new LinkedHashMap<String,Double>());
+			data.put("M" + i, mdata);
+			++i;
+		}
+		
+		Gson gson = new Gson();
+		File file = new File("visualizer-data.txt");
+		try {
+			FileUtils.writeStringToFile(file, gson.toJson(data));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

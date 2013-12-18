@@ -1,6 +1,7 @@
 package com.analysis.focus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,6 +21,12 @@ public class Component {
 	@Transient
 	private List<Item> items;
 	
+	// Key: contributor ID
+	// Value: number of contributors who contributed 
+	// towards this component
+	@Transient
+	private HashMap<String,Integer> contributionMap;
+	
 	private String name;
 	private int contributions;
 	private double contribProportion;
@@ -27,6 +34,7 @@ public class Component {
 	
 	public Component() {
 		items = new ArrayList<Item>();
+		contributionMap = new HashMap<>();
 	}
 	
 	public Component(String name, Item item) {
@@ -53,6 +61,14 @@ public class Component {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public HashMap<String, Integer> getContributionMap() {
+		return contributionMap;
+	}
+
+	public void setContributionMap(HashMap<String, Integer> contributionMap) {
+		this.contributionMap = contributionMap;
 	}
 
 	public String getName() {
@@ -83,6 +99,17 @@ public class Component {
 		contribProportion = (double)contributions / (double)totalContributions;
 	}
 
+	public void addContributor(Contributor contributor) {
+		String id = contributor.getAuthorId();
+		if (contributionMap.containsKey(id)) {
+			Integer count = contributionMap.get(id);
+			contributionMap.put(id, count + 1);
+		} else {
+			contributionMap.put(id, 1);
+		}
+		++contributions;
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getSimpleName());

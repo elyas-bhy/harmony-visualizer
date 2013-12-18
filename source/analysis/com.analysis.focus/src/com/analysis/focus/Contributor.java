@@ -81,10 +81,6 @@ public class Contributor {
 	public HashMap<String,Integer> getContributionMap() {
 		return contributionMap;
 	}
-
-	public void setContributionMap(HashMap<String,Integer> contributionMap) {
-		this.contributionMap = contributionMap;
-	}
 	
 	public void addComponent(Component component) {
 		String id = component.getName();

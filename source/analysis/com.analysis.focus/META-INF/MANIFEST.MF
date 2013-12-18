@@ -1,6 +1,9 @@
 Manifest-Version: 1.0
 Export-Package: com.analysis.focus
-Require-Bundle: fr.labri.harmony.core, org.h2, com.mysql.jdbc
+Require-Bundle: fr.labri.harmony.core,
+ org.h2,
+ com.mysql.jdbc,
+ org.apache.commons.io;bundle-version="2.4.0"
 Service-Component: OSGI-INF/*.xml
 Bundle-Version: 1.0.0.qualifier
 Bundle-Name: com.analysis.focus
@@ -10,4 +13,6 @@ Import-Package: javax.persistence;version="2.0.4", org.osgi.framework;
 Bundle-SymbolicName: com.analysis.focus
 Meta-Persistence: META-INF/persistence.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: WEB-INF/lib/gson-2.2.4.jar,
+ .
 
