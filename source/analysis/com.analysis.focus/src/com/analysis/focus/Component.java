@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import com.analysis.focus.viewer.AbstractVisualizerEntity;
-import com.analysis.focus.viewer.MapUtil;
 
 import fr.labri.harmony.core.model.Item;
 

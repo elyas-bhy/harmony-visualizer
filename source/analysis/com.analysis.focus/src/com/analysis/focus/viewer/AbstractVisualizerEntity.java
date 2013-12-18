@@ -1,7 +1,7 @@
 package com.analysis.focus.viewer;
 
 
-public class AbstractVisualizerEntity {
+public abstract class AbstractVisualizerEntity implements VisualizerEntity {
 
 	protected String name;
 	protected int contributions;
