@@ -3,16 +3,21 @@ package com.analysis.focus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import com.analysis.focus.viewer.AbstractVisualizerEntity;
+import com.analysis.focus.viewer.MapUtil;
+
 import fr.labri.harmony.core.model.Item;
 
 @Entity
-public class Component {
+public class Component extends AbstractVisualizerEntity implements Comparable<Component> {
 	
 	@Id
 	@GeneratedValue
@@ -25,16 +30,12 @@ public class Component {
 	// Value: number of contributors who contributed 
 	// towards this component
 	@Transient
-	private HashMap<String,Distribution> contributionMap;
-	
-	private String name;
-	private int contributions;
-	private double contribProportion;
+	private Map<String,Distribution> contributionMap;
 	
 	
 	public Component() {
 		items = new ArrayList<Item>();
-		contributionMap = new HashMap<>();
+		contributionMap = new TreeMap<>();
 	}
 	
 	public Component(String name, Item item) {
@@ -63,36 +64,12 @@ public class Component {
 		this.items = items;
 	}
 
-	public HashMap<String,Distribution> getContributionMap() {
+	public Map<String,Distribution> getContributionMap() {
 		return contributionMap;
 	}
 
 	public void setContributionMap(HashMap<String,Distribution> contributionMap) {
 		this.contributionMap = contributionMap;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getContributions() {
-		return contributions;
-	}
-
-	public void setContributions(int contributions) {
-		this.contributions = contributions;
-	}
-
-	public double getContribProportion() {
-		return contribProportion;
-	}
-
-	public void setContribProportion(double proportion) {
-		this.contribProportion = proportion;
 	}
 	
 	public void updateContribProportion(int totalContributions) {
@@ -100,13 +77,13 @@ public class Component {
 	}
 
 	public void addContributor(Contributor contributor) {
-		String id = contributor.getAuthorId();
+		String id = contributor.getName();
 		if (contributionMap.containsKey(id)) {
 			Distribution d = contributionMap.get(id);
 			d.setContributions(d.getContributions() + 1);
 			contributionMap.put(id, d);
 		} else {
-			contributionMap.put(id, new Distribution(1));
+			contributionMap.put(id, new Distribution(id, 1));
 		}
 		++contributions;
 	}
@@ -120,6 +97,11 @@ public class Component {
 		sb.append(", items: " + items.toString());
 		sb.append("]");
 		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(Component c) {
+		return name.compareTo(c.getName());
 	}
 	
 }

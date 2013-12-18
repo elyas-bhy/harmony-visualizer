@@ -66,12 +66,22 @@ public class FocusAnalysis extends AbstractAnalysis {
 		}
 		
 		// Update contributions percentage for all components
+		int contribs;
+		String contributorId;
 		for (Component component : components.values()) {
 			component.updateContribProportion(totalContributions);
+			
+			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
+				contributorId = entry.getKey();
+				Distribution d = entry.getValue();
+				contribs = d.getContributions();
+				d.setQprime((double)contribs / (double)component.getContributions());
+				d.setRprime((double)contribs / (double)contributors.get(contributorId).getContributions());
+			}
+			
 			dao.saveData(getPersitenceUnitName(), component, src);
 		}
 		
-		int contribs;
 		String componentId;
 		for (Contributor contributor : contributors.values()) {
 			contributor.updateContribProportion(totalContributions);
