@@ -2,6 +2,7 @@ package com.analysis.focus.viewer;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,17 +23,17 @@ public class VisualizerDataWriter {
 	private Map<String,Component> components;
 	
 	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components) {
-		this.mapping = new LinkedHashMap<>();
+		this.mapping = new LinkedHashMap<>(); 
 		this.data = new LinkedHashMap<>();
-		this.contributors = contributors;
-		this.components = components;
+		this.contributors = MapUtil.sortByValue(contributors);
+		this.components = MapUtil.sortByValue(components);
 		initMapping();
 	}
 	
 	private void initMapping() {
 		int i = 1;
 		for (Contributor contributor : contributors.values()) {
-			mapping.put(contributor.getAuthorId(), "D" + i);
+			mapping.put(contributor.getName(), "D" + i);
 			++i;
 		}
 		i = 1;
@@ -45,17 +46,17 @@ public class VisualizerDataWriter {
 	public void generateRelations() {
 		ContributorData cdata;
 		for (Contributor contributor : contributors.values()) {
-			cdata = new ContributorData(contributor.getAuthorId());
+			cdata = new ContributorData(contributor.getName());
 			cdata.putComponents(contributor.getContributionMap().size());
 			cdata.putNumContributions(contributor.getContributions());
 			cdata.putProportionContributions(contributor.getContribProportion());
 			cdata.putDaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime() * 100);
+				relations.put(mapping.get(entry.getKey()), new Double(Math.round(entry.getValue().getQprime() * 100)));
 			}
 			cdata.putRelations(relations);
-			data.put(mapping.get(contributor.getAuthorId()), cdata);
+			data.put(mapping.get(contributor.getName()), cdata);
 		}
 		
 		ComponentData mdata;
@@ -67,7 +68,7 @@ public class VisualizerDataWriter {
 			mdata.putMaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				relations.put(mapping.get(entry.getKey()), entry.getValue().getRprime() * 100);
+				relations.put(mapping.get(entry.getKey()), new Double(Math.round(entry.getValue().getQprime() * 100)));
 			}
 			mdata.putRelations(relations);
 			data.put(mapping.get(component.getName()), mdata);

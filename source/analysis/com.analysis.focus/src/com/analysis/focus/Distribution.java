@@ -1,7 +1,9 @@
 package com.analysis.focus;
 
 
-public class Distribution {
+public class Distribution implements Comparable<Distribution> {
+	
+	private String owner;
 	
 	private int contributions;
 	
@@ -13,10 +15,19 @@ public class Distribution {
 	// relative to the total amount of contributions on a given component
 	private double rprime;
 	
-	public Distribution(int contributions) {
+	public Distribution(String owner, int contributions) {
+		this.owner = owner;
 		this.contributions = contributions;
 		this.qprime = 0;
 		this.rprime = 0;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 
 	public int getContributions() {
@@ -51,5 +62,10 @@ public class Distribution {
 		sb.append(", rprime: " + rprime);
 		sb.append("]");
 		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(Distribution d) {
+		return owner.compareTo(d.getOwner());
 	}
 }
