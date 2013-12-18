@@ -2,14 +2,22 @@ package com.analysis.focus.viewer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+
+import com.google.gson.annotations.Expose;
 
 public class ContributorData implements VisualizerData {
 	
+	@Expose
 	private Map<String,Object> properties;
+	private String id;
 	
-	public ContributorData() {
-		properties = new LinkedHashMap<>();
+	public ContributorData(String id) {
+		this.properties = new LinkedHashMap<>();
+		this.id = id;
+	}
+	
+	public String getID() {
+		return id;
 	}
 
 	public void putComponents(int numComponents) {
@@ -34,14 +42,6 @@ public class ContributorData implements VisualizerData {
 	
 	public Map<String,Object> getProperties() {
 		return properties;
-	}
-	
-	public String toJson() {
-		StringBuilder sb = new StringBuilder();
-		for (Entry<String,Object> entry : properties.entrySet()) {
-			
-		}
-		return "";
 	}
 
 }

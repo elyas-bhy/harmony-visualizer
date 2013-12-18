@@ -1,22 +1,13 @@
 package com.analysis.focus;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
-
-import com.analysis.focus.viewer.ComponentData;
-import com.analysis.focus.viewer.ContributorData;
-import com.analysis.focus.viewer.VisualizerData;
-import com.google.gson.Gson;
+import com.analysis.focus.viewer.VisualizerDataWriter;
 
 import fr.labri.harmony.core.analysis.AbstractAnalysis;
 import fr.labri.harmony.core.config.model.AnalysisConfiguration;
@@ -30,14 +21,12 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
-	private HashMap<String,VisualizerData> data;
 	private HashMap<String,Distribution> distributions;
 	private HashMap<String,Component> components;
 	private HashMap<String,Contributor> contributors;
 
 	public FocusAnalysis() {
 		super();
-		data = new LinkedHashMap<>();
 		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
@@ -45,7 +34,6 @@ public class FocusAnalysis extends AbstractAnalysis {
 
 	public FocusAnalysis(AnalysisConfiguration config, Dao dao, Properties properties) {
 		super(config, dao, properties);
-		data = new LinkedHashMap<>();
 		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
@@ -104,44 +92,9 @@ public class FocusAnalysis extends AbstractAnalysis {
 			}
 		}
 
-		generateJsonData();
-	}
-	
-	private void generateJsonData() {
-		int i = 1;
-		ContributorData cdata;
-		for (Contributor contributor : contributors.values()) {
-			cdata = new ContributorData();
-			cdata.putComponents(contributor.getContributionMap().size());
-			cdata.putNumContributions(contributor.getContributions());
-			cdata.putProportionContributions(contributor.getContribProportion());
-			cdata.putDaf(0);
-			cdata.putRelations(new LinkedHashMap<String,Double>());
-			data.put("D" + i, cdata);
-			++i;
-		}
-		
-		i = 1;
-		ComponentData mdata;
-		for (Component component : components.values()) {
-			mdata = new ComponentData();
-			mdata.putContributors(component.getContributionMap().size());
-			mdata.putNumContributions(component.getContributions());
-			mdata.putItems(component.getItems().size());
-			mdata.putMaf(0);
-			mdata.putRelations(new LinkedHashMap<String,Double>());
-			data.put("M" + i, mdata);
-			++i;
-		}
-		
-		Gson gson = new Gson();
-		File file = new File("visualizer-data.txt");
-		try {
-			FileUtils.writeStringToFile(file, gson.toJson(data));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components);
+		writer.generateRelations();
+		writer.generateMapping();
 	}
 	
 	/**
