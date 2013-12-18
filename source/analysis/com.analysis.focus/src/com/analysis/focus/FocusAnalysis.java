@@ -21,20 +21,17 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
-	private HashMap<String,Distribution> distributions;
 	private HashMap<String,Component> components;
 	private HashMap<String,Contributor> contributors;
 
 	public FocusAnalysis() {
 		super();
-		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
 
 	public FocusAnalysis(AnalysisConfiguration config, Dao dao, Properties properties) {
 		super(config, dao, properties);
-		distributions = new HashMap<>();
 		components = new HashMap<>();
 		contributors = new HashMap<>();
 	}
@@ -77,19 +74,17 @@ public class FocusAnalysis extends AbstractAnalysis {
 		String componentId;
 		for (Contributor contributor : contributors.values()) {
 			contributor.updateContribProportion(totalContributions);
-			dao.saveData(getPersitenceUnitName(), contributor, src);
 			
 			// Calculate the distribution of the contributor's contributions
-			for (Entry<String,Integer> entry : contributor.getContributionMap().entrySet()) {
+			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
 				componentId = entry.getKey();
-				contribs = entry.getValue();
-				Distribution d = new Distribution(contributor.getAuthorId(), componentId);
-				d.setContributions(contribs);
+				Distribution d = entry.getValue();
+				contribs = d.getContributions();
+				//d.setContributions(contribs);
 				d.setQprime((double)contribs / (double)contributor.getContributions());
 				d.setRprime((double)contribs / (double)components.get(componentId).getContributions());
-				distributions.put(contributor.getAuthorId(), d);
-				dao.saveData(getPersitenceUnitName(), d, src);
 			}
+			dao.saveData(getPersitenceUnitName(), contributor, src);
 		}
 
 		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components);

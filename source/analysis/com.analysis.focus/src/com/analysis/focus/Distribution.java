@@ -1,18 +1,7 @@
 package com.analysis.focus;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
 public class Distribution {
-	
-	@Id
-	@GeneratedValue
-	private int id;
-	
-	private String contributorId;
-	private String componentId;
 	
 	private int contributions;
 	
@@ -24,13 +13,10 @@ public class Distribution {
 	// relative to the total amount of contributions on a given component
 	private double rprime;
 	
-	public Distribution() {
-		
-	}
-	
-	public Distribution(String contributorId, String componentId) {
-		this.contributorId = contributorId;
-		this.componentId = componentId;
+	public Distribution(int contributions) {
+		this.contributions = contributions;
+		this.qprime = 0;
+		this.rprime = 0;
 	}
 
 	public int getContributions() {
@@ -60,9 +46,7 @@ public class Distribution {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getSimpleName());
-		sb.append("[ID: " + id);
-		sb.append(", contributorId: " + contributorId);
-		sb.append(", componentId: " + componentId);
+		sb.append("[Contributions: " + contributions);
 		sb.append(", qprime: " + qprime);
 		sb.append(", rprime: " + rprime);
 		sb.append("]");

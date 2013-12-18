@@ -25,7 +25,7 @@ public class Component {
 	// Value: number of contributors who contributed 
 	// towards this component
 	@Transient
-	private HashMap<String,Integer> contributionMap;
+	private HashMap<String,Distribution> contributionMap;
 	
 	private String name;
 	private int contributions;
@@ -63,11 +63,11 @@ public class Component {
 		this.items = items;
 	}
 
-	public HashMap<String, Integer> getContributionMap() {
+	public HashMap<String,Distribution> getContributionMap() {
 		return contributionMap;
 	}
 
-	public void setContributionMap(HashMap<String, Integer> contributionMap) {
+	public void setContributionMap(HashMap<String,Distribution> contributionMap) {
 		this.contributionMap = contributionMap;
 	}
 
@@ -102,10 +102,11 @@ public class Component {
 	public void addContributor(Contributor contributor) {
 		String id = contributor.getAuthorId();
 		if (contributionMap.containsKey(id)) {
-			Integer count = contributionMap.get(id);
-			contributionMap.put(id, count + 1);
+			Distribution d = contributionMap.get(id);
+			d.setContributions(d.getContributions() + 1);
+			contributionMap.put(id, d);
 		} else {
-			contributionMap.put(id, 1);
+			contributionMap.put(id, new Distribution(1));
 		}
 		++contributions;
 	}

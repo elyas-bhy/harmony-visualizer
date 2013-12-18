@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 
 import com.analysis.focus.Component;
 import com.analysis.focus.Contributor;
+import com.analysis.focus.Distribution;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,7 +36,11 @@ public class VisualizerDataWriter {
 			cdata.putNumContributions(contributor.getContributions());
 			cdata.putProportionContributions(contributor.getContribProportion());
 			cdata.putDaf(0);
-			cdata.putRelations(new LinkedHashMap<String,Double>());
+			Map<String,Double> relations = new LinkedHashMap<>();
+			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
+				relations.put(entry.getKey(), entry.getValue().getQprime());
+			}
+			cdata.putRelations(relations);
 			data.put("D" + i, cdata);
 			++i;
 		}
@@ -47,13 +53,17 @@ public class VisualizerDataWriter {
 			mdata.putNumContributions(component.getContributions());
 			mdata.putItems(component.getItems().size());
 			mdata.putMaf(0);
-			mdata.putRelations(new LinkedHashMap<String,Double>());
+			Map<String,Double> relations = new LinkedHashMap<>();
+			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
+				relations.put(entry.getKey(), entry.getValue().getQprime());
+			}
+			mdata.putRelations(relations);
 			data.put("M" + i, mdata);
 			++i;
 		}
 		
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		File file = new File("visualizer-data.txt");
+		File file = new File("popup.json");
 		try {
 			FileUtils.writeStringToFile(file, gson.toJson(data));
 		} catch (IOException e) {
@@ -88,5 +98,9 @@ public class VisualizerDataWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void generateFlows() {
+		// TODO
 	}
 }

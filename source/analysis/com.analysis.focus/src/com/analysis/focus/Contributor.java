@@ -18,7 +18,7 @@ public class Contributor {
 	// Value: contributions made by this contributor
 	// towards the specified component
 	@Transient
-	private HashMap<String,Integer> contributionMap;
+	private HashMap<String,Distribution> contributionMap;
 	
 	private String authorId;
 	private double daf;
@@ -78,17 +78,18 @@ public class Contributor {
 		contribProportion = (double)contributions / (double)totalContributions;
 	}
 	
-	public HashMap<String,Integer> getContributionMap() {
+	public HashMap<String,Distribution> getContributionMap() {
 		return contributionMap;
 	}
 	
 	public void addComponent(Component component) {
 		String id = component.getName();
 		if (contributionMap.containsKey(id)) {
-			Integer count = contributionMap.get(id);
-			contributionMap.put(id, count + 1);
+			Distribution d = contributionMap.get(id);
+			d.setContributions(d.getContributions() + 1);
+			contributionMap.put(id, d);
 		} else {
-			contributionMap.put(id, 1);
+			contributionMap.put(id, new Distribution(1));
 		}
 		++contributions;
 	}
