@@ -17,18 +17,33 @@ import com.google.gson.GsonBuilder;
 
 public class VisualizerDataWriter {
 
+	private HashMap<String,String> mapping;
 	private HashMap<String,VisualizerData> data;
 	private HashMap<String,Contributor> contributors;
 	private HashMap<String,Component> components;
 	
 	public VisualizerDataWriter(HashMap<String,Contributor> contributors, HashMap<String,Component> components) {
+		this.mapping = new LinkedHashMap<>();
 		this.data = new LinkedHashMap<>();
 		this.contributors = contributors;
 		this.components = components;
+		initMapping();
+	}
+	
+	private void initMapping() {
+		int i = 1;
+		for (Contributor contributor : contributors.values()) {
+			mapping.put(contributor.getAuthorId(), "D" + i);
+			++i;
+		}
+		i = 1;
+		for (Component component : components.values()) {
+			mapping.put(component.getName(), "M" + i);
+			++i;
+		}
 	}
 
 	public void generateRelations() {
-		int i = 1;
 		ContributorData cdata;
 		for (Contributor contributor : contributors.values()) {
 			cdata = new ContributorData(contributor.getAuthorId());
@@ -38,14 +53,12 @@ public class VisualizerDataWriter {
 			cdata.putDaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				relations.put(entry.getKey(), entry.getValue().getQprime());
+				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime());
 			}
 			cdata.putRelations(relations);
-			data.put("D" + i, cdata);
-			++i;
+			data.put(mapping.get(contributor.getAuthorId()), cdata);
 		}
 		
-		i = 1;
 		ComponentData mdata;
 		for (Component component : components.values()) {
 			mdata = new ComponentData(component.getName());
@@ -55,11 +68,10 @@ public class VisualizerDataWriter {
 			mdata.putMaf(0);
 			Map<String,Double> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				relations.put(entry.getKey(), entry.getValue().getQprime());
+				relations.put(mapping.get(entry.getKey()), entry.getValue().getQprime());
 			}
 			mdata.putRelations(relations);
-			data.put("M" + i, mdata);
-			++i;
+			data.put(mapping.get(component.getName()), mdata);
 		}
 		
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
