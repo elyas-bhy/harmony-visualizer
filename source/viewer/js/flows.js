@@ -38,20 +38,22 @@
 							i:isiOS?1:0,
 							ie:$.browser.msie && (typeof WebSocket == "undefined")?1:0
 						},
-						type:'POST',
+						type:'GET',
 						dataType: 'json',
-						success: function(json){	
-						                        	
-	                        	datamovin=new DataMovin();
-	                        	if(datamovin.init("flows",{flows:json,margins:margins,orientation:'vertical',labels:mapping})) {
-	                        		
-	                        		
-	                        		contents.height(datamovin.getCanvas().height);
-	                        		
-	                        		datamovin.drawSources();
-	                        		datamovin.drawDestinations();
-	                        		
-	                        		vertical=datamovin.getOrientation()=='vertical';
+						success: function(json) {
+
+							// 123
+
+                        	datamovin=new DataMovin();
+                        	if(datamovin.init("flows",{flows:json,margins:margins,orientation:'vertical',labels:mapping})) {
+                        		
+                        		
+                        		contents.height(datamovin.getCanvas().height);
+                        		
+                        		datamovin.drawSources();
+                        		datamovin.drawDestinations();
+                        		
+                        		vertical=datamovin.getOrientation()=='vertical';
 
 
 								var dm_interactions=new DataMovinInteractions();
@@ -238,17 +240,14 @@
 
 					if (null != data[entity]["properties"]) {
 
-						var rel, title;
 						if (direction == 'src' ? 1 : 0) {
 							rel = "to_";
 							reverseRel = "from_";
 							contractedRel = "f_";
-							side = "modules";
 						} else {
 							rel = "from_";
 							reverseRel = "to_";
 							contractedRel = "t_";
-							side = "developpers";
 						}
 
 						html = '<h2><a href="#' + contractedRel + entity + '" id="' + reverseRel + entity + '" title="' + mapping[entity] + '">' + mapping[entity] + '</a></h2>'
@@ -260,8 +259,14 @@
 							}
 						}
 
-						html += '<h5>Top ' + side + '</h5>'
-							+ '<ul>';
+						if (entity.substring(0,1) == "D") {
+							html += '<h5>Top modules</h5>';
+						}
+						else if (entity.substring(0,1) == "M") {
+							html += '<h5>Top developpers</h5>';
+						}
+
+						html += '<ul>';
 						var k = 1;
 						for (var key in relations = sortByValue(data[entity]["properties"]["relations"])) {
 							html += '<li class="p' + k%2 + '">';
