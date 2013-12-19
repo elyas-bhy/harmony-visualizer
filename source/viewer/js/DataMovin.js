@@ -76,12 +76,12 @@ function DataMovin(){
 			box_w=options.box_w||box_w;
 			margins=options.margins||margins;
 
-			
-
+			/*
 			padding={
 				left:(heights.to-heights.from>0)?(heights.to-heights.from)/2:0,
 				right:(heights.from-heights.to>0)?(heights.from-heights.to)/2:0
 			};
+			*/
 			
 			canvas=document.getElementById("flows");
 			ctx=canvas.getContext("2d");
@@ -89,9 +89,9 @@ function DataMovin(){
 			orientation=options.orientation || orientation;
 			if(orientation=='horizontal') {
 				canvas.height=canvas.width;
-				canvas.width=heights.from+margins.top+margins.bottom;
+				canvas.width=heights.from+margins.top+margins.bottom+20;
 			} else {
-				canvas.height=heights.from+margins.top+margins.bottom;
+				canvas.height=heights.from+margins.top+margins.bottom+20;
 			}
 			
 			this.ctx=ctx;
