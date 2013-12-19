@@ -46,6 +46,9 @@
 								if (dev.substring(0,1) == "M") {
 									var flows = new Object();
 									flows["flows"] = json[dev]["properties"]["relations"];
+									for (var val in flows["flows"]) {
+										flows["flows"][val] = Math.round(flows["flows"][val]/10);
+									}
 									flowsJson[dev] = flows;
 								}
 							}
