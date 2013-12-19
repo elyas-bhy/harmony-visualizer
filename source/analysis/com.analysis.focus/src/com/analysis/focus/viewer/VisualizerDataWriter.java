@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 
@@ -52,7 +53,7 @@ public class VisualizerDataWriter {
 			mdata.putNumContributions(component.getContributions());
 			mdata.putItems(component.getItems().size());
 			mdata.putMaf(0);
-			Map<String,Integer> relations = new LinkedHashMap<>();
+			Map<String,Integer> relations = new TreeMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
 				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
@@ -68,7 +69,7 @@ public class VisualizerDataWriter {
 			cdata.putNumContributions(contributor.getContributions());
 			cdata.putProportionContributions(new Double(Math.round(contributor.getContribProportion() * 1000)));
 			cdata.putDaf(0);
-			Map<String,Integer> relations = new LinkedHashMap<>();
+			Map<String,Integer> relations = new TreeMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
 				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
