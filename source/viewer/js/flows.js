@@ -271,10 +271,10 @@
 						}
 
 						if (entity.substring(0,1) == "D") {
-							html += '<h5>Top modules</h5>';
+							html += '<h5>Top modules (%):</h5>';
 						}
 						else if (entity.substring(0,1) == "M") {
-							html += '<h5>Top developpers</h5>';
+							html += '<h5>Top developpers (%):</h5>';
 						}
 
 						html += '<ul>';
@@ -289,7 +289,7 @@
 							}
 
 							html += '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>'
-								+ '<span class="val">' + relations[key] + '</span>'
+								+ '<span class="val">' + relations[key]/10 + '</span>'
 								+ '</a>'
 								+ '</li>';
 							k++;
