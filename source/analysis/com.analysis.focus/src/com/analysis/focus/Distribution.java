@@ -66,6 +66,6 @@ public class Distribution implements Comparable<Distribution> {
 
 	@Override
 	public int compareTo(Distribution d) {
-		return owner.compareTo(d.getOwner());
+		return owner.compareToIgnoreCase(d.getOwner());
 	}
 }

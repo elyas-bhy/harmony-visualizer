@@ -82,7 +82,7 @@ public class Contributor extends AbstractVisualizerEntity implements Comparable<
 
 	@Override
 	public int compareTo(Contributor c) {
-		return name.compareTo(c.getName());
+		return name.compareToIgnoreCase(c.getName());
 	}
 	
 }

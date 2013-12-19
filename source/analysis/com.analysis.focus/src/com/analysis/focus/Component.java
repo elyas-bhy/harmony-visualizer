@@ -100,7 +100,7 @@ public class Component extends AbstractVisualizerEntity implements Comparable<Co
 
 	@Override
 	public int compareTo(Component c) {
-		return name.compareTo(c.getName());
+		return name.compareToIgnoreCase(c.getName());
 	}
 	
 }

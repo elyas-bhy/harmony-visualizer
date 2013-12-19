@@ -54,7 +54,7 @@ public class VisualizerDataWriter {
 			mdata.putMaf(0);
 			Map<String,Integer> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				d = new Double(Math.round(entry.getValue().getQprime() * 100));
+				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
 			mdata.putRelations(relations);
@@ -66,11 +66,11 @@ public class VisualizerDataWriter {
 			cdata = new ContributorData(contributor.getName());
 			cdata.putComponents(contributor.getContributionMap().size());
 			cdata.putNumContributions(contributor.getContributions());
-			cdata.putProportionContributions(new Double(Math.round(contributor.getContribProportion() * 100)));
+			cdata.putProportionContributions(new Double(Math.round(contributor.getContribProportion() * 1000)));
 			cdata.putDaf(0);
 			Map<String,Integer> relations = new LinkedHashMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				d = new Double(Math.round(entry.getValue().getQprime() * 100));
+				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
 			cdata.putRelations(relations);
