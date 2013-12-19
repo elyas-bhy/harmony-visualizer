@@ -1,7 +1,6 @@
 (function($){
 	
-	var $host = "data/flows.json"
-		$info_host = "data/popup.json";
+	var $host = "data/popup.json";
 	
 	var Flows = new function() {
 		
@@ -42,7 +41,16 @@
 						dataType: 'json',
 						success: function(json) {
 
-							// 123
+							flowsJson = new Object();
+							for (var dev in json) {
+								if (dev.substring(0,1) == "M") {
+									var flows = new Object();
+									flows["flows"] = json[dev]["properties"]["relations"];
+									flowsJson[dev] = flows;
+								}
+							}
+							json = flowsJson;
+							
 
                         	datamovin=new DataMovin();
                         	if(datamovin.init("flows",{flows:json,margins:margins,orientation:'vertical',labels:mapping})) {
@@ -226,7 +234,7 @@
 
 		function getEntityInfo(entity,direction,x,y,other,animate) {
 			$.ajax({
-				url:  $info_host,
+				url:  $host,
 				data: {
 					c:   entity,
 					src: (direction == 'src' ? 1 : 0),
