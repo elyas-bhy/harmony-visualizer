@@ -23,6 +23,6 @@ var mapping = {
 "DAF":"DAF",
 "MAF":"MAF",
 "NBI":"Items",
-"NBC":"Contributions",
+"NBC":"Total Contributions",
 "TPC":"Total commits (%)"
 }
