@@ -274,7 +274,7 @@
 							html += '<h5>Top modules (%):</h5>';
 						}
 						else if (entity.substring(0,1) == "M") {
-							html += '<h5>Top developpers (%):</h5>';
+							html += '<h5>Top developers (%):</h5>';
 						}
 
 						html += '<ul>';

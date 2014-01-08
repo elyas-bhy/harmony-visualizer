@@ -17,7 +17,7 @@ var mapping = {
 "D6":"Largaroth",
 "D7":"rya.herb@gmail.com",
 "D8":"Ryan Herbert",
-"D":"Developpers",
+"D":"Developers",
 "M":"Modules",
 "PC":"Commits (%)",
 "DAF":"DAF",
