@@ -3,6 +3,7 @@ package com.analysis.focus;
 
 public class Distribution implements Comparable<Distribution> {
 	
+	// TODO use type + id instead
 	private String owner;
 	
 	private int contributions;

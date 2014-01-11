@@ -97,7 +97,7 @@ public class FocusAnalysis extends AbstractAnalysis {
 			dao.saveData(getPersitenceUnitName(), contributor, src);
 		}
 
-		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components);
+		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components, totalContributions);
 		writer.generateRelations();
 		writer.generateMapping();
 	}

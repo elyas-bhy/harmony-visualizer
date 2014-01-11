@@ -21,47 +21,33 @@ public class VisualizerDataWriter {
 	private Map<String,VisualizerData> data;
 	private Map<String,Contributor> contributors;
 	private Map<String,Component> components;
+	private int totalContributions;
 	
-	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components) {
+	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components, int totalContributions) {
 		this.mapping = new LinkedHashMap<>(); 
 		this.data = new LinkedHashMap<>();
 		this.contributors = MapUtil.sortByValue(contributors);
 		this.components = MapUtil.sortByValue(components);
+		this.totalContributions = totalContributions;
 		initMapping();
 	}
 	
 	private void initMapping() {
 		int i = 1;
-		for (Component component : components.values()) {
-			mapping.put(component.getName(), "M" + i);
-			++i;
-		}
-
-		i = 1;
 		for (Contributor contributor : contributors.values()) {
 			mapping.put(contributor.getName(), "D" + i);
+			++i;
+		}
+		
+		i = 1;
+		for (Component component : components.values()) {
+			mapping.put(component.getName(), "M" + i);
 			++i;
 		}
 	}
 
 	public void generateRelations() {
 		Double d;
-		ComponentData mdata;
-		for (Component component : components.values()) {
-			mdata = new ComponentData(component.getName());
-			mdata.putContributors(component.getContributionMap().size());
-			mdata.putNumContributions(component.getContributions());
-			mdata.putItems(component.getItems().size());
-			mdata.putMaf(0);
-			Map<String,Integer> relations = new TreeMap<>();
-			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
-				relations.put(mapping.get(entry.getKey()), d.intValue());
-			}
-			mdata.putRelations(relations);
-			data.put(mapping.get(component.getName()), mdata);
-		}
-		
 		ContributorData cdata;
 		for (Contributor contributor : contributors.values()) {
 			cdata = new ContributorData(contributor.getName());
@@ -71,11 +57,29 @@ public class VisualizerDataWriter {
 			cdata.putDaf(0);
 			Map<String,Integer> relations = new TreeMap<>();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				d = new Double(Math.round(entry.getValue().getQprime() * 1000));
+				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
+				d = new Double(Math.round(entry.getValue().getContributions() * 100));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
 			cdata.putRelations(relations);
 			data.put(mapping.get(contributor.getName()), cdata);
+		}
+		
+		ComponentData mdata;
+		for (Component component : components.values()) {
+			mdata = new ComponentData(component.getName());
+			mdata.putContributors(component.getContributionMap().size());
+			mdata.putNumContributions(component.getContributions());
+			mdata.putItems(component.getItems().size());
+			mdata.putMaf(0);
+			Map<String,Integer> relations = new TreeMap<>();
+			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
+				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
+				d = new Double(Math.round(entry.getValue().getContributions() * 100));
+				relations.put(mapping.get(entry.getKey()), d.intValue());
+			}
+			mdata.putRelations(relations);
+			data.put(mapping.get(component.getName()), mdata);
 		}
 		
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -116,7 +120,4 @@ public class VisualizerDataWriter {
 		}
 	}
 	
-	public void generateFlows() {
-		// TODO
-	}
 }

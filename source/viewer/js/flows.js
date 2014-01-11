@@ -265,8 +265,10 @@
 						+ '<a href="#" class="close" rel="' + rel + entity + '">hide</a>'
 
 						for (var key in items = data[entity]["properties"]) {
-							if (key != "relations") {
+							if (key != "relations" && key != "PC") {
 								html += '<h3>' + mapping[key] + ': <b>' + items[key] + '</b></h3>';
+							} else if (key == "PC") {
+								html += '<h3>' + mapping[key] + ': <b>' + items[key]/10 + '</b></h3>';
 							}
 						}
 
@@ -289,7 +291,7 @@
 							}
 
 							html += '<span class="name"><b>&bull; </b>' + mapping[key] + '</span>'
-								+ '<span class="val">' + relations[key]/10 + '</span>'
+								+ '<span class="val">' + (relations[key] / data[entity]["properties"]["NBC"]).toFixed(2) + '</span>'
 								+ '</a>'
 								+ '</li>';
 							k++;
