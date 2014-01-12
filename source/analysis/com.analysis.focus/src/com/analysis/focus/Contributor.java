@@ -1,31 +1,20 @@
 package com.analysis.focus;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 
 import com.analysis.focus.viewer.AbstractVisualizerEntity;
 
 @Entity
-public class Contributor extends AbstractVisualizerEntity implements Comparable<Contributor> {
-
-	@Id
-	@GeneratedValue
-	private int id;
-	
-	// Key: component ID
-	// Value: contributions made by this contributor
-	// towards the specified component
-	@Transient
-	private Map<String,Distribution> contributionMap;
+public class Contributor extends AbstractVisualizerEntity {
 	
 	private double daf;
 	
 	public Contributor() {
+		// Key: component ID
+		// Value: contributions made by this contributor
+		// towards the specified component
 		contributionMap = new TreeMap<>();
 	}
 	
@@ -34,28 +23,12 @@ public class Contributor extends AbstractVisualizerEntity implements Comparable<
 		this.name = name;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public double getDaf() {
 		return daf;
 	}
 
 	public void setDaf(double daf) {
 		this.daf = daf;
-	}
-	
-	public void updateContribProportion(int totalContributions) {
-		contribProportion = (double)contributions / (double)totalContributions;
-	}
-	
-	public Map<String,Distribution> getContributionMap() {
-		return contributionMap;
 	}
 	
 	public void addComponent(Component component) {
@@ -78,11 +51,6 @@ public class Contributor extends AbstractVisualizerEntity implements Comparable<
 		sb.append(", components: " + contributionMap.values().toString());
 		sb.append("]");
 		return sb.toString();
-	}
-
-	@Override
-	public int compareTo(Contributor c) {
-		return name.compareToIgnoreCase(c.getName());
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.analysis.focus;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import com.analysis.focus.viewer.VisualizerDataWriter;
+import com.analysis.focus.viewer.VisualizerEntity;
 
 import fr.labri.harmony.core.analysis.AbstractAnalysis;
 import fr.labri.harmony.core.config.model.AnalysisConfiguration;
@@ -22,6 +24,7 @@ import fr.labri.harmony.core.model.Source;
 
 public class FocusAnalysis extends AbstractAnalysis {
 	
+	private int totalContributions;
 	private Map<String,Component> components;
 	private Map<String,Contributor> contributors;
 
@@ -42,7 +45,7 @@ public class FocusAnalysis extends AbstractAnalysis {
 		HarmonyLogger.info("Starting FocusAnalysis, with " + src.getItems().size() + " items to analyze.");
 		initComponents(src.getItems());
 		
-		int totalContributions = 0;
+		totalContributions = 0;
 		for (Author author : src.getAuthors()) {
 			Contributor c = new Contributor(author.getNativeId());
 			
@@ -66,40 +69,32 @@ public class FocusAnalysis extends AbstractAnalysis {
 		}
 		
 		// Update contributions percentage for all components
-		int contribs;
-		String contributorId;
-		for (Component component : components.values()) {
-			component.updateContribProportion(totalContributions);
-			
-			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				contributorId = entry.getKey();
-				Distribution d = entry.getValue();
-				contribs = d.getContributions();
-				d.setQprime((double)contribs / (double)component.getContributions());
-				d.setRprime((double)contribs / (double)contributors.get(contributorId).getContributions());
-			}
-			
-			dao.saveData(getPersitenceUnitName(), component, src);
-		}
-		
-		String componentId;
-		for (Contributor contributor : contributors.values()) {
-			contributor.updateContribProportion(totalContributions);
-			
-			// Calculate the distribution of the contributor's contributions
-			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				componentId = entry.getKey();
-				Distribution d = entry.getValue();
-				contribs = d.getContributions();
-				d.setQprime((double)contribs / (double)contributor.getContributions());
-				d.setRprime((double)contribs / (double)components.get(componentId).getContributions());
-			}
-			dao.saveData(getPersitenceUnitName(), contributor, src);
-		}
+		updateContributions(src, components, contributors);
+		// Update contributions percentage for all contributors
+		updateContributions(src, contributors, components);
 
-		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components, totalContributions);
+		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components);
 		writer.generateRelations();
 		writer.generateMapping();
+	}
+	
+	private void updateContributions(Source src, Map<String, ? extends VisualizerEntity> a, Map<String, ? extends VisualizerEntity> b) {
+		int contribs;
+		String entityId;
+		for (VisualizerEntity entity : a.values()) {
+			entity.updateContribProportion(totalContributions);
+
+			// Calculate the distribution of the entity's contributions
+			for (Entry<String,Distribution> entry : entity.getContributionMap().entrySet()) {
+				entityId = entry.getKey();
+				Distribution d = entry.getValue();
+				contribs = d.getContributions();
+				d.setQprime((double)contribs / (double)entity.getContributions());
+				d.setRprime((double)contribs / (double)b.get(entityId).getContributions());
+			}
+			
+			dao.saveData(getPersitenceUnitName(), entity, src);
+		}
 	}
 	
 	/**

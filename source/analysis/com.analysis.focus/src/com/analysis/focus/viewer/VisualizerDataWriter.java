@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 
@@ -21,14 +20,12 @@ public class VisualizerDataWriter {
 	private Map<String,VisualizerData> data;
 	private Map<String,Contributor> contributors;
 	private Map<String,Component> components;
-	private int totalContributions;
 	
-	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components, int totalContributions) {
+	public VisualizerDataWriter(Map<String,Contributor> contributors, Map<String,Component> components) {
 		this.mapping = new LinkedHashMap<>(); 
 		this.data = new LinkedHashMap<>();
 		this.contributors = MapUtil.sortByValue(contributors);
 		this.components = MapUtil.sortByValue(components);
-		this.totalContributions = totalContributions;
 		initMapping();
 	}
 	
@@ -55,13 +52,13 @@ public class VisualizerDataWriter {
 			cdata.putNumContributions(contributor.getContributions());
 			cdata.putProportionContributions(new Double(Math.round(contributor.getContribProportion() * 1000)));
 			cdata.putDaf(0);
-			Map<String,Integer> relations = new TreeMap<>();
+			Relations relations = new Relations();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
 				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				d = new Double(Math.round(entry.getValue().getContributions() * 100));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
-			cdata.putRelations(relations);
+			cdata.putRelations(relations.getValues());
 			data.put(mapping.get(contributor.getName()), cdata);
 		}
 		
@@ -72,13 +69,13 @@ public class VisualizerDataWriter {
 			mdata.putNumContributions(component.getContributions());
 			mdata.putItems(component.getItems().size());
 			mdata.putMaf(0);
-			Map<String,Integer> relations = new TreeMap<>();
+			Relations relations = new Relations();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
 				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				d = new Double(Math.round(entry.getValue().getContributions() * 100));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
-			mdata.putRelations(relations);
+			mdata.putRelations(relations.getValues());
 			data.put(mapping.get(component.getName()), mdata);
 		}
 		
@@ -98,7 +95,7 @@ public class VisualizerDataWriter {
 		for (Entry<String,VisualizerData> entry : data.entrySet()) {
 			sb.append("\"" + entry.getKey() + "\"");
 			sb.append(":\"");
-			sb.append(entry.getValue().getID());
+			sb.append(entry.getValue().getId());
 			sb.append("\",\n");
 		}
 

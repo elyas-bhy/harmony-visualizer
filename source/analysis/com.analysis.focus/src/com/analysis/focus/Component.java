@@ -1,14 +1,10 @@
 package com.analysis.focus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import com.analysis.focus.viewer.AbstractVisualizerEntity;
@@ -16,24 +12,16 @@ import com.analysis.focus.viewer.AbstractVisualizerEntity;
 import fr.labri.harmony.core.model.Item;
 
 @Entity
-public class Component extends AbstractVisualizerEntity implements Comparable<Component> {
-	
-	@Id
-	@GeneratedValue
-	private int id;
+public class Component extends AbstractVisualizerEntity {
 	
 	@Transient
 	private List<Item> items;
 	
-	// Key: contributor ID
-	// Value: number of contributors who contributed 
-	// towards this component
-	@Transient
-	private Map<String,Distribution> contributionMap;
-	
-	
 	public Component() {
 		items = new ArrayList<Item>();
+		// Key: contributor ID
+		// Value: number of contributors who contributed 
+		// towards this component
 		contributionMap = new TreeMap<>();
 	}
 	
@@ -46,14 +34,6 @@ public class Component extends AbstractVisualizerEntity implements Comparable<Co
 	public void add(Item item) {
 		items.add(item);
 	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public List<Item> getItems() {
 		return items;
@@ -61,18 +41,6 @@ public class Component extends AbstractVisualizerEntity implements Comparable<Co
 
 	public void setItems(List<Item> items) {
 		this.items = items;
-	}
-
-	public Map<String,Distribution> getContributionMap() {
-		return contributionMap;
-	}
-
-	public void setContributionMap(HashMap<String,Distribution> contributionMap) {
-		this.contributionMap = contributionMap;
-	}
-	
-	public void updateContribProportion(int totalContributions) {
-		contribProportion = (double)contributions / (double)totalContributions;
 	}
 
 	public void addContributor(Contributor contributor) {
@@ -96,11 +64,6 @@ public class Component extends AbstractVisualizerEntity implements Comparable<Co
 		sb.append(", items: " + items.toString());
 		sb.append("]");
 		return sb.toString();
-	}
-
-	@Override
-	public int compareTo(Component c) {
-		return name.compareToIgnoreCase(c.getName());
 	}
 	
 }

@@ -16,7 +16,7 @@ public class ComponentData implements VisualizerData {
 		this.id = id;
 	}
 	
-	public String getID() {
+	public String getId() {
 		return id;
 	}
 

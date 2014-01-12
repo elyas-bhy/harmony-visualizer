@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface VisualizerData {
 
-	public String getID();
+	public String getId();
 	public Map<String,Object> getProperties();
 	
 }
