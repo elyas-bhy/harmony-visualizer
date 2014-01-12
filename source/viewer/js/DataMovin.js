@@ -155,11 +155,11 @@ function DataMovin(){
 		}
 		var tot_from=0,tot_to=0;
 		for(var s in src) {
-			src[s].color=colors.getColor(Math.round(Math.map(src[s].flow,src_values.min,src_values.max,30,colors.length-35)));
+			src[s].color=colors.getColor(Math.round(Math.map(src[s].flow,src_values.min,src_values.max,5,colors.length-45)));
 			tot_from+=src[s].flow+step;
 		}
 		for(var d in dst) {
-			dst[d].color=colors.getColor(Math.round(Math.map(dst[d].flow,dst_values.min,dst_values.max,30,colors.length-35)));
+			dst[d].color=colors.getColor(Math.round(Math.map(dst[d].flow,dst_values.min,dst_values.max,5,colors.length-45)));
 			tot_to+=dst[d].flow+step;
 		}
 		dst=iterateSorted(dst,label_reference);
