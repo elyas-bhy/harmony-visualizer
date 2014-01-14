@@ -14,12 +14,13 @@
 	var input = {
 		"aaData" : items,
 		"bJQueryUI": true,
-        "sDom": 'RC<"clear">lfrtip',
+        //"sDom": 'RC<"clear">lfrtip',
+        "iDisplayLength": "50",
         "sPaginationType": "full_numbers",
         "aoColumns" : [ 
 		//"sDefaultContent": "Edit"
 		  { "sTitle" : "Name", "mData": "name", "sClass": "dName" },
-		  { "sTitle" : "Total", "mData": "total" },
+		  { "sTitle" : "Total", "mData": "total", "sClass": "dTotal" },
 		  { "sTitle" : "/", "mData": "/" },
 		  { "sTitle" : "doc", "mData": "doc" },
 		  { "sTitle" : "docs/filetransfer", "mData": "docs/filetransfer" },
@@ -53,6 +54,7 @@
 		$('.dataTables_length').click(function() {
 			new FixedHeader(oTable);
 		});
+		$('.dtable tr:first-child').addClass("dTotal");
 	});
 
 </script>
