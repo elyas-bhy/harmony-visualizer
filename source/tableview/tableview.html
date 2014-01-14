@@ -43,7 +43,10 @@
 
 	$(document).ready(function() {
 		var oTable = $('#dtable').dataTable(input);
-		new FixedHeader(oTable);
+		//new FixedHeader(oTable);
+		$('.DataTables_sort_wrapper').each(function() {
+			$(this).attr("title", $(this).text());
+		});
 	});
 </script>
 </head>
