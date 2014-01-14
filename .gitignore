@@ -2,6 +2,14 @@
 *~
 bin/
 
+# LaTeX files #
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+
 # Package Files #
 *.jar
 *.war
