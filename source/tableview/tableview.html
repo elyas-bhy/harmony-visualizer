@@ -2,6 +2,7 @@
 <head>
 <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/ColReorder.js"></script>
 <script type="text/javascript" src="js/FixedHeader.js"></script>
 <link type="text/css" rel="stylesheet" href="css/ui-darkness/jquery-ui.css"/>
 <link type="text/css" rel="stylesheet" href="css/site.css"/>
@@ -13,10 +14,11 @@
 	var input = {
 		"aaData" : items,
 		"bJQueryUI": true,
+        "sDom": 'RC<"clear">lfrtip',
         "sPaginationType": "full_numbers",
-		"aoColumns" : [ 
+        "aoColumns" : [ 
 		//"sDefaultContent": "Edit"
-		  { "sTitle" : "Name", "mData": "name" },
+		  { "sTitle" : "Name", "mData": "name", "sClass": "dName" },
 		  { "sTitle" : "Total", "mData": "total" },
 		  { "sTitle" : "/", "mData": "/" },
 		  { "sTitle" : "doc", "mData": "doc" },
@@ -41,11 +43,11 @@
 		  { "sTitle" : "www/wp7", "mData": "www/wp7" }
 		]
 	};
-	
+
 	$(document).ready(function() {
 		var oTable = $('#dtable').dataTable(input);
 		new FixedHeader(oTable);
-		$('.dataTables_length').click(function() {
+		$('#dtable').click(function() {
 			new FixedHeader(oTable);
 		});
 	});

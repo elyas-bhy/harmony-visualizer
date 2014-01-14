@@ -1,6 +1,6 @@
 /*
  * File:        FixedHeader.js
- * Version:     2.1.0.dev
+ * Version:     2.1.0-dev
  * Description: "Fix" a header at the top of the table, so it scrolls with the table
  * Author:      Allan Jardine (www.sprymedia.co.uk)
  * Created:     Wed 16 Sep 2009 19:46:30 BST
@@ -9,7 +9,7 @@
  * Project:     Just a little bit of fun - enjoy :-)
  * Contact:     www.sprymedia.co.uk/contact
  *
- * Copyright 2009-2012 Allan Jardine, all rights reserved.
+ * Copyright 2009-2013 Allan Jardine, all rights reserved.
  *
  * This source file is free software, under either the GPL v2 license or a
  * BSD style license, available at:
@@ -42,7 +42,7 @@ var FixedHeader;
  */
 FixedHeader = function ( mTable, oInit ) {
 	/* Sanity check - you just know it will happen */
-	if ( typeof this.fnInit != 'function' )
+	if ( ! this instanceof FixedHeader )
 	{
 		alert( "FixedHeader warning: FixedHeader must be initialised with the 'new' keyword." );
 		return;
@@ -81,7 +81,6 @@ FixedHeader = function ( mTable, oInit ) {
 			"top": 0
 		},
 		"nTable": null,
-		"bUseAbsPos": false,
 		"bFooter": false,
 		"bInitComplete": false
 	};
@@ -165,7 +164,7 @@ FixedHeader.prototype = {
 
 			var oDtSettings = oTable.fnSettings();
 
-			if ( oDtSettings.oScroll.sX != "" || oDtSettings.oScroll.sY != "" )
+			if ( oDtSettings.oScroll.sX !== "" || oDtSettings.oScroll.sY !== "" )
 			{
 				alert( "FixedHeader 2 is not supported with DataTables' scrolling mode at this time" );
 				return;
@@ -187,9 +186,6 @@ FixedHeader.prototype = {
 		}
 
 		s.bFooter = ($('>tfoot', s.nTable).length > 0) ? true : false;
-
-		/* "Detect" browsers that don't support absolute positioing - or have bugs */
-		s.bUseAbsPos = ($.browser && $.browser.msie && ($.browser.version=="6.0"||$.browser.version=="7.0"));
 
 		/* Add the 'sides' that are fixed */
 		if ( s.oSides.top )
@@ -220,6 +216,18 @@ FixedHeader.prototype = {
 			that._fnUpdatePositions.call(that);
 		} );
 
+		$(s.nTable)
+			.on('column-reorder', function () {
+				FixedHeader.fnMeasure();
+				that._fnUpdateClones( true );
+				that._fnUpdatePositions();
+			} )
+			.on('column-visibility', function () {
+				FixedHeader.fnMeasure();
+				that._fnUpdateClones( true );
+				that._fnUpdatePositions();
+			} );
+
 		/* Get things right to start with */
 		FixedHeader.fnMeasure();
 		that._fnUpdateClones();
@@ -242,61 +250,56 @@ FixedHeader.prototype = {
 	 */
 	fnInitSettings: function ( s, oInit )
 	{
-		if ( typeof oInit != 'undefined' )
+		if ( oInit !== undefined )
 		{
-			if ( typeof oInit.top != 'undefined' ) {
+			if ( oInit.top !== undefined ) {
 				s.oSides.top = oInit.top;
 			}
-			if ( typeof oInit.bottom != 'undefined' ) {
+			if ( oInit.bottom !== undefined ) {
 				s.oSides.bottom = oInit.bottom;
 			}
 			if ( typeof oInit.left == 'boolean' ) {
 				s.oSides.left = oInit.left ? 1 : 0;
-			} else if ( typeof oInit.left != 'undefined' ) {
+			}
+			else if ( oInit.left !== undefined ) {
 				s.oSides.left = oInit.left;
 			}
 			if ( typeof oInit.right == 'boolean' ) {
 				s.oSides.right = oInit.right ? 1 : 0;
-			} else if ( typeof oInit.right != 'undefined' ) {
+			}
+			else if ( oInit.right !== undefined ) {
 				s.oSides.right = oInit.right;
 			}
 
-			if ( typeof oInit.zTop != 'undefined' ) {
+			if ( oInit.zTop !== undefined ) {
 				s.oZIndexes.top = oInit.zTop;
 			}
-			if ( typeof oInit.zBottom != 'undefined' ) {
+			if ( oInit.zBottom !== undefined ) {
 				s.oZIndexes.bottom = oInit.zBottom;
 			}
-			if ( typeof oInit.zLeft != 'undefined' ) {
+			if ( oInit.zLeft !== undefined ) {
 				s.oZIndexes.left = oInit.zLeft;
 			}
-			if ( typeof oInit.zRight != 'undefined' ) {
+			if ( oInit.zRight !== undefined ) {
 				s.oZIndexes.right = oInit.zRight;
 			}
 
-			if ( typeof oInit.offsetTop != 'undefined' ) {
+			if ( oInit.offsetTop !== undefined ) {
 				s.oOffset.top = oInit.offsetTop;
 			}
-			if ( typeof oInit.alwaysCloneTop != 'undefined' ) {
+			if ( oInit.alwaysCloneTop !== undefined ) {
 				s.oCloneOnDraw.top = oInit.alwaysCloneTop;
 			}
-			if ( typeof oInit.alwaysCloneBottom != 'undefined' ) {
+			if ( oInit.alwaysCloneBottom !== undefined ) {
 				s.oCloneOnDraw.bottom = oInit.alwaysCloneBottom;
 			}
-			if ( typeof oInit.alwaysCloneLeft != 'undefined' ) {
+			if ( oInit.alwaysCloneLeft !== undefined ) {
 				s.oCloneOnDraw.left = oInit.alwaysCloneLeft;
 			}
-			if ( typeof oInit.alwaysCloneRight != 'undefined' ) {
+			if ( oInit.alwaysCloneRight !== undefined ) {
 				s.oCloneOnDraw.right = oInit.alwaysCloneRight;
 			}
 		}
-
-		/* Detect browsers which have poor position:fixed support so we can use absolute positions.
-		 * This is much slower since the position must be updated for each scroll, but widens
-		 * compatibility
-		 */
-		s.bUseAbsPos = ($.browser && $.browser.msie &&
-			($.browser.version=="6.0"||$.browser.version=="7.0"));
 	},
 
 	/*
@@ -367,7 +370,7 @@ FixedHeader.prototype = {
 	},
 
 	/*
-	 * Function: _fnUpdatePositions
+	 * Function: _fnMeasure
 	 * Purpose:  Get the current positioning of the table in the DOM
 	 * Returns:  -
 	 * Inputs:   -
@@ -450,12 +453,24 @@ FixedHeader.prototype = {
 	 * Returns:  -
 	 * Inputs:   -
 	 */
-	_fnUpdateClones: function ()
+	_fnUpdateClones: function ( full )
 	{
 		var s = this.fnGetSettings();
+
+		if ( full ) {
+			// This is a little bit of a hack to force a full clone draw. When
+			// `full` is set to true, we want to reclone the source elements,
+			// regardless of the clone-on-draw settings
+			s.bInitComplete = false;
+		}
+
 		for ( var i=0, iLen=s.aoCache.length ; i<iLen ; i++ )
 		{
 			s.aoCache[i].fnClone.call( this, s.aoCache[i] );
+		}
+
+		if ( full ) {
+			s.bInitComplete = true;
 		}
 	},
 
@@ -490,18 +505,9 @@ FixedHeader.prototype = {
 		else if ( oMes.iTableLeft < oDoc.iWidth-oWin.iScrollRight-iFixedWidth )
 		{
 			/* Middle */
-			if ( s.bUseAbsPos )
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'absolute', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', oMes.iTableTop+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', (oDoc.iWidth-oWin.iScrollRight-iFixedWidth)+"px", 'left', nTable.style );
-			}
-			else
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', (oMes.iTableTop-oWin.iScrollTop)+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', (oWin.iWidth-iFixedWidth)+"px", 'left', nTable.style );
-			}
+			this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
+			this._fnUpdateCache( oCache, 'sTop', (oMes.iTableTop-oWin.iScrollTop)+"px", 'top', nTable.style );
+			this._fnUpdateCache( oCache, 'sLeft', (oWin.iWidth-iFixedWidth)+"px", 'left', nTable.style );
 		}
 		else
 		{
@@ -537,19 +543,9 @@ FixedHeader.prototype = {
 		}
 		else if ( oWin.iScrollLeft < oMes.iTableLeft+oMes.iTableWidth-iCellWidth )
 		{
-			/* Middle */
-			if ( s.bUseAbsPos )
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'absolute', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', oMes.iTableTop+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', oWin.iScrollLeft+"px", 'left', nTable.style );
-			}
-			else
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', (oMes.iTableTop-oWin.iScrollTop)+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', "0px", 'left', nTable.style );
-			}
+			this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
+			this._fnUpdateCache( oCache, 'sTop', (oMes.iTableTop-oWin.iScrollTop)+"px", 'top', nTable.style );
+			this._fnUpdateCache( oCache, 'sLeft', "0px", 'left', nTable.style );
 		}
 		else
 		{
@@ -586,19 +582,9 @@ FixedHeader.prototype = {
 		}
 		else if ( oWin.iScrollBottom < oMes.iTableBottom+oMes.iTableHeight-iCellHeight-iTheadHeight )
 		{
-			/* Middle */
-			if ( s.bUseAbsPos )
-			{
-				this._fnUpdateCache( oCache, 'sPosition', "absolute", 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', (oDoc.iHeight-oWin.iScrollBottom-iCellHeight)+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', oMes.iTableLeft+"px", 'left', nTable.style );
-			}
-			else
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', (oWin.iHeight-iCellHeight)+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', (oMes.iTableLeft-oWin.iScrollLeft)+"px", 'left', nTable.style );
-			}
+			this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
+			this._fnUpdateCache( oCache, 'sTop', (oWin.iHeight-iCellHeight)+"px", 'top', nTable.style );
+			this._fnUpdateCache( oCache, 'sLeft', (oMes.iTableLeft-oWin.iScrollLeft)+"px", 'left', nTable.style );
 		}
 		else
 		{
@@ -647,18 +633,9 @@ FixedHeader.prototype = {
 		else
 		{
 			/* In the middle of the table */
-			if ( s.bUseAbsPos )
-			{
-				this._fnUpdateCache( oCache, 'sPosition', "absolute", 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', oWin.iScrollTop+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', oMes.iTableLeft+"px", 'left', nTable.style );
-			}
-			else
-			{
-				this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
-				this._fnUpdateCache( oCache, 'sTop', s.oOffset.top+"px", 'top', nTable.style );
-				this._fnUpdateCache( oCache, 'sLeft', (oMes.iTableLeft-oWin.iScrollLeft)+"px", 'left', nTable.style );
-			}
+			this._fnUpdateCache( oCache, 'sPosition', 'fixed', 'position', nTable.style );
+			this._fnUpdateCache( oCache, 'sTop', s.oOffset.top+"px", 'top', nTable.style );
+			this._fnUpdateCache( oCache, 'sLeft', (oMes.iTableLeft-oWin.iScrollLeft)+"px", 'left', nTable.style );
 		}
 	},
 
@@ -747,21 +724,21 @@ FixedHeader.prototype = {
 		var a = [];
 		var b = [];
 
-		jQuery("thead>tr th", s.nTable).each( function (i) {
-			a.push( jQuery(this).width() );
+		$("thead>tr th", s.nTable).each( function (i) {
+			a.push( $(this).width() );
 		} );
 
-		jQuery("thead>tr td", s.nTable).each( function (i) {
-			b.push( jQuery(this).width() );
+		$("thead>tr td", s.nTable).each( function (i) {
+			b.push( $(this).width() );
 		} );
 
-		jQuery("thead>tr th", s.nTable).each( function (i) {
-			jQuery("thead>tr th:eq("+i+")", nTable).width( a[i] );
+		$("thead>tr th", s.nTable).each( function (i) {
+			$("thead>tr th:eq("+i+")", nTable).width( a[i] );
 			$(this).width( a[i] );
 		} );
 
-		jQuery("thead>tr td", s.nTable).each( function (i) {
-			jQuery("thead>tr td:eq("+i+")", nTable).width( b[i] );
+		$("thead>tr td", s.nTable).each( function (i) {
+			$("thead>tr td:eq("+i+")", nTable).width( b[i] );
 			$(this).width( b[i] );
 		} );
 
@@ -802,7 +779,7 @@ FixedHeader.prototype = {
 		} );
 
 		$("tfoot:eq(0)>tr td", s.nTable).each( function (i) {
-			$("tfoot:eq(0)>tr th:eq("+i+")", nTable)[0].style.width( $(this).width() );
+			$("tfoot:eq(0)>tr td:eq("+i+")", nTable).width( $(this).width() );
 		} );
 	},
 
@@ -817,7 +794,6 @@ FixedHeader.prototype = {
 		var s = this.fnGetSettings();
 		var nTable = oCache.nNode;
 		var nBody = $('tbody', s.nTable)[0];
-		var bRubbishOldIE = ($.browser && $.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0"));
 
 		/* Remove any children the cloned table has */
 		while ( nTable.childNodes.length > 0 )
@@ -871,7 +847,6 @@ FixedHeader.prototype = {
 		var nBody = $('tbody', s.nTable)[0];
 		var nTable = oCache.nNode;
 		var iCols = $('tbody tr:eq(0) td', s.nTable).length;
-		var bRubbishOldIE = ($.browser && $.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0"));
 
 		/* Remove any children the cloned table has */
 		while ( nTable.childNodes.length > 0 )
@@ -919,19 +894,27 @@ FixedHeader.prototype = {
 	 */
 	"fnEqualiseHeights": function ( parent, original, clone )
 	{
-		var that = this,
-			jqBoxHack = $(parent+' tr:eq(0)', original).children(':eq(0)'),
-			iBoxHack = jqBoxHack.outerHeight() - jqBoxHack.height(),
-			bRubbishOldIE = ($.browser && $.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0"));
+		var that = this;
+		var originals = $(parent +' tr', original);
+		var height;
 
-		/* Remove cells which are not needed and copy the height from the original table */
 		$(parent+' tr', clone).each( function (k) {
-			$(this).children().height( $(parent+' tr:eq('+k+')', original).outerHeight() );
+			height = originals.eq( k ).css('height');
 
-			if ( !bRubbishOldIE )
-			{
-				$(parent+' tr:eq('+k+')', original).height( $(parent+' tr:eq('+k+')', original).outerHeight() );
+			// This is nasty :-(. IE has a sub-pixel error even when setting
+			// the height below (the Firefox fix) which causes the fixed column
+			// to go out of alignment. Need to add a pixel before the assignment
+			// Can this be feature detected? Not sure how...
+			if ( navigator.appName == 'Microsoft Internet Explorer' ) {
+				height = parseInt( height, 10 ) + 1;
 			}
+
+			$(this).css( 'height', height );
+
+			// For Firefox to work, we need to also set the height of the
+			// original row, to the value that we read from it! Otherwise there
+			// is a sub-pixel rounding error
+			originals.eq( k ).css( 'height', height );
 		} );
 	}
 };
@@ -1000,7 +983,7 @@ FixedHeader.fnMeasure = function ()
 };
 
 
-FixedHeader.VERSION = "2.1.0.dev";
+FixedHeader.VERSION = "2.1.0-dev";
 FixedHeader.prototype.VERSION = FixedHeader.VERSION;
 
 
@@ -1022,3 +1005,4 @@ $(window).scroll( function () {
 
 
 }(window, document, jQuery));
+
