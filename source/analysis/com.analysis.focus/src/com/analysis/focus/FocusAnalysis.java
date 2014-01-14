@@ -1,6 +1,5 @@
 package com.analysis.focus;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import com.analysis.focus.table.TabularDataWriter;
 import com.analysis.focus.viewer.VisualizerDataWriter;
 import com.analysis.focus.viewer.VisualizerEntity;
 
@@ -76,9 +76,13 @@ public class FocusAnalysis extends AbstractAnalysis {
 		VisualizerDataWriter writer = new VisualizerDataWriter(contributors, components);
 		writer.generateRelations();
 		writer.generateMapping();
+		
+		TabularDataWriter twriter = new TabularDataWriter(contributors);
+		twriter.generateTable();
 	}
 	
-	private void updateContributions(Source src, Map<String, ? extends VisualizerEntity> a, Map<String, ? extends VisualizerEntity> b) {
+	private void updateContributions(Source src, 
+			Map<String, ? extends VisualizerEntity> a, Map<String, ? extends VisualizerEntity> b) {
 		int contribs;
 		String entityId;
 		for (VisualizerEntity entity : a.values()) {

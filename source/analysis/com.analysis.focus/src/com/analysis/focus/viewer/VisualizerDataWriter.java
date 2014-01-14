@@ -54,7 +54,6 @@ public class VisualizerDataWriter {
 			cdata.putDaf(0);
 			Relations relations = new Relations();
 			for (Entry<String,Distribution> entry : contributor.getContributionMap().entrySet()) {
-				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				d = new Double(Math.round(entry.getValue().getContributions() * 100));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}
@@ -71,7 +70,6 @@ public class VisualizerDataWriter {
 			mdata.putMaf(0);
 			Relations relations = new Relations();
 			for (Entry<String,Distribution> entry : component.getContributionMap().entrySet()) {
-				//d = new Double(Math.round(entry.getValue().getQprime() * 1000));
 				d = new Double(Math.round(entry.getValue().getContributions() * 100));
 				relations.put(mapping.get(entry.getKey()), d.intValue());
 			}

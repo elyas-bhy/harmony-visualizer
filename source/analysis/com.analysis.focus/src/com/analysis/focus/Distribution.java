@@ -4,7 +4,7 @@ package com.analysis.focus;
 public class Distribution implements Comparable<Distribution> {
 	
 	// TODO use type + id instead
-	private String owner;
+	private String name;
 	
 	private int contributions;
 	
@@ -16,19 +16,19 @@ public class Distribution implements Comparable<Distribution> {
 	// relative to the total amount of contributions on a given component
 	private double rprime;
 	
-	public Distribution(String owner, int contributions) {
-		this.owner = owner;
+	public Distribution(String name, int contributions) {
+		this.name = name;
 		this.contributions = contributions;
 		this.qprime = 0;
 		this.rprime = 0;
 	}
 
-	public String getOwner() {
-		return owner;
+	public String getName() {
+		return name;
 	}
 
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getContributions() {
@@ -67,6 +67,6 @@ public class Distribution implements Comparable<Distribution> {
 
 	@Override
 	public int compareTo(Distribution d) {
-		return owner.compareToIgnoreCase(d.getOwner());
+		return name.compareToIgnoreCase(d.getName());
 	}
 }
