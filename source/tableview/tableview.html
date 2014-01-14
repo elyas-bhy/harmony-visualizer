@@ -41,11 +41,15 @@
 		  { "sTitle" : "www/wp7", "mData": "www/wp7" }
 		]
 	};
-
+	
 	$(document).ready(function() {
 		var oTable = $('#dtable').dataTable(input);
 		new FixedHeader(oTable);
+		$('.dataTables_length').click(function() {
+			new FixedHeader(oTable);
+		});
 	});
+
 </script>
 </head>
 
