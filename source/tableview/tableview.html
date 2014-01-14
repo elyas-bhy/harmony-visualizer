@@ -47,7 +47,7 @@
 	$(document).ready(function() {
 		var oTable = $('#dtable').dataTable(input);
 		new FixedHeader(oTable);
-		$('#dtable').click(function() {
+		$('.dataTables_length').click(function() {
 			new FixedHeader(oTable);
 		});
 	});
