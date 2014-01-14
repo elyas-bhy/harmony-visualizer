@@ -6,3 +6,15 @@ bin/
 *.jar
 *.war
 *.ear
+
+# website
+/source/website/app/bootstrap*
+/source/website/app/config/parameters.ini
+/source/website/app/config/parameters.yml
+/source/website/*/logs/*
+/source/website/*/cache/*
+/source/website/bin/*
+/source/website/vendor/*
+/source/website/web/uploads/*
+/source/website/web/bundles/*
+/source/website/composer.lock
