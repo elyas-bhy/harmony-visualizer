@@ -77,7 +77,7 @@ public class FocusAnalysis extends AbstractAnalysis {
 		writer.generateRelations();
 		writer.generateMapping();
 		
-		TabularDataWriter twriter = new TabularDataWriter(contributors);
+		TabularDataWriter twriter = new TabularDataWriter(contributors, components);
 		twriter.generateTable();
 	}
 	
