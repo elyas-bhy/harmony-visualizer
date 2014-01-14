@@ -1,0 +1,82 @@
+html,body {background-color:#000;}
+body {
+	font-family: Arial, serif;
+	background-color:#000;
+	color:#fff;
+	min-width: 1320px;
+}
+
+.blockSurvey * {
+	color: #8B8A88;
+}
+.blockSurvey input, .blockSurvey textarea {
+	color: #8B8A88;
+	background-color: #1b1b1b;
+	border: 1px solid #333;
+}
+
+.blockSurvey div.title {
+	width:360px;
+}
+.blockSurvey h1 {
+	font-size: 2em;
+	margin: 20px auto 10px;
+	text-align: center;
+	color: #fff;
+
+	font-family: 'Arvo', Georgia, serif;
+	font-weight: normal;
+	letter-spacing: 2px;
+}
+.blockSurvey h1 span {
+	color: #00F2FF;
+}
+.blockSurvey h2 {
+	font-size: 1.6em;
+	margin: 20px auto 10px;
+	text-align: center;
+	color: #fff;
+}
+
+.blockSurvey label {
+	display:block;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+.blockSurvey form {
+	width: 360px;
+}
+.blockSurvey form * {
+	width: 300px;
+}
+.blockSurvey form div {
+	margin: 30px;
+}
+.blockSurvey form {
+	margin-bottom: 50px;
+}
+.blockSurvey form input[type=submit] {
+	display: block;
+	width:200px;
+	margin:10px auto;
+	color: #fff;
+}
+
+.blockSurvey {
+	float:left;
+	border-left: 2px solid #444;
+	height:100%;
+	overflow-y: scroll;
+}
+.blockVisualizer {
+	float:left;
+	width: 1000px;
+}
+
+.blockSurvey div.separator {
+	margin:0px;
+	height:1px;
+	width:100%;
+	border-top:1px solid #222;
+}

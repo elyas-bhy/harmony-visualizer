@@ -1,0 +1,14 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('css/designSurvey.css') }}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block body %}
+
+<div class="pageSurvey">
+	{{ render(controller("HarmonyVisualizerMainBundle:Form:new")) }}
+</div>
+
+{% endblock %}

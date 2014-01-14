@@ -1,0 +1,79 @@
+{% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
+
+{% block body -%}
+    <h1>Form list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Experience</th>
+                <th>Job</th>
+                <th>Visualizationexperience</th>
+                <th>Deficiency</th>
+                <th>Contributed</th>
+                <th>Q1</th>
+                <th>Q2</th>
+                <th>Q3</th>
+                <th>Q4</th>
+                <th>Q5</th>
+                <th>Q6</th>
+                <th>Q7</th>
+                <th>Q8</th>
+                <th>Q9</th>
+                <th>Q10</th>
+                <th>Q11</th>
+                <th>Q12</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('form_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.age }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.experience }}</td>
+                <td>{{ entity.job }}</td>
+                <td>{{ entity.visualizationExperience }}</td>
+                <td>{{ entity.deficiency }}</td>
+                <td>{{ entity.contributed }}</td>
+                <td>{{ entity.q1 }}</td>
+                <td>{{ entity.q2 }}</td>
+                <td>{{ entity.q3 }}</td>
+                <td>{{ entity.q4 }}</td>
+                <td>{{ entity.q5 }}</td>
+                <td>{{ entity.q6 }}</td>
+                <td>{{ entity.q7 }}</td>
+                <td>{{ entity.q8 }}</td>
+                <td>{{ entity.q9 }}</td>
+                <td>{{ entity.q10 }}</td>
+                <td>{{ entity.q11 }}</td>
+                <td>{{ entity.q12 }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('form_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('form_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('form_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
+
+{% block body -%}
+	<div class="title">
+    	<h1>Harmony<span>Visualizer</span> Survey</h1>
+	</div>
+
+    {{ form_start(form) }}
+
+    <div class="separator"></div>
+    
+    <h2>Tell us about yourself</h2>
+
+    <div>
+        {{ form_label(form.name, "Name") }}
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+    <div>
+        {{ form_label(form.age, "Age") }}
+        {{ form_errors(form.age) }}
+        {{ form_widget(form.age) }}
+    </div>
+    <div>
+        {{ form_label(form.email, "Email") }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email) }}
+    </div>
+    <div>
+        {{ form_label(form.experience, "What is your level of experience in the world of software development (in terms of years)?") }}
+        {{ form_errors(form.experience) }}
+        {{ form_widget(form.experience) }}
+    </div>
+    <div>
+        {{ form_label(form.job, "What is your job description?") }}
+        {{ form_errors(form.job) }}
+        {{ form_widget(form.job) }}
+    </div>
+    <div>
+        {{ form_label(form.visualizationExperience, "Have you ever used a visualization tool in a similar context?") }}
+        {{ form_errors(form.visualizationExperience) }}
+        {{ form_widget(form.visualizationExperience) }}
+    </div>
+    <div>
+        {{ form_label(form.deficiency, "Do you have a visual deficiency (colour blindness for instance)?") }}
+        {{ form_errors(form.deficiency) }}
+        {{ form_widget(form.deficiency) }}
+    </div>
+    <div>
+        {{ form_label(form.contributed, "Did you contribute to the cordova-plugin-file-transfer project by apache? If so, indicate your nickname.") }}
+        {{ form_errors(form.contributed) }}
+        {{ form_widget(form.contributed) }}
+    </div>
+
+    <div class="separator"></div>
+
+    <h2>About the project</h2>
+
+    <div>
+        {{ form_label(form.q1, "Find the most active developer (in terms of contributions).") }}
+        {{ form_errors(form.q1) }}
+        {{ form_widget(form.q1) }}
+    </div>
+    <div>
+        {{ form_label(form.q2, "Find the component which has the highest amount of contributors.") }}
+        {{ form_errors(form.q2) }}
+        {{ form_widget(form.q2) }}
+    </div>
+    <div>
+        {{ form_label(form.q3, "Find the component which received the highest amount of contributions.") }}
+        {{ form_errors(form.q3) }}
+        {{ form_widget(form.q3) }}
+    </div>
+    <div>
+        {{ form_label(form.q4, "Find the component which received the highest amount of contributions by purplecabbage.") }}
+        {{ form_errors(form.q4) }}
+        {{ form_widget(form.q4) }}
+    </div>
+    <div>
+        {{ form_label(form.q5, "Find the most active developer on the root (“/”) component.") }}
+        {{ form_errors(form.q5) }}
+        {{ form_widget(form.q5) }}
+    </div>
+    <div>
+        {{ form_label(form.q6, "Find a component which was mainly the product of a particular developer.") }}
+        {{ form_errors(form.q6) }}
+        {{ form_widget(form.q6) }}
+    </div>
+    <div>
+        {{ form_label(form.q7, "Find the component which was the product of the largest collaboration of developers.") }}
+        {{ form_errors(form.q7) }}
+        {{ form_widget(form.q7) }}
+    </div>
+    <div>
+        {{ form_label(form.q8, "Indicate his total number of contributions of Ian Cleland.") }}
+        {{ form_errors(form.q8) }}
+        {{ form_widget(form.q8) }}
+    </div>
+    <div>
+        {{ form_label(form.q9, "Indicate whether the workload is equally divided amongst developers.") }}
+        {{ form_errors(form.q9) }}
+        {{ form_widget(form.q9) }}
+    </div>
+    <div>
+        {{ form_label(form.q10, "Give a component which is the product of a large contribution.") }}
+        {{ form_errors(form.q10) }}
+        {{ form_widget(form.q10) }}
+    </div>
+    <div>
+        {{ form_label(form.q11, "Does the project present many collaborations between developers?") }}
+        {{ form_errors(form.q11) }}
+        {{ form_widget(form.q11) }}
+    </div>
+    <div>
+        {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group which all seem to work together?") }}
+        {{ form_errors(form.q12) }}
+        {{ form_widget(form.q12) }}
+    </div>
+
+	<input type="submit" class="btn btn-primary"/>
+
+</form>
+
+{% endblock %}

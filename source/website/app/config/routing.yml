@@ -1,0 +1,4 @@
+harmony_visualizer_main:
+    resource: "@HarmonyVisualizerMainBundle/Resources/config/routing.yml"
+    prefix:   /
+

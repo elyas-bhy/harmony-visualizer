@@ -1,0 +1,16 @@
+harmony_visualizer_main_homepage:
+    pattern:  /
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:index }
+
+HarmonyVisualizerMainBundle_form:
+    resource: "@HarmonyVisualizerMainBundle/Resources/config/routing/form.yml"
+    prefix:   /form
+
+visualizer:
+    pattern:  /visualizer
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visualizer }
+
+form:
+    pattern:  /form
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:form }
+
