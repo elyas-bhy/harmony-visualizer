@@ -37,7 +37,7 @@
             {{ form_widget(form.deficiency) }}
         </div>
         <div>
-            {{ form_label(form.contributed, "Did you contribute to the apache/cordova-plugin-file-transfer project? If so, indicate your nickname.") }}
+            {{ form_label(form.contributed, "Did you contribute to an Apache project? If so, indicate your nickname.") }}
             {{ form_errors(form.contributed) }}
             {{ form_widget(form.contributed) }}
         </div>
@@ -99,7 +99,7 @@
             <button id="7" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q8" style="display:none;" class="question">
-            {{ form_label(form.q8, "Indicate his total number of contributions of Anis Kadri.") }}
+            {{ form_label(form.q8, "Indicate the total number of contributions of Anis Kadri.") }}
             {{ form_errors(form.q8) }}
             {{ form_widget(form.q8) }}
             <button id="8" class="nextQ" type="button" disabled="disabled">Next Question</button>
@@ -111,7 +111,7 @@
             <button id="9" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q10" style="display:none;" class="question">
-            {{ form_label(form.q10, "Give a component which is the product of a large contribution.") }}
+            {{ form_label(form.q10, "Indicate a component which is the product of a large contribution.") }}
             {{ form_errors(form.q10) }}
             {{ form_widget(form.q10) }}
             <button id="10" class="nextQ" type="button" disabled="disabled">Next Question</button>
@@ -164,12 +164,11 @@ $(document).ready(function(){
             next.fadeIn('slow', function(){
                 demarrerChrono();
             });
+            ++currentQuestion;
+            $('.question_counter').text("");
+            $('.question_counter').text(currentQuestion + '/' + numQuestions);
         });
-            
 
-        ++currentQuestion;
-        $('.question_counter').text("");
-        $('.question_counter').text(currentQuestion + '/' + numQuestions);
     });
 
     $(".question textarea, .question input").keyup(function() {
