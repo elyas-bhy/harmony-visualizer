@@ -1,6 +1,6 @@
 (function($){
 	
-	var $host = "/website/web/data/popup.json";
+	var $host = window.location.pathname + "/../../data/popup_cordova_plugin_file_transfer.json";
 	
 	var Flows = new function() {
 		
@@ -499,7 +499,8 @@
 		function handleProcessing(status,direction){
 			if(status=='start'){
 				var title=$("#"+direction+"_title");
-				title.html(title.html()+" <img src=\"img/loading.gif\"/>");
+				//title.html(title.html()+" <img src=\"img/loading.gif\"/>");
+				title.html(title.html());
 			}
 			if(status=='end'){
 			}

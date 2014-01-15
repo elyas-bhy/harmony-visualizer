@@ -10,9 +10,13 @@ class DefaultController extends Controller
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:index.html.twig');
     }
-    public function visualizerAction()
+    public function visuContactAction()
     {
-        return $this->render('HarmonyVisualizerMainBundle:Default:harmony-visualizer.html.twig');
+        return $this->render('HarmonyVisualizerMainBundle:Default:visu_cordova_plugin_contacts.html.twig');
+    }
+    public function visuFileTransferAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:visu_cordova_plugin_file_transfer.html.twig');
     }
     public function formAction()
     {
