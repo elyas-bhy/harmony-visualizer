@@ -24,20 +24,6 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="age", type="integer")
-     */
-    private $age;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -161,6 +147,13 @@ class Form
      */
     private $q12;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q13", type="text")
+     */
+    private $q13;
+
 
     /**
      * Get id
@@ -170,52 +163,6 @@ class Form
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Form
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set age
-     *
-     * @param integer $age
-     * @return Form
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    /**
-     * Get age
-     *
-     * @return integer 
-     */
-    public function getAge()
-    {
-        return $this->age;
     }
 
     /**
@@ -630,5 +577,28 @@ class Form
     public function getQ12()
     {
         return $this->q12;
+    }
+
+    /**
+     * Set q13
+     *
+     * @param string $q13
+     * @return Form
+     */
+    public function setQ13($q13)
+    {
+        $this->q13 = $q13;
+
+        return $this;
+    }
+
+    /**
+     * Get q13
+     *
+     * @return string 
+     */
+    public function getQ13()
+    {
+        return $this->q13;
     }
 }

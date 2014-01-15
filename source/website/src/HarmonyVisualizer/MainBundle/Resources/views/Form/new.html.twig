@@ -12,21 +12,6 @@
     <h2>Tell us about yourself</h2>
 
     <div>
-        {{ form_label(form.name, "Name") }}
-        {{ form_errors(form.name) }}
-        {{ form_widget(form.name) }}
-    </div>
-    <div>
-        {{ form_label(form.age, "Age") }}
-        {{ form_errors(form.age) }}
-        {{ form_widget(form.age) }}
-    </div>
-    <div>
-        {{ form_label(form.email, "Email") }}
-        {{ form_errors(form.email) }}
-        {{ form_widget(form.email) }}
-    </div>
-    <div>
         {{ form_label(form.experience, "What is your level of experience in the world of software development (in terms of years)?") }}
         {{ form_errors(form.experience) }}
         {{ form_widget(form.experience) }}
@@ -47,9 +32,14 @@
         {{ form_widget(form.deficiency) }}
     </div>
     <div>
-        {{ form_label(form.contributed, "Did you contribute to the cordova-plugin-file-transfer project by apache? If so, indicate your nickname.") }}
+        {{ form_label(form.contributed, "Did you contribute to the apache/cordova-plugin-file-transfer project? If so, indicate your nickname.") }}
         {{ form_errors(form.contributed) }}
         {{ form_widget(form.contributed) }}
+    </div>
+    <div>
+        {{ form_label(form.email, "If you wish to know the results of this survey, please provide us with your email address.") }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email) }}
     </div>
 
     <div class="separator"></div>
@@ -82,17 +72,17 @@
         {{ form_widget(form.q5) }}
     </div>
     <div>
-        {{ form_label(form.q6, "Find a component which was mainly the product of a particular developer.") }}
+        {{ form_label(form.q6, "Find a component to which one developer contributed much more than the other developers.") }}
         {{ form_errors(form.q6) }}
         {{ form_widget(form.q6) }}
     </div>
     <div>
-        {{ form_label(form.q7, "Find the component which was the product of the largest collaboration of developers.") }}
+        {{ form_label(form.q7, "Find the component to which the highest number of developers contributed to.") }}
         {{ form_errors(form.q7) }}
         {{ form_widget(form.q7) }}
     </div>
     <div>
-        {{ form_label(form.q8, "Indicate his total number of contributions of Ian Cleland.") }}
+        {{ form_label(form.q8, "Indicate his total number of contributions of Anis Kadri.") }}
         {{ form_errors(form.q8) }}
         {{ form_widget(form.q8) }}
     </div>
@@ -107,14 +97,19 @@
         {{ form_widget(form.q10) }}
     </div>
     <div>
-        {{ form_label(form.q11, "Does the project present many collaborations between developers?") }}
+        {{ form_label(form.q11, "Does it seem that developers work on the same components, or is there only one developer per component?") }}
         {{ form_errors(form.q11) }}
         {{ form_widget(form.q11) }}
     </div>
     <div>
-        {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group which all seem to work together?") }}
+        {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group in which all members seem to work together?") }}
         {{ form_errors(form.q12) }}
         {{ form_widget(form.q12) }}
+    </div>
+    <div>
+        {{ form_label(form.q13, "According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?") }}
+        {{ form_errors(form.q13) }}
+        {{ form_widget(form.q13) }}
     </div>
 
 	<input type="submit" class="btn btn-primary"/>

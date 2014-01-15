@@ -15,8 +15,6 @@ class FormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('age')
             ->add('email', 'email')
             ->add('experience')
             ->add('job')
@@ -35,6 +33,7 @@ class FormType extends AbstractType
             ->add('q10')
             ->add('q11')
             ->add('q12')
+            ->add('q13')
         ;
     }
     
