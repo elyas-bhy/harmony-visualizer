@@ -153,12 +153,11 @@ $(document).ready(function(){
         var next = $('#' + prefix.concat(nextId));
         $('#' + prefix.concat(id)).fadeOut('slow', function(){
             next.fadeIn();
+            ++currentQuestion;
+            $('.question_counter').text("");
+            $('.question_counter').text(currentQuestion + '/' + numQuestions);
         });
-            
 
-        ++currentQuestion;
-        $('.question_counter').text("");
-        $('.question_counter').text(currentQuestion + '/' + numQuestions);
     });
 
     $(".question textarea, .question input").keyup(function() {
