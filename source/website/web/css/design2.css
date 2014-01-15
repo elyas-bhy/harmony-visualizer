@@ -49,6 +49,13 @@ header h2 {
 	color:#aaa;
 	letter-spacing:1px;
 }
+header h3 a {
+	color: white;
+	text-decoration: none
+}
+header h3 a:hover {
+	text-decoration: underline;
+}
 header #header {
 	margin:10px;
 }
