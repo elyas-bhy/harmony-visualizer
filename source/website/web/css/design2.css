@@ -28,7 +28,7 @@ article, aside, figure, footer, header, hgroup, nav, section {display: block;}
 	position:relative;
 }
 header {
-	height:80px;
+	height:100px;
 }
 header h1 {
 	font-family: 'Arvo', Georgia, serif;
@@ -48,6 +48,21 @@ header h2 {
 	font-weight: 300;
 	color:#aaa;
 	letter-spacing:1px;
+}
+header h3 {
+	font-size:13px;
+	font-family: 'Open Sans', arial, serif;
+	margin-top: 4px;
+	margin-bottom: 10px;
+}
+header h3 a {
+	font-size:13px;
+	font-family: 'Open Sans', arial, serif;
+	color: white;
+	text-decoration: none
+}
+header h3 a:hover {
+	text-decoration: underline;
 }
 header #header {
 	margin:10px;
@@ -250,7 +265,7 @@ canvas#ix {
 	height:100%;
 	width:520px;
 	z-index:1010;
-	top:80px;
+	top:100px;
 	left:212px;
 	background-color:rgba(0,0,0,0.85);
 	z-index:900;

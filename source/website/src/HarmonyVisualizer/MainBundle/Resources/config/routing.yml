@@ -6,9 +6,13 @@ HarmonyVisualizerMainBundle_form:
     resource: "@HarmonyVisualizerMainBundle/Resources/config/routing/form.yml"
     prefix:   /form
 
-visualizer:
-    pattern:  /visualizer
-    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visualizer }
+visu_cordova_plugin_contacts:
+    pattern:  /cordova-plugin-contacts
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuContact }
+
+visu_cordova_plugin_file_transfert:
+    pattern:  /cordova-plugin-file-transfer
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuFileTransfer }
 
 form:
     pattern:  /form
