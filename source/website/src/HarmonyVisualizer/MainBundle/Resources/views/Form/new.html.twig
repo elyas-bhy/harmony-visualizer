@@ -49,80 +49,81 @@
     </div>
     <div class="project" style="display:none;">
         <h2>About the project</h2>
+        <div class="question_counter"></div>
 
-        <div id="q1">
+        <div id="q1" class="question">
             {{ form_label(form.q1, "Find the most active developer (in terms of contributions).") }}
             {{ form_errors(form.q1) }}
             {{ form_widget(form.q1) }}
             <button id="1" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q2" style="display:none;">
+        <div id="q2" style="display:none;" class="question">
             {{ form_label(form.q2, "Find the component which has the highest amount of contributors.") }}
             {{ form_errors(form.q2) }}
             {{ form_widget(form.q2) }}
             <button id="2" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q3" style="display:none;">
+        <div id="q3" style="display:none;" class="question">
             {{ form_label(form.q3, "Find the component which received the highest amount of contributions.") }}
             {{ form_errors(form.q3) }}
             {{ form_widget(form.q3) }}
             <button id="3" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q4" style="display:none;">
+        <div id="q4" style="display:none;" class="question">
             {{ form_label(form.q4, "Find the component which received the highest amount of contributions by purplecabbage.") }}
             {{ form_errors(form.q4) }}
             {{ form_widget(form.q4) }}
             <button id="4" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q5" style="display:none;">
+        <div id="q5" style="display:none;" class="question">
             {{ form_label(form.q5, "Find the most active developer on the root (“/”) component.") }}
             {{ form_errors(form.q5) }}
             {{ form_widget(form.q5) }}
             <button id="5" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q6" style="display:none;">
+        <div id="q6" style="display:none;" class="question">
             {{ form_label(form.q6, "Find a component to which one developer contributed much more than the other developers.") }}
             {{ form_errors(form.q6) }}
             {{ form_widget(form.q6) }}
             <button id="6" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q7" style="display:none;">
+        <div id="q7" style="display:none;" class="question">
             {{ form_label(form.q7, "Find the component to which the highest number of developers contributed to.") }}
             {{ form_errors(form.q7) }}
             {{ form_widget(form.q7) }}
             <button id="7" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q8" style="display:none;">
+        <div id="q8" style="display:none;" class="question">
             {{ form_label(form.q8, "Indicate his total number of contributions of Anis Kadri.") }}
             {{ form_errors(form.q8) }}
             {{ form_widget(form.q8) }}
             <button id="8" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q9" style="display:none;">
+        <div id="q9" style="display:none;" class="question">
             {{ form_label(form.q9, "Indicate whether the workload is equally divided amongst developers.") }}
             {{ form_errors(form.q9) }}
             {{ form_widget(form.q9) }}
             <button id="9" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q10" style="display:none;">
+        <div id="q10" style="display:none;" class="question">
             {{ form_label(form.q10, "Give a component which is the product of a large contribution.") }}
             {{ form_errors(form.q10) }}
             {{ form_widget(form.q10) }}
             <button id="10" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q11" style="display:none;">
+        <div id="q11" style="display:none;" class="question">
             {{ form_label(form.q11, "Does it seem that developers work on the same components, or is there only one developer per component?") }}
             {{ form_errors(form.q11) }}
             {{ form_widget(form.q11) }}
             <button id="11" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q12" style="display:none;">
+        <div id="q12" style="display:none;" class="question">
             {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group in which all members seem to work together?") }}
             {{ form_errors(form.q12) }}
             {{ form_widget(form.q12) }}
             <button id="12" class="nextQ" type="button">Next Question</button>
         </div>
-        <div id="q13" style="display:none;">
+        <div id="q13" style="display:none;" class="question">
             {{ form_label(form.q13, "According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?") }}
             {{ form_errors(form.q13) }}
             {{ form_widget(form.q13) }}
@@ -133,18 +134,29 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+    var numQuestions = $('.question').length;
+    var currentQuestion = 1;
+
     $('#unhide').click(function() {
         $('.yourself').attr("style", "display:none;");
         $('.project').removeAttr("style");
     });
+
+    $('.question_counter').text(currentQuestion + '/' + numQuestions);
 
     $('.nextQ').click(function() {
         var prefix = "q";
         var id = parseInt($(this).attr('id'));
         var nextId = id + 1;
         var next = $('#' + prefix.concat(nextId));
-        $('#' + prefix.concat(id)).hide();
-        next.show();
+        $('#' + prefix.concat(id)).fadeOut('slow', function(){
+            next.fadeIn();
+        });
+            
+
+        ++currentQuestion;
+        $('.question_counter').text("");
+        $('.question_counter').text(currentQuestion + '/' + numQuestions);
     });
 });
 </script>
