@@ -7,11 +7,11 @@ HarmonyVisualizerMainBundle_form:
     prefix:   /form
 
 visu_cordova_plugin_contacts:
-    pattern:  /visu1
+    pattern:  /cordova-plugin-contacts
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuContact }
 
 visu_cordova_plugin_file_transfert:
-    pattern:  /visu2
+    pattern:  /cordova-plugin-file-transfer
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuFileTransfer }
 
 form:
