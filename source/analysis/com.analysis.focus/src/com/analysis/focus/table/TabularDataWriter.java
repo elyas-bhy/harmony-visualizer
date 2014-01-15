@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import com.analysis.focus.Component;
 import com.analysis.focus.Contributor;
 import com.analysis.focus.Distribution;
+import com.analysis.focus.viewer.MapUtil;
 
 public class TabularDataWriter {
 
@@ -17,14 +18,16 @@ public class TabularDataWriter {
 	private StringBuffer data;
 	
 	public TabularDataWriter(Map<String,Contributor> contributors, Map<String,Component> components) {
-		this.contributors = contributors;
-		this.components = components;
+		this.contributors = MapUtil.sortByValue(contributors);
+		this.components = MapUtil.sortByValue(components);
 		this.data = new StringBuffer();
 	}
 
 	public void generateTable() {
+		// Generate contributions data in JSON format
 		int total = 0;
-		data.append("[");
+		int rowTotal = 0;
+		data.append("var items = [");
 		for (Contributor contributor : contributors.values()) {
 			data.append("{ \"name\":\"");
 			data.append(contributor.getName());
@@ -34,24 +37,43 @@ public class TabularDataWriter {
 				data.append("\":\"");
 				data.append(d.getContributions());
 				data.append("\"");
-				total += d.getContributions();
+				rowTotal += d.getContributions();
 			}
 			data.append(",\"total\":\"");
-			data.append(total);
+			data.append(rowTotal);
 			data.append("\"},");
-			total = 0;
+			total += rowTotal;
+			rowTotal = 0;
 		}
 		
 		data.append("{ \"name\":\" TOTAL\"");
+		data.append(",\"total\":\"");
+		data.append(total);
+		data.append("\"");
 		for (Component component : components.values()) {
 			data.append(",\"" + component.getName());
 			data.append("\":\"");
 			data.append(component.getContributions());
 			data.append("\"");
 		}
-		data.append("}]");
+		data.append("}];\n");
 		
-		File file = new File("tview.json");
+		// Generate jQuery datatable with appropriate columns
+		data.append("var input = {\n\t\"aaData\":items,\n\t\"bJQueryUI\":true,\n\t\"iDisplayLength\":50");
+		data.append(",\n\t\"sPaginationType\":\"full_numbers\",\n\t\"aoColumns\":[\n\t");
+		data.append("{\"sTitle\":\"Name\", \"mData\":\"name\", \"sClass\":\"dName\"},\n\t");
+		data.append("{\"sTitle\":\"Total\", \"mData\":\"total\", \"sClass\":\"dTotal\"},\n\t");
+		
+		for (Component component : components.values()) {
+			data.append("{\"sTitle\":\"");
+			data.append(component.getName());
+			data.append("\", \"mData\":\"");
+			data.append(component.getName() + "\"},\n\t");
+		}
+		data.append("]};");
+		
+		
+		File file = new File("tabledata.js");
 		try {
 			FileUtils.writeStringToFile(file, data.toString());
 		} catch (IOException e) {

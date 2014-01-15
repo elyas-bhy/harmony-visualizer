@@ -10,40 +10,6 @@
 <link type="text/css" rel="stylesheet" href="css/site.css"/>
 
 <script type="text/javascript">
-	
-	var input = {
-		"aaData" : items,
-		"bJQueryUI": true,
-        //"sDom": 'RC<"clear">lfrtip',
-        "iDisplayLength": "50",
-        "sPaginationType": "full_numbers",
-        "aoColumns" : [ 
-		//"sDefaultContent": "Edit"
-		  { "sTitle" : "Name", "mData": "name", "sClass": "dName" },
-		  { "sTitle" : "Total", "mData": "total", "sClass": "dTotal" },
-		  { "sTitle" : "/", "mData": "/" },
-		  { "sTitle" : "doc", "mData": "doc" },
-		  { "sTitle" : "docs/filetransfer", "mData": "docs/filetransfer" },
-		  { "sTitle" : "docs/filetransfererror", "mData": "docs/filetransfererror" },
-		  { "sTitle" : "src/amazon", "mData": "src/amazon" },
-		  { "sTitle" : "src/android", "mData": "src/android" },
-		  { "sTitle" : "src/ios", "mData": "src/ios" },
-		  { "sTitle" : "src/ubuntu", "mData": "src/ubuntu" },
-		  { "sTitle" : "src/wp", "mData": "src/wp" },
-		  { "sTitle" : "src/wp7", "mData": "src/wp7" },
-		  { "sTitle" : "src/wp8", "mData": "src/wp8" },
-		  { "sTitle" : "test", "mData": "test" },
-		  { "sTitle" : "test/autotest", "mData": "test/autotest" },
-		  { "sTitle" : "test/autotest/html", "mData": "test/autotest/html" },
-		  { "sTitle" : "test/autotest/pages", "mData": "test/autotest/pages" },
-		  { "sTitle" : "test/autotest/tests", "mData": "test/autotest/tests" },
-		  { "sTitle" : "www", "mData": "www" },
-		  { "sTitle" : "www/blackberry10", "mData": "www/blackberry10" },
-		  { "sTitle" : "www/windows8", "mData": "www/windows8" },
-		  { "sTitle" : "www/wp", "mData": "www/wp" },
-		  { "sTitle" : "www/wp7", "mData": "www/wp7" }
-		]
-	};
 
 	$(document).ready(function() {
 		var oTable = $('#dtable').dataTable(input);
