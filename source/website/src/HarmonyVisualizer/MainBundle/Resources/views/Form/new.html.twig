@@ -1,4 +1,8 @@
 {% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
+{% block head -%}
+    <script src="../../../../../../web/js/chrono.js" language="javascript" type="text/javascript"</script>
+{% endblock %}
+
 
 {% block body -%}
 	<div class="title">
@@ -48,6 +52,7 @@
 
     </div>
     <div class="project" style="display:none;">
+        <input id="timer" type="text" style="display:none;"/>
         <h2>About the project</h2>
         <div class="question_counter"></div>
 
@@ -147,12 +152,18 @@ $(document).ready(function(){
     $('.question_counter').text(currentQuestion + '/' + numQuestions);
 
     $('.nextQ').click(function() {
+        arreterChrono();
+        var time = tempsChrono();
+        RAZChrono();
         var prefix = "q";
         var id = parseInt($(this).attr('id'));
+        form.q1Time = time;
         var nextId = id + 1;
         var next = $('#' + prefix.concat(nextId));
         $('#' + prefix.concat(id)).fadeOut('slow', function(){
-            next.fadeIn();
+            next.fadeIn('slow', function(){
+                demarrerChrono();
+            });
         });
             
 
@@ -192,6 +203,13 @@ $(document).ready(function(){
             $('#unhide').removeAttr('disabled');
         }
     });
+
+    chargerChronoDyna($("#timer"));
 });
+
+$(document).unload(function(){
+    dechargerChronoDyna($("#timer"));
+});
+
 </script>
 {% endblock %}

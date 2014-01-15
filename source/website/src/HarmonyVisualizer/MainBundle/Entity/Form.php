@@ -73,9 +73,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q1Time", type="text")
+     */ 
+    private $q1Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q2", type="text")
      */
     private $q2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q2Time", type="text")
+     */ 
+    private $q2Time;
 
     /**
      * @var string
@@ -87,9 +101,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q3Time", type="text")
+     */ 
+    private $q3Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q4", type="text")
      */
     private $q4;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q4Time", type="text")
+     */ 
+    private $q4Time;
 
     /**
      * @var string
@@ -101,6 +129,13 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q5Time", type="text")
+     */ 
+    private $q5Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q6", type="text")
      */
     private $q6;
@@ -108,9 +143,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q6Time", type="text")
+     */ 
+    private $q6Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q7", type="text")
      */
     private $q7;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q7Time", type="text")
+     */ 
+    private $q7Time;
 
     /**
      * @var float
@@ -122,9 +171,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q8Time", type="text")
+     */ 
+    private $q8Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q9", type="text")
      */
     private $q9;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q9Time", type="text")
+     */ 
+    private $q9Time;
 
     /**
      * @var string
@@ -136,9 +199,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q10Time", type="text")
+     */ 
+    private $q10Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q11", type="text")
      */
     private $q11;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q11Time", type="text")
+     */ 
+    private $q11Time;
 
     /**
      * @var string
@@ -150,9 +227,23 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="q12Time", type="text")
+     */ 
+    private $q12Time;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="q13", type="text")
      */
     private $q13;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="q13Time", type="text")
+     */ 
+    private $q13Time;
 
 
     /**
@@ -600,5 +691,304 @@ class Form
     public function getQ13()
     {
         return $this->q13;
+    }  
+
+    /**
+     * Set q1Time
+     *
+     * @param string $q1Time
+     * @return Form
+     */
+    public function setQ1Time($q1Time)
+    {
+        $this->q1Time = $q1Time;
+
+        return $this;
     }
+
+    /**
+     * Get q1Time
+     *
+     * @return string 
+     */
+    public function getQ1Time()
+    {
+        return $this->q1Time;
+    }  
+
+    /**
+     * Set q2Time
+     *
+     * @param string $q2Time
+     * @return Form
+     */
+    public function setQ2Time($q2Time)
+    {
+        $this->q2Time = $q2Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q2Time
+     *
+     * @return string 
+     */
+    public function getQ2Time()
+    {
+        return $this->q2Time;
+    }  
+
+    /**
+     * Set q3Time
+     *
+     * @param string $q3Time
+     * @return Form
+     */
+    public function setQ3Time($q3Time)
+    {
+        $this->q3Time = $q3Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q3Time
+     *
+     * @return string 
+     */
+    public function getQ3Time()
+    {
+        return $this->q3Time;
+    }  
+
+    /**
+     * Set q4Time
+     *
+     * @param string $q4Time
+     * @return Form
+     */
+    public function setQ4Time($q4Time)
+    {
+        $this->q4Time = $q4Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q4Time
+     *
+     * @return string 
+     */
+    public function getQ4Time()
+    {
+        return $this->q4Time;
+    }  
+
+    /**
+     * Set q5Time
+     *
+     * @param string $q5Time
+     * @return Form
+     */
+    public function setQ5Time($q5Time)
+    {
+        $this->q5Time = $q5Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q5Time
+     *
+     * @return string 
+     */
+    public function getQ5Time()
+    {
+        return $this->q5Time;
+    }  
+
+    /**
+     * Set q6Time
+     *
+     * @param string $q6Time
+     * @return Form
+     */
+    public function setQ6Time($q6Time)
+    {
+        $this->q6Time = $q6Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q6Time
+     *
+     * @return string 
+     */
+    public function getQ6Time()
+    {
+        return $this->q6Time;
+    }  
+
+    /**
+     * Set q7Time
+     *
+     * @param string $q7Time
+     * @return Form
+     */
+    public function setQ7Time($q7Time)
+    {
+        $this->q7Time = $q7Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q7Time
+     *
+     * @return string 
+     */
+    public function getQ7Time()
+    {
+        return $this->q7Time;
+    }    
+
+    /**
+     * Set q8Time
+     *
+     * @param string $q8Time
+     * @return Form
+     */
+    public function setQ8Time($q8Time)
+    {
+        $this->q8Time = $q8Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q8Time
+     *
+     * @return string 
+     */
+    public function getQ8Time()
+    {
+        return $this->q8Time;
+    }  
+
+    /**
+     * Set q9Time
+     *
+     * @param string $q9Time
+     * @return Form
+     */
+    public function setQ9Time($q9Time)
+    {
+        $this->q9Time = $q9Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q9Time
+     *
+     * @return string 
+     */
+    public function getQ9Time()
+    {
+        return $this->q9Time;
+    }  
+
+    /**
+     * Set q10Time
+     *
+     * @param string $q10Time
+     * @return Form
+     */
+    public function setQ10Time($q10Time)
+    {
+        $this->q10Time = $q10Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q10Time
+     *
+     * @return string 
+     */
+    public function getQ10Time()
+    {
+        return $this->q10Time;
+    }  
+
+    /**
+     * Set q11Time
+     *
+     * @param string $q11Time
+     * @return Form
+     */
+    public function setQ11Time($q11Time)
+    {
+        $this->q11Time = $q11Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q11Time
+     *
+     * @return string 
+     */
+    public function getQ11Time()
+    {
+        return $this->q11Time;
+    }  
+
+    /**
+     * Set q12Time
+     *
+     * @param string $q12Time
+     * @return Form
+     */
+    public function setQ12Time($q12Time)
+    {
+        $this->q12Time = $q12Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q12Time
+     *
+     * @return string 
+     */
+    public function getQ12Time()
+    {
+        return $this->q12Time;
+    }  
+
+    /**
+     * Set q13Time
+     *
+     * @param string $q13Time
+     * @return Form
+     */
+    public function setQ13Time($q13Time)
+    {
+        $this->q13Time = $q13Time;
+
+        return $this;
+    }
+
+    /**
+     * Get q13Time
+     *
+     * @return string 
+     */
+    public function getQ13Time()
+    {
+        return $this->q13Time;
+    }  
 }
