@@ -26,6 +26,7 @@ public class TabularDataWriter {
 	public void generateTable() {
 		// Generate contributions data in JSON format
 		int total = 0;
+		int rowTotal = 0;
 		data.append("var items = [");
 		for (Contributor contributor : contributors.values()) {
 			data.append("{ \"name\":\"");
@@ -36,15 +37,19 @@ public class TabularDataWriter {
 				data.append("\":\"");
 				data.append(d.getContributions());
 				data.append("\"");
-				total += d.getContributions();
+				rowTotal += d.getContributions();
 			}
 			data.append(",\"total\":\"");
-			data.append(total);
+			data.append(rowTotal);
 			data.append("\"},");
-			total = 0;
+			total += rowTotal;
+			rowTotal = 0;
 		}
 		
 		data.append("{ \"name\":\" TOTAL\"");
+		data.append(",\"total\":\"");
+		data.append(total);
+		data.append("\"");
 		for (Component component : components.values()) {
 			data.append(",\"" + component.getName());
 			data.append("\":\"");
