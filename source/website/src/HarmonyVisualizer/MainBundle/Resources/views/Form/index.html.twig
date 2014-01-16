@@ -1,4 +1,4 @@
-{% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
     <h1>Form list</h1>
@@ -7,8 +7,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Age</th>
                 <th>Email</th>
                 <th>Experience</th>
                 <th>Job</th>
@@ -16,17 +14,31 @@
                 <th>Deficiency</th>
                 <th>Contributed</th>
                 <th>Q1</th>
+                <th>Q1time</th>
                 <th>Q2</th>
+                <th>Q2time</th>
                 <th>Q3</th>
+                <th>Q3time</th>
                 <th>Q4</th>
+                <th>Q4time</th>
                 <th>Q5</th>
+                <th>Q5time</th>
                 <th>Q6</th>
+                <th>Q6time</th>
                 <th>Q7</th>
+                <th>Q7time</th>
                 <th>Q8</th>
+                <th>Q8time</th>
                 <th>Q9</th>
+                <th>Q9time</th>
                 <th>Q10</th>
+                <th>Q10time</th>
                 <th>Q11</th>
+                <th>Q11time</th>
                 <th>Q12</th>
+                <th>Q12time</th>
+                <th>Q13</th>
+                <th>Q13time</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,8 +46,6 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('form_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.age }}</td>
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.experience }}</td>
                 <td>{{ entity.job }}</td>
@@ -43,17 +53,31 @@
                 <td>{{ entity.deficiency }}</td>
                 <td>{{ entity.contributed }}</td>
                 <td>{{ entity.q1 }}</td>
+                <td>{{ entity.q1Time }}</td>
                 <td>{{ entity.q2 }}</td>
+                <td>{{ entity.q2Time }}</td>
                 <td>{{ entity.q3 }}</td>
+                <td>{{ entity.q3Time }}</td>
                 <td>{{ entity.q4 }}</td>
+                <td>{{ entity.q4Time }}</td>
                 <td>{{ entity.q5 }}</td>
+                <td>{{ entity.q5Time }}</td>
                 <td>{{ entity.q6 }}</td>
+                <td>{{ entity.q6Time }}</td>
                 <td>{{ entity.q7 }}</td>
+                <td>{{ entity.q7Time }}</td>
                 <td>{{ entity.q8 }}</td>
+                <td>{{ entity.q8Time }}</td>
                 <td>{{ entity.q9 }}</td>
+                <td>{{ entity.q9Time }}</td>
                 <td>{{ entity.q10 }}</td>
+                <td>{{ entity.q10Time }}</td>
                 <td>{{ entity.q11 }}</td>
+                <td>{{ entity.q11Time }}</td>
                 <td>{{ entity.q12 }}</td>
+                <td>{{ entity.q12Time }}</td>
+                <td>{{ entity.q13 }}</td>
+                <td>{{ entity.q13Time }}</td>
                 <td>
                 <ul>
                     <li>

@@ -73,7 +73,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q1Time", type="text")
+     * @ORM\Column(name="q1Time", type="text", nullable=true)
      */ 
     private $q1Time;
 
@@ -87,7 +87,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q2Time", type="text")
+     * @ORM\Column(name="q2Time", type="text", nullable=true)
      */ 
     private $q2Time;
 
@@ -101,7 +101,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q3Time", type="text")
+     * @ORM\Column(name="q3Time", type="text", nullable=true)
      */ 
     private $q3Time;
 
@@ -115,7 +115,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q4Time", type="text")
+     * @ORM\Column(name="q4Time", type="text", nullable=true)
      */ 
     private $q4Time;
 
@@ -129,7 +129,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q5Time", type="text")
+     * @ORM\Column(name="q5Time", type="text", nullable=true)
      */ 
     private $q5Time;
 
@@ -143,7 +143,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q6Time", type="text")
+     * @ORM\Column(name="q6Time", type="text", nullable=true)
      */ 
     private $q6Time;
 
@@ -157,7 +157,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q7Time", type="text")
+     * @ORM\Column(name="q7Time", type="text", nullable=true)
      */ 
     private $q7Time;
 
@@ -171,7 +171,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q8Time", type="text")
+     * @ORM\Column(name="q8Time", type="text", nullable=true)
      */ 
     private $q8Time;
 
@@ -185,7 +185,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q9Time", type="text")
+     * @ORM\Column(name="q9Time", type="text", nullable=true)
      */ 
     private $q9Time;
 
@@ -199,7 +199,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q10Time", type="text")
+     * @ORM\Column(name="q10Time", type="text", nullable=true)
      */ 
     private $q10Time;
 
@@ -213,7 +213,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q11Time", type="text")
+     * @ORM\Column(name="q11Time", type="text", nullable=true)
      */ 
     private $q11Time;
 
@@ -227,7 +227,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q12Time", type="text")
+     * @ORM\Column(name="q12Time", type="text", nullable=true)
      */ 
     private $q12Time;
 
@@ -241,7 +241,7 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="q13Time", type="text")
+     * @ORM\Column(name="q13Time", type="text", nullable=true)
      */ 
     private $q13Time;
 

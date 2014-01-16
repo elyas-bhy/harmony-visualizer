@@ -22,4 +22,8 @@ class DefaultController extends Controller
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:form.html.twig');
     }
+    public function formCompleteAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:formComplete.html.twig');
+    }
 }

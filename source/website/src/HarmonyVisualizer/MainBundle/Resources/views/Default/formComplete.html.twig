@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="screen" />
@@ -9,12 +9,12 @@
 {% endblock %}
 
 {% block body %}
+<div class="blockSurvey" style="height: auto;overflow-y: auto;">
+	<div class="title">
+		<h1>Harmony<span>Visualizer</span> Survey</h1>
+	</div>
 
-<div class="blockVisualizer">
-	{{ render(controller("HarmonyVisualizerMainBundle:Default:visuContact")) }}
-</div>
-<div class="blockSurvey">
-	{{ render(controller("HarmonyVisualizerMainBundle:Form:new")) }}
+	<p style="margin:50px;">Thank you</p>
 </div>
 
 {% endblock %}
