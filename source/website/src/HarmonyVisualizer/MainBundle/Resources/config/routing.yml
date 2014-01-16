@@ -18,3 +18,6 @@ form:
     pattern:  /form
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:form }
 
+formComplete:
+    pattern:  /formComplete
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:formComplete }

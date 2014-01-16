@@ -44,7 +44,7 @@ class FormController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('form_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('formComplete'));
         }
 
         return $this->render('HarmonyVisualizerMainBundle:Form:new.html.twig', array(
