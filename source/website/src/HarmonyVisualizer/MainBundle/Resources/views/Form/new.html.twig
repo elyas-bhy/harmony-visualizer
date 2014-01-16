@@ -160,11 +160,27 @@
     <script src="{{ asset('js/chrono.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
+
+    function checkEmail(mail) {
+        var reg = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
+
+        if(reg.test(mail)) {
+            return(true);
+        }
+        else {
+            return(false);
+        }
+    }
+
     $(document).ready(function(){
         var numQuestions = $('.question').length;
         var currentQuestion = 1;
 
         $('#unhide').click(function() {
+            if (checkEmail( $("#harmonyvisualizer_mainbundle_form_email").val() ) == false) {
+                alert("Invalid email !");
+                return ;
+            }
             if(!($(this).attr("disabled") == "disabled")) {
                 $('.yourself').attr("style", "display:none;");
                 $('.project').removeAttr("style");

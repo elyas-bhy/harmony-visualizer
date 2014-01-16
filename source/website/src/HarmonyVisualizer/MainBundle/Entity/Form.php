@@ -162,9 +162,9 @@ class Form
     private $q7Time;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="q8", type="float")
+     * @ORM\Column(name="q8", type="text")
      */
     private $q8;
 
@@ -558,7 +558,7 @@ class Form
     /**
      * Set q8
      *
-     * @param float $q8
+     * @param string $q8
      * @return Form
      */
     public function setQ8($q8)
@@ -571,7 +571,7 @@ class Form
     /**
      * Get q8
      *
-     * @return float 
+     * @return string 
      */
     public function getQ8()
     {
