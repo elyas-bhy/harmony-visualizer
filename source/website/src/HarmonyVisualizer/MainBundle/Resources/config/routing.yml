@@ -6,11 +6,11 @@ HarmonyVisualizerMainBundle_form:
     resource: "@HarmonyVisualizerMainBundle/Resources/config/routing/form.yml"
     prefix:   /form
 
-visu_cordova_plugin_contacts:
+cordova_plugin_contacts:
     pattern:  /cordova-plugin-contacts
-    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuContact }
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuContacts }
 
-visu_cordova_plugin_file_transfert:
+cordova_plugin_file_transfer:
     pattern:  /cordova-plugin-file-transfer
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuFileTransfer }
 
@@ -21,3 +21,22 @@ form:
 formComplete:
     pattern:  /formComplete
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:formComplete }
+
+
+# Survey routes
+
+survey_visu_cordova_plugin_contacts:
+    pattern:  /survey-cordova-plugin-contacts
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuContactsForm }
+
+survey_visu_cordova_plugin_file_transfer:
+    pattern:  /survey-cordova-plugin-file-transfer
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuFileTransferForm }
+
+survey_matrix_cordova_plugin_contacts:
+    pattern:  /survey-matrix-cordova-plugin-contacts
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:matrixContactsForm }
+
+survey_matrix_cordova_plugin_file_transfer:
+    pattern:  /survey-matrix-cordova-plugin-file-transfer
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:matrixFileTransferForm }

@@ -10,7 +10,7 @@ class DefaultController extends Controller
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:index.html.twig');
     }
-    public function visuContactAction()
+    public function visuContactsAction()
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:visu_cordova_plugin_contacts.html.twig');
     }
@@ -25,5 +25,22 @@ class DefaultController extends Controller
     public function formCompleteAction()
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:formComplete.html.twig');
+    }
+
+    public function visuContactsFormAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:survey-visu-contacts.html.twig');
+    }
+    public function visuFileTransferFormAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:survey-visu-file.html.twig');
+    }
+    public function matrixContactsFormAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:survey-matrix-contacts.html.twig');
+    }
+    public function matrixFileTransferFormAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:survey-matrix-file.html.twig');
     }
 }

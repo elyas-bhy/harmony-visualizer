@@ -10,13 +10,11 @@
 
 {% block body %}
 
-<ul class="homeUl">
-	<li>
-		<a class="btn btn-primary" href="{{ path('survey_visu_cordova_plugin_contacts') }}">Survey - Visu cordova-plugin-contacts</a>
-	</li>
-	<li>
-		<a class="btn btn-primary" href="{{ path('survey_visu_cordova_plugin_file_transfer') }}">Survey - Visu cordova-plugin-file-transfer</a>
-	</li>
-</ul>
+<div class="blockVisualizer">
+	{{ render(controller("HarmonyVisualizerMainBundle:Default:visuFileTransfer")) }}
+</div>
+<div class="blockSurvey">
+	{{ render(controller("HarmonyVisualizerMainBundle:Form:new")) }}
+</div>
 
 {% endblock %}

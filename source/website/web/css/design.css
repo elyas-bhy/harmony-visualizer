@@ -90,3 +90,10 @@ body {
 .blockSurvey button {
 	color:white;
 }
+
+.homeUl {
+	list-style-type: none;
+}
+.homeUl li {
+	margin:30px;
+}
