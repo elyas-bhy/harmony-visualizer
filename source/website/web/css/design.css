@@ -45,10 +45,10 @@ body {
 }
 
 .blockSurvey form {
-	width: 360px;
+	width: 400px;
 }
 .blockSurvey form * {
-	width: 300px;
+	width: 340px;
 }
 .blockSurvey form div {
 	margin: 30px;
