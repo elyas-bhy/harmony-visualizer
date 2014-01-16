@@ -13,7 +13,8 @@
 
     {{ form_start(form) }}
 
-    <input type="hidden" value="" name="harmonyvisualizer_mainbundle_form[formType]" id="formType" />
+    {#<input type="hidden" value="" name="harmonyvisualizer_mainbundle_form[formType]" id="formType" />#}
+    {{ form_widget(form.formType, {'attr': {'style': 'display:none;', 'id': 'formType'}}) }}
 
     <div class="separator"></div>
 
@@ -198,8 +199,8 @@
                 return ;
             }
 
-            alert($("#formtypetxt").attr("data-formtype"));
-            $("#formType").val( $("#formtypetxt").attr("data-formtype") );
+            //alert($("#formtypetxt").attr("data-formtype"));
+            $("#harmonyvisualizer_mainbundle_form_formType").val( $("#formtypetxt").attr("data-formtype") );
 
             if(!($(this).attr("disabled") == "disabled")) {
                 $('.yourself').attr("style", "display:none;");
