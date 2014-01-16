@@ -16,7 +16,7 @@ body {
 }
 
 .blockSurvey div.title {
-	width:360px;
+	width:300px;
 }
 .blockSurvey h1 {
 	font-size: 2em;
@@ -45,7 +45,7 @@ body {
 }
 
 .blockSurvey form * {
-	width: 300px;
+	width: 250px;
 }
 
 .blockSurvey form div {
@@ -74,16 +74,16 @@ body {
 	left:0px;
 	height:100%;
 	position: absolute;
-	width: 380px;
+	width: 330px;
 	overflow: auto;
 	border-right: 2px solid #444;
 }
 .blockVisualizer {
 	float:left;
-	left:380px;
+	left:330px;
 	position: absolute;
 	height:100%;
-	width: calc(100% - 380px);
+	width: calc(100% - 330px);
 	overflow: auto;
 }
 
