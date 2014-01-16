@@ -18,6 +18,14 @@ class DefaultController extends Controller
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:visu_cordova_plugin_file_transfer.html.twig');
     }
+    public function matrixContactsAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:matrix-contacts.html.twig');
+    }
+    public function matrixFileTransferAction()
+    {
+        return $this->render('HarmonyVisualizerMainBundle:Default:matrix-file.html.twig');
+    }
     public function formAction()
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:form.html.twig');
@@ -26,6 +34,7 @@ class DefaultController extends Controller
     {
         return $this->render('HarmonyVisualizerMainBundle:Default:formComplete.html.twig');
     }
+
 
     public function visuContactsFormAction()
     {

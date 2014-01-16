@@ -10,4 +10,11 @@
 
 {% block body %}
 
+<div class="blockVisualizer">
+	{{ render(controller("HarmonyVisualizerMainBundle:Default:matrixContacts")) }}
+</div>
+<div class="blockSurvey">
+	{{ render(controller("HarmonyVisualizerMainBundle:Form:new")) }}
+</div>
+
 {% endblock %}

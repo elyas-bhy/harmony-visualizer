@@ -14,6 +14,15 @@ cordova_plugin_file_transfer:
     pattern:  /cordova-plugin-file-transfer
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:visuFileTransfer }
 
+
+matrix_cordova_plugin_contacts:
+    pattern:  /matrix-cordova-plugin-contacts
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:matrixContacts }
+
+matrix_cordova_plugin_file_transfer:
+    pattern:  /matrix-cordova-plugin-file-transfer
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:matrixFileTransfer }
+
 form:
     pattern:  /form
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:form }
