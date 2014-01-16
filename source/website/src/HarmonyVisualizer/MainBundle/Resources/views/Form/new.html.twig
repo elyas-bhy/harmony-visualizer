@@ -1,6 +1,6 @@
 {% extends 'HarmonyVisualizerMainBundle:Default:index.html.twig' %}
 {% block head -%}
-    <script src="../../../../../../web/js/chrono.js" language="javascript" type="text/javascript"</script>
+    
 {% endblock %}
 
 
@@ -47,7 +47,7 @@
             {{ form_widget(form.email) }}
         </div>
 
-        <input id="unhide" class="btn btn-primary" disabled="disabled">
+        <button id="unhide" disabled="disabled">Next Step</button>
         {#<div class="separator"></div>#}
 
     </div>
@@ -57,158 +57,184 @@
         <div class="question_counter"></div>
 
         <div id="q1" class="question">
+            {{ form_widget(form.q1Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q1, "Find the most active developer (in terms of contributions).") }}
             {{ form_errors(form.q1) }}
             {{ form_widget(form.q1) }}
             <button id="1" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q2" style="display:none;" class="question">
+            {{ form_widget(form.q2Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q2, "Find the component which has the highest amount of contributors.") }}
             {{ form_errors(form.q2) }}
             {{ form_widget(form.q2) }}
             <button id="2" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q3" style="display:none;" class="question">
+            {{ form_widget(form.q3Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q3, "Find the component which received the highest amount of contributions.") }}
             {{ form_errors(form.q3) }}
             {{ form_widget(form.q3) }}
             <button id="3" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q4" style="display:none;" class="question">
+            {{ form_widget(form.q4Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q4, "Find the component which received the highest amount of contributions by purplecabbage.") }}
             {{ form_errors(form.q4) }}
             {{ form_widget(form.q4) }}
             <button id="4" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q5" style="display:none;" class="question">
+            {{ form_widget(form.q5Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q5, "Find the most active developer on the root (“/”) component.") }}
             {{ form_errors(form.q5) }}
             {{ form_widget(form.q5) }}
             <button id="5" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q6" style="display:none;" class="question">
+            {{ form_widget(form.q6Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q6, "Find a component to which one developer contributed much more than the other developers.") }}
             {{ form_errors(form.q6) }}
             {{ form_widget(form.q6) }}
             <button id="6" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q7" style="display:none;" class="question">
+            {{ form_widget(form.q7Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q7, "Find the component to which the highest number of developers contributed to.") }}
             {{ form_errors(form.q7) }}
             {{ form_widget(form.q7) }}
             <button id="7" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q8" style="display:none;" class="question">
+            {{ form_widget(form.q8Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q8, "Indicate the total number of contributions of Anis Kadri.") }}
             {{ form_errors(form.q8) }}
             {{ form_widget(form.q8) }}
             <button id="8" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q9" style="display:none;" class="question">
+            {{ form_widget(form.q9Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q9, "Indicate whether the workload is equally divided amongst developers.") }}
             {{ form_errors(form.q9) }}
             {{ form_widget(form.q9) }}
             <button id="9" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q10" style="display:none;" class="question">
+            {{ form_widget(form.q10Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q10, "Indicate a component which is the product of a large contribution.") }}
             {{ form_errors(form.q10) }}
             {{ form_widget(form.q10) }}
             <button id="10" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q11" style="display:none;" class="question">
+            {{ form_widget(form.q11Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q11, "Does it seem that developers work on the same components, or is there only one developer per component?") }}
             {{ form_errors(form.q11) }}
             {{ form_widget(form.q11) }}
             <button id="11" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q12" style="display:none;" class="question">
+            {{ form_widget(form.q12Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group in which all members seem to work together?") }}
             {{ form_errors(form.q12) }}
             {{ form_widget(form.q12) }}
             <button id="12" class="nextQ" type="button" disabled="disabled">Next Question</button>
         </div>
         <div id="q13" style="display:none;" class="question">
+            {{ form_widget(form.q13Time, {'attr': {'style': 'display:none;'}}) }}
             {{ form_label(form.q13, "According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?") }}
             {{ form_errors(form.q13) }}
             {{ form_widget(form.q13) }}
-    	    <input type="submit" class="btn btn-primary" disabled="disabled"/>
+    	    <button id="13" type="submit" class="btn btn-primary" disabled="disabled"/>
         </div>
     </div>
 </form>
 
-<script type="text/javascript">
-$(document).ready(function(){
-    var numQuestions = $('.question').length;
-    var currentQuestion = 1;
 
-    $('#unhide').click(function() {
-        if(!($(this).attr("disabled") == "disabled")) {
-            $('.yourself').attr("style", "display:none;");
-            $('.project').removeAttr("style");
-        }
-    });
+    <script src="{{ asset('js/chrono.js') }}" type="text/javascript"></script>
 
-    $('.question_counter').text(currentQuestion + '/' + numQuestions);
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var numQuestions = $('.question').length;
+        var currentQuestion = 1;
 
-    $('.nextQ').click(function() {
-        arreterChrono();
-        var time = tempsChrono();
-        RAZChrono();
-        var prefix = "q";
-        var id = parseInt($(this).attr('id'));
-        form.q1Time = time;
-        var nextId = id + 1;
-        var next = $('#' + prefix.concat(nextId));
-        $('#' + prefix.concat(id)).fadeOut('slow', function(){
-            next.fadeIn('slow', function(){
+        $('#unhide').click(function() {
+            if(!($(this).attr("disabled") == "disabled")) {
+                $('.yourself').attr("style", "display:none;");
+                $('.project').removeAttr("style");
+
+                // Switching to project questions, start timer
                 demarrerChrono();
-            });
-            ++currentQuestion;
-            $('.question_counter').text("");
-            $('.question_counter').text(currentQuestion + '/' + numQuestions);
-        });
-
-    });
-
-    $(".question textarea, .question input").keyup(function() {
-        var id = $(this).parent().attr('id');
-        id = id.split('q')[1];
-        var button = $('#' + id);
-        var empty = false;
-        if($(this).val().length == 0) {
-            empty = true;
-        }
-
-        if(empty) {
-            button.attr('disabled', 'disabled');
-        } else {
-            button.removeAttr("disabled");
-        }
-    });
-
-    $('.yourself input').keyup(function() {
-
-        var empty = false;
-        $('.field input').each(function() {
-            if ($(this).val().length == 0) {
-                empty = true;
             }
         });
 
-        if (empty) {
-            $('#unhide').attr('disabled', 'disabled');
-        } else {
-            $('#unhide').removeAttr('disabled');
-        }
+        $('.question_counter').text(currentQuestion + '/' + numQuestions);
+
+        $('.nextQ, #13').click(function() {
+            arreterChrono();
+            var time = tempsChrono();
+
+            // calculate prefix and and current question ID
+            var prefix = "q";
+            var id = parseInt($(this).attr('id'));
+            var nextId = id + 1;
+            // get next question block
+            var next = $('#' + prefix.concat(nextId));
+
+            // set time in correct field
+            $('#harmonyvisualizer_mainbundle_form_q' + id + 'Time').text(time);
+
+            $('#' + prefix.concat(id)).fadeOut('fast', function(){
+                next.fadeIn('fast', function(){
+                    RAZChrono();
+
+                    if($(this).attr('class') == "nextQ") {
+                        demarrerChrono();
+                    }
+                });
+
+                if($(this).attr('class') == "nextQ") {
+                    // update question counter
+                    ++currentQuestion;
+                    $('.question_counter').text("");
+                    $('.question_counter').text(currentQuestion + '/' + numQuestions);
+                }
+            });
+
+        });
+
+        // Disable buttons if all questions aren't aswered
+        $(".question textarea, .question input").keyup(function() {
+            var id = $(this).parent().attr('id');
+            id = id.split('q')[1];
+            var button = $('#' + id);
+            var empty = false;
+            if($(this).val().length == 0) {
+                empty = true;
+            }
+
+            if(empty) {
+                button.attr('disabled', 'disabled');
+            } else {
+                button.removeAttr("disabled");
+            }
+        });
+
+        $('.yourself input').keyup(function() {
+            var empty = false;
+            $('.field input').each(function() {
+                if ($(this).val().length == 0) {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('#unhide').attr('disabled', 'disabled');
+            } else {
+                $('#unhide').removeAttr('disabled');
+            }
+        });
+
     });
-
-    chargerChronoDyna($("#timer"));
-});
-
-$(document).unload(function(){
-    dechargerChronoDyna($("#timer"));
-});
-
-</script>
+    </script>
 {% endblock %}
