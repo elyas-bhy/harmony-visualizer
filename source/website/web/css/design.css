@@ -80,3 +80,7 @@ body {
 	width:100%;
 	border-top:1px solid #222;
 }
+
+.blockSurvey button {
+	color:white;
+}

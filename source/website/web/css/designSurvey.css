@@ -89,3 +89,7 @@ body {
 	clear:both;
 	min-height:0px;
 }
+
+.pageSurvey button {
+	color:white;
+}
