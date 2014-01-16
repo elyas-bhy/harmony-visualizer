@@ -31,6 +31,13 @@ class Form
     /**
      * @var string
      *
+     * @ORM\Column(name="formType", type="string", length=255, nullable=true)
+     */
+    private $formType;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="experience", type="text")
      */
     private $experience;
@@ -991,4 +998,27 @@ class Form
     {
         return $this->q13Time;
     }  
+
+    /**
+     * Set formType
+     *
+     * @param string $formType
+     * @return Form
+     */
+    public function setFormType($formType)
+    {
+        $this->formType = $formType;
+
+        return $this;
+    }
+
+    /**
+     * Get formType
+     *
+     * @return string 
+     */
+    public function getFormType()
+    {
+        return $this->formType;
+    }
 }

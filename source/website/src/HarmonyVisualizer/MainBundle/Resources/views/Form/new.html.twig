@@ -13,6 +13,8 @@
 
     {{ form_start(form) }}
 
+    <input type="hidden" value="" name="harmonyvisualizer_mainbundle_form[formType]" id="formType" />
+
     <div class="separator"></div>
 
     <div class="yourself">
@@ -195,6 +197,10 @@
                 alert("Invalid email !");
                 return ;
             }
+
+            alert($("#formtypetxt").attr("data-formtype"));
+            $("#formType").val( $("#formtypetxt").attr("data-formtype") );
+
             if(!($(this).attr("disabled") == "disabled")) {
                 $('.yourself').attr("style", "display:none;");
                 $('.project').removeAttr("style");
