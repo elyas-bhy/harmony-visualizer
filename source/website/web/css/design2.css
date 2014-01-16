@@ -202,6 +202,7 @@ canvas#ix {
 }
 .info h3 {
 	font-size:14px;
+	margin: 3px 0px;
 }
 .info h3 b,
 .info h4 b{
