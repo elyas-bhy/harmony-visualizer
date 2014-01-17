@@ -1,0 +1,63 @@
+\section{Validation}
+
+\subsection{Context}
+
+This survey is being conducted for a university project which involves creating a visualisation of version control systems (VCS) data, namely git, in order to facilitate the identification of workload distribution between developers on a given project.
+This survey is a part of an empirical study which aims to evaluate the usefulness of our visualisation tool.
+We chose to compare our visualisation with raw data (in tabular format) in order to obtain a first impression of the limitations of our tool when compared to the most basic form of data presentation.
+For this analysis, we chose two Apache projects: cordova-plugin-file-transfer (project A1) and cordova-plugin-contacts (project A2). Larger projects will rapidly become difficult to read data in tabular format, thus potentially biasing the survey in favor of our tool, which would not respect the concept of an empirical study. In order to conduct a thorough study, we would need to conduct the survey on several projects of varying sizes, however we have used our best judgement to choose two projects which will hopefully best resemble the results of a more thorough study.
+
+In this survey, we will be interrogating people with an IT background (namely developers), on visualisations of open-source projects.
+
+This visualisation represents the distribution of developer contributions to the components of a project. We define a developer as any person having contributed to the git repository of the project, and component as a folder in the projects filesystem which contains at least one file that is not of directory nature.
+
+During the course of this survey, we will be taking into consideration the level of experience and status of the subjects that are answering the questions, in order to establish whether or not there exists a correlation between the level of expertise of a developer, and his/her ability to correctly answer our survey.
+
+
+\subsection{Experimental Protocol}
+
+In order to underline an eventual difference in efficiency between our visualization and a tabular view, we need to compare the time efficiency of both views on different test subjects. Thus, one test group will be provided with the visualisation of project A1 and the tabular equivalent for project A2. The second test group will be provided with the opposite combination.
+
+To measure the efficiency of both views, we will simply record the time required by the participant to complete the survey. In order to do so, participants will be required to fill an online form, and will be provided with either of the two combinations mentioned above.
+
+In order to compare the efficiency of a view compared to another, we need to calculate several performance indicators, such as:
+Median of the participant’s elapsed time: for the fastest half, calculate the distribution of people according to their test group. This data indicates whether our visualization tool is useful for a large number of people or not.
+Compare the time performance median of both test groups: this data indicates the difference in efficiency of a view compared to the other.
+Boxplots: depicts groups of numerical data through their quartiles. This data displays differences between populations without making any assumptions of the underlying statistical distribution
+
+
+\subsection{Definitions}
+\begin{itemize}
+\item Component: represents a set of software artifacts (files).
+\item Contribution: represents a modification on a given component.
+\item Workload: represents a set of contributions.
+\end{itemize}
+
+\subsection{Survey}
+
+\textbf{Tell us about yourself:}
+\begin{enumerate}
+\item What is your level of experience in the world of software development (in terms of years)?
+\item What is your job description?
+\item Have you ever used a visualization tool in a similar context?
+\item Do you have a visual deficiency (colour blindness for instance)?
+\item Did you contribute to the apache/cordova-plugin-file-transfer or apache/cordova-plugin-contacts \item project? If so, please indicate your nickname.
+\item What is your email address?
+\end{enumerate}
+
+\textbf{About the project:}
+\begin{enumerate}
+\item Find the most active developer (in terms of contributions).
+\item Find the developer who has contributed to the highest number of components.
+\item Find the component which has the highest amount of contributors.
+\item Find the component which received the highest amount of contributions.
+\item Find the component which received the highest amount of contributions by purplecabbage.
+\item Find the most active developer on the root (“/”) component.
+\item Find a component to which one developer contributed much more than the other developers.
+\item Indicate the total number of contributions of Anis Kadri.
+\item Indicate whether the workload is equally divided amongst developers.
+\item Indicate a component which is the product of a large contribution.
+\item Does it seem that developers work on the same components, or is there only one developer per component?
+\item Is the team composed of isolated groups which tend to work together, or is the team one large group in which all members seem to work together?
+\item According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?
+\end{enumerate}
