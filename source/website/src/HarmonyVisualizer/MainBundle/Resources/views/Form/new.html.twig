@@ -181,7 +181,9 @@
         var currentQuestion = 1;
 
         $('#unhide').click(function() {
-            if (checkEmail( $("#harmonyvisualizer_mainbundle_form_email").val() ) == false) {
+            var email = $("#harmonyvisualizer_mainbundle_form_email").val();
+
+            if ( (checkEmail( email ) == false) && email!="") {
                 alert("Invalid email !");
                 return ;
             }
@@ -229,7 +231,8 @@
 
                 if(currentButton.hasClass("nextQ")) {
                     // update question counter
-                    ++currentQuestion;
+                    if (currentQuestion < 13)
+                        ++currentQuestion;
                     $('.question_counter').text("");
                     $('.question_counter').text(currentQuestion + '/' + numQuestions);
                 }

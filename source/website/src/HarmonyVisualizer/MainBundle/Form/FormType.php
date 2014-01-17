@@ -16,7 +16,7 @@ class FormType extends AbstractType
     {
         $builder
             ->add('formType')
-            ->add('email', 'email')
+            ->add('email')
             ->add('experience')
             ->add('job')
             ->add('visualizationExperience')
