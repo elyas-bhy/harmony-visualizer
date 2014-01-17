@@ -38,35 +38,35 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="text")
+     * @ORM\Column(name="experience", type="text", nullable=true)
      */
     private $experience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="text")
+     * @ORM\Column(name="job", type="text", nullable=true)
      */
     private $job;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="visualizationExperience", type="text")
+     * @ORM\Column(name="visualizationExperience", type="text", nullable=true)
      */
     private $visualizationExperience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="deficiency", type="text")
+     * @ORM\Column(name="deficiency", type="text", nullable=true)
      */
     private $deficiency;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contributed", type="text")
+     * @ORM\Column(name="contributed", type="text", nullable=true)
      */
     private $contributed;
 

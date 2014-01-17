@@ -53,7 +53,7 @@
             {{ form_widget(form.email) }}
         </div>
         <div>
-            <button id="unhide" class="nextQ btn btn-primary" type="button" disabled="disabled">I am ready to start the survey</button>
+            <button id="unhide" class="btn btn-primary" type="button" {#disabled="disabled"#}>I am ready to start the survey</button>
         </div>
         {#<div class="separator"></div>#}
 
@@ -263,7 +263,7 @@
             });
 
             if (empty) {
-                $('#unhide').attr('disabled', 'disabled');
+                //$('#unhide').attr('disabled', 'disabled');
             } else {
                 $('#unhide').removeAttr('disabled');
             }
