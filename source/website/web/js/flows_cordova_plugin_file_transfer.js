@@ -1,6 +1,6 @@
 (function($){
 	
-	var $host = window.location.pathname + "/../../data/popup_cordova_plugin_file_transfer.json";
+	var $host = window.location.pathname + "/../data/popup_cordova_plugin_file_transfer.json";
 	
 	var Flows = new function() {
 		
