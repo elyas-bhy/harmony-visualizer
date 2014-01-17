@@ -195,6 +195,7 @@
                 $('.yourself').attr("style", "display:none;");
                 $('.project').removeAttr("style");
 
+                $("#harmonyvisualizer_mainbundle_form_q1").focus(); 
                 // Switching to project questions, start timer
                 demarrerChrono();
             }
@@ -223,7 +224,7 @@
             $('#' + prefix.concat(id)).fadeOut('fast', function(){
                 next.fadeIn('fast', function(){
                     RAZChrono();
-
+                    $('#harmonyvisualizer_mainbundle_form_q' + nextId).focus();
                     if(currentButton.hasClass("nextQ")) {
                         demarrerChrono();
                     }
