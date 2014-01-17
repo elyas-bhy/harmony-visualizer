@@ -305,8 +305,10 @@ canvas#ix {
 	font-family: 'Arvo', Georgia, serif;
 }
 #contents .par strong,
+#contents .par p strong,
 #contents .alert span strong {
 	color:#00F2FF;
+	font-weight: normal;
 }
 #contents .par h3 {
 	font-size:24px;
