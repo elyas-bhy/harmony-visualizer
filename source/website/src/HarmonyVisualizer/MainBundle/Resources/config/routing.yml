@@ -2,6 +2,10 @@ harmony_visualizer_main_homepage:
     pattern:  /
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:index }
 
+start_survey:
+    pattern:  /start
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:startSurvey }
+
 HarmonyVisualizerMainBundle_form:
     resource: "@HarmonyVisualizerMainBundle/Resources/config/routing/form.yml"
     prefix:   /form

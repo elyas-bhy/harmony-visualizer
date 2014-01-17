@@ -8,6 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        return $this->render('HarmonyVisualizerMainBundle:Default:index.html.twig');
+    }
+    public function startSurveyAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $formType1 = $em->getRepository('HarmonyVisualizerMainBundle:Form')->findBy(
             array('formType' => 'cordova-plugin-contacts visu')
@@ -24,7 +28,6 @@ class DefaultController extends Controller
         } else {
             return $this->redirect($this->generateUrl('survey_matrix_cordova_plugin_contacts'));
         }
-        //return $this->render('HarmonyVisualizerMainBundle:Default:index.html.twig');
     }
     public function visuContactsAction()
     {
