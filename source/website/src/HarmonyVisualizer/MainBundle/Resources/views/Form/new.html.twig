@@ -8,14 +8,18 @@
 
 
 	<div class="title">
-    	<h1>Harmony<span>Visualizer</span> Survey</h1>
+    	<h1>Survey</h1>
 	</div>
 
     {{ form_start(form) }}
 
+    {#<input type="hidden" value="" name="harmonyvisualizer_mainbundle_form[formType]" id="formType" />#}
+    {{ form_widget(form.formType, {'attr': {'style': 'display:none;', 'id': 'formType'}}) }}
+
     <div class="separator"></div>
 
     <div class="yourself">
+
         <h2>Tell us about yourself</h2>
 
         <div>
@@ -49,7 +53,7 @@
             {{ form_widget(form.email) }}
         </div>
         <div>
-            <button id="unhide" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Step</button>
+            <button id="unhide" class="btn btn-primary" type="button" {#disabled="disabled"#}>I am ready to start the survey</button>
         </div>
         {#<div class="separator"></div>#}
 
@@ -160,11 +164,33 @@
     <script src="{{ asset('js/chrono.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
+
+    function checkEmail(mail) {
+        var reg = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
+
+        if(reg.test(mail)) {
+            return(true);
+        }
+        else {
+            return(false);
+        }
+    }
+
     $(document).ready(function(){
         var numQuestions = $('.question').length;
         var currentQuestion = 1;
 
         $('#unhide').click(function() {
+            var email = $("#harmonyvisualizer_mainbundle_form_email").val();
+
+            if ( (checkEmail( email ) == false) && email!="") {
+                alert("Invalid email !");
+                return ;
+            }
+
+            //alert($("#formtypetxt").attr("data-formtype"));
+            $("#harmonyvisualizer_mainbundle_form_formType").val( $("#formtypetxt").attr("data-formtype") );
+
             if(!($(this).attr("disabled") == "disabled")) {
                 $('.yourself').attr("style", "display:none;");
                 $('.project').removeAttr("style");
@@ -205,7 +231,8 @@
 
                 if(currentButton.hasClass("nextQ")) {
                     // update question counter
-                    ++currentQuestion;
+                    if (currentQuestion < 13)
+                        ++currentQuestion;
                     $('.question_counter').text("");
                     $('.question_counter').text(currentQuestion + '/' + numQuestions);
                 }
@@ -239,7 +266,7 @@
             });
 
             if (empty) {
-                $('#unhide').attr('disabled', 'disabled');
+                //$('#unhide').attr('disabled', 'disabled');
             } else {
                 $('#unhide').removeAttr('disabled');
             }

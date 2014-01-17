@@ -44,6 +44,14 @@ class FormController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $formType = $entity->getFormType();
+            
+            if ($formType == "cordova-plugin-contacts matrix") {
+                return $this->redirect($this->generateUrl('survey_visu_cordova_plugin_file_transfer'));
+            }
+            else if ($formType == "cordova-plugin-contacts visu") {
+                return $this->redirect($this->generateUrl('survey_matrix_cordova_plugin_file_transfer'));
+            }
             return $this->redirect($this->generateUrl('formComplete'));
         }
 

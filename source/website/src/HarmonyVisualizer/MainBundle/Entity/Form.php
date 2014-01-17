@@ -24,42 +24,49 @@ class Form
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="text")
+     * @ORM\Column(name="formType", type="string", length=255, nullable=true)
+     */
+    private $formType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="experience", type="text", nullable=true)
      */
     private $experience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="text")
+     * @ORM\Column(name="job", type="text", nullable=true)
      */
     private $job;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="visualizationExperience", type="text")
+     * @ORM\Column(name="visualizationExperience", type="text", nullable=true)
      */
     private $visualizationExperience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="deficiency", type="text")
+     * @ORM\Column(name="deficiency", type="text", nullable=true)
      */
     private $deficiency;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contributed", type="text")
+     * @ORM\Column(name="contributed", type="text", nullable=true)
      */
     private $contributed;
 
@@ -162,9 +169,9 @@ class Form
     private $q7Time;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="q8", type="float")
+     * @ORM\Column(name="q8", type="text")
      */
     private $q8;
 
@@ -558,7 +565,7 @@ class Form
     /**
      * Set q8
      *
-     * @param float $q8
+     * @param string $q8
      * @return Form
      */
     public function setQ8($q8)
@@ -571,7 +578,7 @@ class Form
     /**
      * Get q8
      *
-     * @return float 
+     * @return string 
      */
     public function getQ8()
     {
@@ -991,4 +998,27 @@ class Form
     {
         return $this->q13Time;
     }  
+
+    /**
+     * Set formType
+     *
+     * @param string $formType
+     * @return Form
+     */
+    public function setFormType($formType)
+    {
+        $this->formType = $formType;
+
+        return $this;
+    }
+
+    /**
+     * Get formType
+     *
+     * @return string 
+     */
+    public function getFormType()
+    {
+        return $this->formType;
+    }
 }

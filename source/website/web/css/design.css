@@ -1,4 +1,19 @@
 html,body {background-color:#000;}
+
+header h1 {
+	font-family: 'Arvo', Georgia, serif;
+	font-size:31px;
+	line-height:36px;
+	font-weight:normal;
+	letter-spacing:2px;
+	text-align: center;
+	position:relative;
+}
+
+.context h1 span, .context h2 span {
+	color:#00F2FF;
+}
+
 body {
 	font-family: Arial, serif;
 	background-color:#000;
@@ -16,7 +31,7 @@ body {
 }
 
 .blockSurvey div.title {
-	width:360px;
+	width:300px;
 }
 .blockSurvey h1 {
 	font-size: 2em;
@@ -44,14 +59,21 @@ body {
 	font-weight: normal;
 }
 
-.blockSurvey form {
-	width: 400px;
-}
 .blockSurvey form * {
-	width: 340px;
+	width: 250px;
 }
+
 .blockSurvey form div {
 	margin: 30px;
+}
+
+.blockSurvey form div.yourself {
+	margin: 0px;
+}
+
+.blockSurvey div.yourself h2 {
+	text-align: left;
+	margin-left: 50px;	
 }
 .blockSurvey form {
 	margin-bottom: 50px;
@@ -64,14 +86,20 @@ body {
 }
 
 .blockSurvey {
-	float:left;
-	border-left: 2px solid #444;
+	left:0px;
 	height:100%;
-	overflow-y: scroll;
+	position: absolute;
+	width: 330px;
+	overflow: auto;
+	border-right: 2px solid #444;
 }
 .blockVisualizer {
 	float:left;
-	width: 1000px;
+	left:330px;
+	position: absolute;
+	height:100%;
+	width: calc(100% - 330px);
+	overflow: auto;
 }
 
 .blockSurvey div.separator {
@@ -83,4 +111,29 @@ body {
 
 .blockSurvey button {
 	color:white;
+}
+
+.context h2 {
+	font-family: 'Arvo', Georgia, serif;
+	font-size: 31px;
+	margin-left: 60px;
+}
+
+.context p {
+	font-family: 'Arvo', Georgia, serif;
+	font-size: 15px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.context {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.homeUl {
+	list-style-type: none;
+}
+.homeUl li {
+	margin:30px;
 }

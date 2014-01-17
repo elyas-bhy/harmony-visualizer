@@ -15,7 +15,8 @@ class FormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email')
+            ->add('formType')
+            ->add('email')
             ->add('experience')
             ->add('job')
             ->add('visualizationExperience')
