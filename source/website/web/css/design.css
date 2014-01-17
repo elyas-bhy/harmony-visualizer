@@ -1,4 +1,19 @@
 html,body {background-color:#000;}
+
+header h1 {
+	font-family: 'Arvo', Georgia, serif;
+	font-size:31px;
+	line-height:36px;
+	font-weight:normal;
+	letter-spacing:2px;
+	text-align: center;
+	position:relative;
+}
+
+.context h1 span, .context h2 span {
+	color:#00F2FF;
+}
+
 body {
 	font-family: Arial, serif;
 	background-color:#000;
@@ -99,12 +114,21 @@ body {
 }
 
 .context h2 {
+	font-family: 'Arvo', Georgia, serif;
+	font-size: 31px;
 	margin-left: 60px;
 }
 
 .context p {
+	font-family: 'Arvo', Georgia, serif;
+	font-size: 15px;
 	margin-left: 40px;
 	margin-right: 40px;
+}
+
+.context {
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .homeUl {
