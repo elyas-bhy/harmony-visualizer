@@ -10,8 +10,6 @@
 #}
     <script type="text/javascript" src="{{ asset('js/jquery-2.0.3.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/jquery.dataTables.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/ColReorder.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/FixedHeader.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('data/tabledata_cordova_plugin_file_transfer.js') }}"></script>
 
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/ui-darkness/jquery-ui.css') }}"/>
@@ -27,13 +25,9 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-			var oTable = $('#dtable').dataTable(input);
-			new FixedHeader(oTable);
+			$('#dtable').dataTable(input);
 			$('.DataTables_sort_wrapper').each(function() {
 				$(this).attr("title", $(this).text());
-			});
-			$('.dataTables_length').click(function() {
-				new FixedHeader(oTable);
 			});
 			$('.dtable tr:first-child').addClass("dTotal");
 		});
