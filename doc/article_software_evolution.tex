@@ -1,11 +1,10 @@
-\subsection{How Developers Drive Software Evolution\\ \textit{T. Girba, A. Kuhn, M. Seeberger, S. Ducasse\\
-2005 - 8th International Workshop on Principles of Software Evolution}}
+\subsection{How Developers Drive Software Evolution\\ \textit{T. Girba, A. Kuhn, M. Seeberger, S. Ducasse (IWPSE'2005)}}
 
 The evolution of a project may sometimes be surprising, and developer knowledge becomes more and more important as the projects becomes more and more complex. Therefore it may sometimes be useful to know which developer might have the best knowledge of each file in the project in order to assign tasks such as bugfixes, or even to ask for help on the matter.
-This paper defines the Ownership metric, as the degree to which a developer is the "owner" of a file at a given time during the project's development.
+This paper defines the \emph{ownership} metric, as the degree to which a developer is the "owner" of a file at a given time during the project's development\cite{Girba2005}.
 
-In order to achieve this, they use the CVS logs of a project in order to calculate a number of metrics, and determine which developer might be considered as most knowledgeable of a file in the project, and designate him as Owner of that file.
-They also created the following visualisation of Ownership during a project's lifetime:
+In order to achieve this, they use the CVS logs of a project in order to calculate a number of metrics, and determine which developer might be considered as most knowledgeable of a file in the project, and designate him as owner of that file.
+They also created the following visualisation of ownership during a project's lifetime:
 
 \begin{figure}[H]
 \includegraphics[keepaspectratio=true,scale=0.5]{./resources/girba2005.png}~
@@ -13,9 +12,9 @@ They also created the following visualisation of Ownership during a project's li
 \label{fig:commit_map}
 \end{figure}
 
-When this visualisation is applied to an entire project, it becomes possible to detect behavioural pattern between developers. See annex[1].
+When this visualisation is applied to an entire project, it becomes possible to detect behavioural pattern between developers. See appendix[1].
 
-Given that CVS is a file-based versionning system, a developer will be considered a Owner of a file if he has written/edited the highest amount of lines within that file. This leaves the system open to inappropriate changes of ownership if for instance a developer decides to reformat the code, leading to a file owner who actually has little knowledge of the file.
+Given that CVS is a file-based versionning system, a developer will be considered an owner of a file if he has written/edited the highest amount of lines within that file. This leaves the system open to inappropriate changes of ownership if for instance a developer decides to reformat the code, leading to a file owner who actually has little knowledge of the file.
 
 On the other hand, this visualisation did allow them to detect behavioural patterns amoung the developers of projects:
 \begin{itemize}
