@@ -1,6 +1,7 @@
 (function($){
 	
-	var $host = window.location.pathname + "/../data/popup_cordova_plugin_file_transfer.json";
+	var patt = new RegExp(".*web","g");
+	var $host = patt.exec(window.location.pathname) + "/data/popup_cordova_plugin_contacts.json";
 	
 	var Flows = new function() {
 		
