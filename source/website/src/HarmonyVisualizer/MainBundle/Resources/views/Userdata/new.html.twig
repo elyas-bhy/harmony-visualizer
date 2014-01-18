@@ -15,14 +15,14 @@
 		        <h2>Tell us about yourself</h2>
 		        <div class="left">
 			        <div class="question">
-			            {{ form_label(form.experience, "What is your level of experience in the world of software development?") }}
-			            {{ form_errors(form.experience) }}
-			            {{ form_widget(form.experience) }}
-			        </div>
-			        <div class="question">
 			            {{ form_label(form.job, "What is your job description?") }}
 			            {{ form_errors(form.job) }}
 			            {{ form_widget(form.job) }}
+			        </div>
+			        <div class="question">
+			            {{ form_label(form.experience, "What is your level of experience in the world of software development?") }}
+			            {{ form_errors(form.experience) }}
+			            {{ form_widget(form.experience) }}
 			        </div>
 			        <div class="question">
 			            {{ form_label(form.visualizationExperience, "Have you ever used a visualization tool in a similar context?") }}
