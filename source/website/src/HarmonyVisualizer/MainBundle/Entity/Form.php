@@ -203,6 +203,13 @@ class Form
      */ 
     private $q12Time;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="totalTime", type="text", nullable=true)
+     */ 
+    private $totalTime;
+
 
     /**
      * Get id
@@ -787,6 +794,29 @@ class Form
     public function getQ12Time()
     {
         return $this->q12Time;
+    }
+
+    /**
+     * Set totalTime
+     *
+     * @param string $totalTime
+     * @return Form
+     */
+    public function setTotalTime($totalTime)
+    {
+        $this->totalTime = $totalTime;
+
+        return $this;
+    }
+
+    /**
+     * Get totalTime
+     *
+     * @return string 
+     */
+    public function getTotalTime()
+    {
+        return $this->totalTime;
     }  
 
     /**
