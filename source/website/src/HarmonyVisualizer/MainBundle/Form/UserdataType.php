@@ -19,10 +19,10 @@ class UserdataType extends AbstractType
             ->add('experience', 'choice', array(
                 'choices' => array(
                     '' => '',
-                    'beginner' => 'beginner',
-                    'novice' => 'novice',
-                    'intermediate' => 'intermediate',
-                    'expert' => 'expert'
+                    'Beginner' => 'Beginner',
+                    'Novice' => 'Novice',
+                    'Intermediate' => 'Intermediate',
+                    'Expert' => 'Expert'
                 ),
             ))
             ->add('job')
