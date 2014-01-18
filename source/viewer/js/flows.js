@@ -1,6 +1,6 @@
 (function($){
 	
-	var $host = "data/popup.json";
+	var $host = "data/popup_cordova_plugin_contacts.json";
 	
 	var Flows = new function() {
 		
