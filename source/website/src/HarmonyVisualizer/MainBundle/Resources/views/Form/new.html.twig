@@ -13,6 +13,7 @@
 
     {{ form_start(form) }}
 
+    {{ form_widget(form.totalTime, {'attr': {'style': 'display:none;', 'id': 'totalTime'}}) }}
     {{ form_widget(form.formType, {'attr': {'style': 'display:none;', 'id': 'formType'}}) }}
     {{ form_widget(form.userid, {'attr': {'style': 'display:none;', 'id': 'formUserid'}}) }}
 
@@ -105,7 +106,7 @@
         {{ form_errors(form.q12) }}
         {{ form_widget(form.q12) }}
 
-	    <button disabled="disabled" class="nextQ btn btn-primary" name="harmonyvisualizer_mainbundle_form[submit]" id="12" type="submit">Submit</button>
+	    <button disabled="disabled" class="btn btn-primary" name="harmonyvisualizer_mainbundle_form[submit]" id="12" type="submit">Submit</button>
     </div>
     
 	{{ form_widget(form._token) }}
@@ -184,6 +185,10 @@
                     $('.question_counter').text(currentQuestion + '/' + numQuestions);
                 }
             });
+            if(id == 12) {
+                $('#harmonyvisualizer_mainbundle_form_totalTime').text(tempsChronoTotal());
+                RAZChronoTotal();
+            }
 
         });
 
