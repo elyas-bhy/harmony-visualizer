@@ -147,6 +147,10 @@ body {
 	margin-right: 20px;
 }
 
+.context header {
+	text-align: center;
+}
+
 .homeUl {
 	list-style-type: none;
 }
