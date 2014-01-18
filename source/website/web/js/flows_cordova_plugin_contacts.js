@@ -96,13 +96,14 @@
 								}
 							}
 
-							var globalInfos = "<span>Total developers: </span>" + nbDev + "<br>"
-											+ "<span>Total modules: </span>" + nbMod + "<br>"
-											+ "<span>Total contributions: </span>" + totalDevContributions + "<br>";
+							var projectDetails = '<span>Project: </span><a href="https://github.com/apache/cordova-plugin-contacts">apache/cordova-plugin-contacts</a><br>' 
+											   + '<span>Modules: </span><strong>' + nbMod + '</strong><br>'
+											   + '<span>Developers: </span><strong>' + nbDev + '</strong><br>'
+											   + '<span>Contributions: </span><strong>' + totalDevContributions + '</strong><br>';
 							
 							$('#topdev').html(htmltopdev);
 							$('#topmod').html(htmltopmod);
-							$('#globalInfos').html(globalInfos);
+							$('#projectDetails').html(projectDetails);
 
 
 							$(".par ul li a").click(function(e){
@@ -551,6 +552,9 @@
 				Finger.remove();
 				if($("#contents").css("opacity")==1) {
 					var entity=this.id.split("_");
+					console.log(entity);
+					entity[0] = 'from';
+					entity[1] = "D2";
 					
 					
 					if(entity[0]=='from') {
