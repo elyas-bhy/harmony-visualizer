@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Userdata</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Experience</th>
+                <td>{{ entity.experience }}</td>
+            </tr>
+            <tr>
+                <th>Job</th>
+                <td>{{ entity.job }}</td>
+            </tr>
+            <tr>
+                <th>Visualizationexperience</th>
+                <td>{{ entity.visualizationExperience }}</td>
+            </tr>
+            <tr>
+                <th>Deficiency</th>
+                <td>{{ entity.deficiency }}</td>
+            </tr>
+            <tr>
+                <th>Contributed</th>
+                <td>{{ entity.contributed }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('userdata') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('userdata_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

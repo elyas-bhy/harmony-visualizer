@@ -10,6 +10,8 @@
 
 {% block body %}
 
+<div style="display:none;" data-id="{{ id }}" id="userid"></div>
+
 <div class="blockVisualizer">
 	{{ render(controller("HarmonyVisualizerMainBundle:Default:matrixFileTransfer")) }}
 </div>

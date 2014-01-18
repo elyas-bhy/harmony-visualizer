@@ -1,0 +1,30 @@
+userdata:
+    pattern:  /
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:index" }
+
+userdata_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:show" }
+
+userdata_new:
+    pattern:  /new
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:new" }
+
+userdata_create:
+    pattern:  /create
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:create" }
+    requirements: { _method: post }
+
+userdata_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:edit" }
+
+userdata_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:update" }
+    requirements: { _method: post|put }
+
+userdata_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "HarmonyVisualizerMainBundle:Userdata:delete" }
+    requirements: { _method: post|delete }

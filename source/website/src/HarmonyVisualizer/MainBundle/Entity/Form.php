@@ -21,6 +21,14 @@ class Form
      */
     private $id;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="userid", type="integer", nullable=true)
+     */
+    private $userid;
+
     /**
      * @var string
      *
@@ -1020,5 +1028,28 @@ class Form
     public function getFormType()
     {
         return $this->formType;
+    }
+
+    /**
+     * Set userid
+     *
+     * @param integer $userid
+     * @return Form
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    /**
+     * Get userid
+     *
+     * @return integer 
+     */
+    public function getUserid()
+    {
+        return $this->userid;
     }
 }
