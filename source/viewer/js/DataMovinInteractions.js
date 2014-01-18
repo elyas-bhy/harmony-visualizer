@@ -52,6 +52,10 @@ function DataMovinInteractions(){
 		top:0,
 		left:0
 	}
+
+	var multiselect = false;
+	var selectedSrcItems = new Object();
+	var selectedDstItems = new Object();
 	
 	this.init=function($datamovin) {
 		
@@ -203,42 +207,110 @@ function DataMovinInteractions(){
 			eventsCallbacks.mouseup.call(e);
 		return false;
 	}
+
+	var SelectionItem = function() {
+		this.e = null;
+		this.point = null;
+		this.mouse = null;
+	};
+
+	function resetSelections() {
+		selectedSrcItems = new Object();
+		selectedDstItems = new Object();
+	}
+
+	function redrawSelections() {
+		for (var i in selectedSrcItems) {
+			datamovin.drawOutFlow(selectedSrcItems[i].point, false);
+		}
+		for (var j in selectedDstItems) {
+			datamovin.drawInFlow(selectedDstItems[j].point, false);
+		}
+	}
+
+	function handleSelectionSrc(selection) {
+		if (multiselect && (selectedSrcItems.length != 0 || selectedDstItems.length != 0)) {  // multiple selection
+			if (selectedSrcItems.hasOwnProperty(selection.point)) {
+				delete selectedSrcItems[selection.point];
+
+				datamovin.clean();
+				redrawSelections();
+			} else {
+				selectedSrcItems[selection.point] = selection;
+				datamovin.drawOutFlow(selection.point, false);
+			}
+
+		} else {  // single selection
+			resetSelections();
+			selectedSrcItems[selection.point] = selection;
+			if(!datamovin.checkCurrent(selection.point,"src")) {
+				eventsCallbacks.processing.call(selection.e,'start','src');
+				setTimeout(function tm(){
+					datamovin.drawOutFlow(selection.point,true);
+					if(eventsCallbacks.click)
+						eventsCallbacks.click.call(selection.e,datamovin.getPointInfo(selection.point,'src'));
+					setTimeout(function ttm(){eventsCallbacks.processing.call(selection.e,'end','src');},250);
+				},100);
+			} else {
+				datamovin.clean();
+				if(eventsCallbacks.click)
+					eventsCallbacks.click.call(selection.e,null);
+			}
+		}
+	}
+
+	function handleSelectionDst(selection) {
+		if (multiselect && (selectedSrcItems.length != 0 || selectedDstItems.length != 0)) {  // multiple selection
+			if (selectedDstItems.hasOwnProperty(selection.point)) {
+				delete selectedDstItems[selection.point];
+
+				datamovin.clean();
+				redrawSelections();
+			} else {
+				selectedDstItems[selection.point] = selection;
+				datamovin.drawInFlow(selection.point, false);
+			}
+
+		} else {  // single selection
+			resetSelections();
+			selectedDstItems[selection.point] = selection;
+			if(!datamovin.checkCurrent(selection.point,"dst")) {
+				eventsCallbacks.processing.call(selection.e,'start','dst');
+				setTimeout(function tm(){
+					datamovin.drawInFlow(selection.point,true);
+					if(eventsCallbacks.click)
+						eventsCallbacks.click.call(selection.e,datamovin.getPointInfo(selection.point,'dst'));
+					setTimeout(function ttm(){eventsCallbacks.processing.call(selection.e,'end','dst');},250);
+				},100);
+			} else {
+				datamovin.clean();
+				if(eventsCallbacks.click)
+					eventsCallbacks.click.call(selection.e,null);
+			}
+		}
+	}
+
 	function canvasMouseClickHandlerVertical(e) {
+		var point, selection;
 		e=initEvent(e);
-		
-		var point;
 		mouse=getPosition(e,canvas);
 		
 		if(mouse.x>=areas.src.x1 && mouse.x<=areas.src.x2) {
 			point=datamovin.lookUp(mouse.y,"src");
-			if(!datamovin.checkCurrent(point,"src")) {
-				eventsCallbacks.processing.call(e,'start','src');
-				setTimeout(function tm(){
-					datamovin.drawOutFlow(point,true);
-					if(eventsCallbacks.click)
-						eventsCallbacks.click.call(e,datamovin.getPointInfo(point,'src'));
-					setTimeout(function ttm(){eventsCallbacks.processing.call(e,'end','src');},250);
-				},100);
-			} else {
-				datamovin.clean();
-				if(eventsCallbacks.click)
-					eventsCallbacks.click.call(e,null);
-			}
+			selection = new SelectionItem();
+			selection.e = e;
+			selection.point = point;
+			selection.mouse = mouse;
+			handleSelectionSrc(selection);
+
 		} else if(mouse.x>=areas.dst.x1 && mouse.x<=areas.dst.x2) {
 			point=datamovin.lookUp(mouse.y,"dst");
-			if(!datamovin.checkCurrent(point,"dst")) {
-				eventsCallbacks.processing.call(e,'start','dst');
-				setTimeout(function tm(){
-					datamovin.drawInFlow(point,true);
-					if(eventsCallbacks.click)
-						eventsCallbacks.click.call(e,datamovin.getPointInfo(point,'dst'));
-					setTimeout(function ttm(){eventsCallbacks.processing.call(e,'end','dst');},250);
-				},100);
-			} else {
-				datamovin.clean();
-				if(eventsCallbacks.click)
-					eventsCallbacks.click.call(e,null);
-			}
+			selection = new SelectionItem();
+			selection.e = e;
+			selection.point = point;
+			selection.mouse = mouse;
+			handleSelectionDst(selection);
+
 		} else {
 			if(eventsCallbacks.click)
 				eventsCallbacks.click.call(e,-1);
@@ -250,7 +322,6 @@ function DataMovinInteractions(){
 
 	function canvasMouseClickHandlerHorizontal(e) {
 		e=initEvent(e);
-		
 		
 		var point;
 		mouse=getPosition(e,canvas);
@@ -290,6 +361,17 @@ function DataMovinInteractions(){
 		        e.returnValue= false;
 		return e;
 	}
+
+	window.onkeydown = function(e) {
+		if (!e) e = window.event;
+		if (e.ctrlKey) multiselect = true;
+	}
+
+	window.onkeyup = function(e) {
+		if (!e) e = window.event;
+		if (!e.ctrlKey) multiselect = false;
+	}
+
 	/*
 	function getPosition(event) {
 		var x = 0,

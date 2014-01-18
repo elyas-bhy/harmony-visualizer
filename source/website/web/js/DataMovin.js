@@ -45,22 +45,6 @@ function DataMovin(){
 	var colors=new Colors();
 	
 	var areas={src:{},dst:{}};
-	
-	multiple = false;
-
-	window.onkeydown = function (e) {
-		if (!e) e = window.event;
-		if (e.ctrlKey) {
-			multiple = true;
-		}
-	}
-
-	window.onkeyup = function (e) {
-		if (!e) e = window.event;
-		if (!e.ctrlKey) {
-			multiple = false;
-		}
-	}
 
 	this.init=function(canvas,options) {
 		if(!!document.createElement('canvas').getContext){
@@ -406,28 +390,25 @@ function DataMovin(){
 		current.dst=[];
 		current.src=[];
 
-		if (!multiple) {
+		switch(orientation) {
+			case 'vertical':
+				var x = margins.left+box_w,
+					y = margins.top+padding.left,
+					w = ctx.canvas.width-margins.right-box_w-x;
+				
+				//alert(x+","+y+","+w+","+(ctx.canvas.height-margins.top-margins.bottom))
 
-			switch(orientation) {
-				case 'vertical':
-					var x = margins.left+box_w,
-						y = margins.top+padding.left,
-						w = ctx.canvas.width-margins.right-box_w-x;
-					
-					//alert(x+","+y+","+w+","+(ctx.canvas.height-margins.top-margins.bottom))
+				ctx.clearRect(x,y,w,ctx.canvas.height-margins.top-margins.bottom);
 
-					ctx.clearRect(x,y,w,ctx.canvas.height-margins.top-margins.bottom);
-
-				break;
-				case 'horizontal':
-					x = 0;//margins.left;
-					y = margins.top+box_w,
-					h = ctx.canvas.height-margins.bottom-box_w-y;
-					
-					ctx.clearRect(x,y,ctx.canvas.width-margins.left-margins.right,h);
-					
-				break;
-			}
+			break;
+			case 'horizontal':
+				x = 0;//margins.left;
+				y = margins.top+box_w,
+				h = ctx.canvas.height-margins.bottom-box_w-y;
+				
+				ctx.clearRect(x,y,ctx.canvas.width-margins.left-margins.right,h);
+				
+			break;
 		}
 	}
 

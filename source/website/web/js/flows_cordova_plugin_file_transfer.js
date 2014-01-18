@@ -1,6 +1,7 @@
 (function($){
 	
-	var $host = window.location.pathname + "/../data/popup_cordova_plugin_file_transfer.json";
+	var patt = new RegExp(".*web","g");
+	var $host = patt.exec(window.location.pathname) + "/data/popup_cordova_plugin_file_transfer.json";
 	
 	var Flows = new function() {
 		
@@ -40,6 +41,94 @@
 						type:'GET',
 						dataType: 'json',
 						success: function(json) {
+							//----------------------------------------------------------------------------------------
+							var k = 1;
+							var htmltopdev = "";
+							var htmltopmod = "";
+							var topDev = new Array();
+							var topMod = new Array();
+							var nbDev = 0;
+							var nbMod = 0;
+							var totalDevContributions = 0;
+
+							for (var entity in json) {
+								if (entity.substring(0,1) == "D") {
+									topDev.push( [entity, json[entity]["properties"]["NBC"]] );
+								}
+								else if (entity.substring(0,1) == "M") {
+									topMod.push( [entity, json[entity]["properties"]["NBC"]] );
+								}
+							}
+
+							topDev = topDev.sort(function(a,b){return b[1]-a[1]});
+							topMod = topMod.sort(function(a,b){return b[1]-a[1]});
+							for (var key in topDev) {
+								if (k==11) {
+									htmltopdev += '</ul><ul class="hidden">';
+								}
+								if (typeof topDev[key][0] != 'undefined') {
+									nbDev++;
+									totalDevContributions += topMod[key][1];
+									htmltopdev += '<li class="p' + k%2 + '">'
+									    + '<a class="clickable" href="#t_' + topDev[key][0] + '" id="to_' + topDev[key][0] + '" class="il">'
+									    + '<span class="name">' + mapping[topDev[key][0]] + '</span>'
+										+ '<span class="val">' + topDev[key][1] + '</span>'
+										+ '</a>'
+										+ '</li>';
+									k++;
+								}
+							}
+
+							k=1;
+							for (var key in topMod) {
+								if (k==11) {
+									htmltopmod += '</ul><ul class="hidden">';
+								}
+								if (typeof topMod[key][0] != 'undefined') {
+									nbMod++;
+									htmltopmod += '<li class="p' + k%2 + '">'
+									    + '<a class="clickable" href="#f_' + topMod[key][0] + '" id="from_' + topMod[key][0] + '" class="il">'
+									    + '<span class="name">' + mapping[topMod[key][0]] + '</span>'
+										+ '<span class="val">' + topMod[key][1] + '</span>'
+										+ '</a>'
+										+ '</li>';
+									k++;
+								}
+							}
+
+							var globalInfos = "<span>Total developers: </span>" + nbDev + "<br>"
+											+ "<span>Total modules: </span>" + nbMod + "<br>"
+											+ "<span>Total contributions: </span>" + totalDevContributions + "<br>";
+							
+							$('#topdev').html(htmltopdev);
+							$('#topmod').html(htmltopmod);
+							$('#globalInfos').html(globalInfos);
+
+
+							$(".par ul li a").click(function(e){
+								e.preventDefault();
+								if($("#contents").css("opacity")==1) {
+									var entity=this.id.split("_");
+									
+									if(entity[0]=='from') {
+										datamovin.drawOutFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),null,true);
+									} else if(entity[0]=='to') {
+										datamovin.drawInFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'dst'),null,true);
+									} else {
+										datamovin.drawFlowFromTo(entity[1],entity[2],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),entity[2],true);
+									}
+														
+									window.location.hash=this.href.split("#")[1];
+
+								} else {
+									$("#contents").click();
+								}
+								return false;
+							});
+							//----------------------------------------------------------------------------------------
 
 							flowsJson = new Object();
 							for (var dev in json) {

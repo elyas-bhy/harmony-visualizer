@@ -1,6 +1,7 @@
 (function($){
 	
-	var $host = window.location.pathname + "/../data/popup_cordova_plugin_contacts.json";
+	var patt = new RegExp(".*web","g");
+	var $host = patt.exec(window.location.pathname) + "/data/popup_cordova_plugin_contacts.json";
 	
 	var Flows = new function() {
 		
@@ -46,6 +47,9 @@
 							var htmltopmod = "";
 							var topDev = new Array();
 							var topMod = new Array();
+							var nbDev = 0;
+							var nbMod = 0;
+							var totalDevContributions = 0;
 
 							for (var entity in json) {
 								if (entity.substring(0,1) == "D") {
@@ -63,6 +67,8 @@
 									htmltopdev += '</ul><ul class="hidden">';
 								}
 								if (typeof topDev[key][0] != 'undefined') {
+									nbDev++;
+									totalDevContributions += topMod[key][1];
 									htmltopdev += '<li class="p' + k%2 + '">'
 									    + '<a class="clickable" href="#t_' + topDev[key][0] + '" id="to_' + topDev[key][0] + '" class="il">'
 									    + '<span class="name">' + mapping[topDev[key][0]] + '</span>'
@@ -79,6 +85,7 @@
 									htmltopmod += '</ul><ul class="hidden">';
 								}
 								if (typeof topMod[key][0] != 'undefined') {
+									nbMod++;
 									htmltopmod += '<li class="p' + k%2 + '">'
 									    + '<a class="clickable" href="#f_' + topMod[key][0] + '" id="from_' + topMod[key][0] + '" class="il">'
 									    + '<span class="name">' + mapping[topMod[key][0]] + '</span>'
@@ -89,8 +96,38 @@
 								}
 							}
 
+							var globalInfos = "<span>Total developers: </span>" + nbDev + "<br>"
+											+ "<span>Total modules: </span>" + nbMod + "<br>"
+											+ "<span>Total contributions: </span>" + totalDevContributions + "<br>";
+							
 							$('#topdev').html(htmltopdev);
 							$('#topmod').html(htmltopmod);
+							$('#globalInfos').html(globalInfos);
+
+
+							$(".par ul li a").click(function(e){
+								e.preventDefault();
+								if($("#contents").css("opacity")==1) {
+									var entity=this.id.split("_");
+
+									if(entity[0]=='from') {
+										datamovin.drawOutFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),null,true);
+									} else if(entity[0]=='to') {
+										datamovin.drawInFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'dst'),null,true);
+									} else {
+										datamovin.drawFlowFromTo(entity[1],entity[2],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),entity[2],true);
+									}
+														
+									window.location.hash=this.href.split("#")[1];
+
+								} else {
+									$("#contents").click();
+								}
+								return false;
+							});
 							//----------------------------------------------------------------------------------------
 
 							flowsJson = new Object();
