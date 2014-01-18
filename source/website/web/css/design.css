@@ -82,8 +82,11 @@ body {
 	width:200px;
 	margin:10px auto;
 	color: #fff;
+	margin-top: 30px;
 }
-
+button[type=submit] {
+	margin-top: 30px;
+}
 .blockSurvey {
 	left:0px;
 	height:100%;
