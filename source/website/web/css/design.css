@@ -150,23 +150,45 @@ button[type=submit] {
 	margin-right: 20px;
 }
 
-.content {
-	margin-left: 100px;
-	height: auto;
-	width: 340px;
+.context header {
+	text-align: center;
 }
 
 .content a.btn {
-	margin-top: -50px;
+	margin-top: 30px;
 	margin-left: 30px;
 }
 
 .content div.question {
+	margin: 30px;
 	min-height: 70px;
+	clear: both;
+	vertical-align: center;
 }
 
-.context header {
-	text-align: center;
+.content .left div.question {
+	float: right;
+}
+
+.content .right div.question {
+	float: left;
+}
+
+.content div.left {
+	height: auto;
+	width: 50%;
+	float: left;
+}
+
+.content div.right {
+	height: auto;
+	width: 50%;
+	float: right;
+}
+
+.content .btn {
+	clear:both;
+	margin-left: 30px;
 }
 
 .homeUl {
