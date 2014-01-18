@@ -18,7 +18,15 @@
 		</h1>
 	</div>
 
-	<p>Thank you for your participation!</p>
+	<div class="context">
+		<p>Thank you for your participation!</br>
+		Your times were :</p>
+		<ul>
+		{% for data in visuData %}
+			<li>{{ data.formType }}: {{ data.totalTime }}</li>
+		{% endfor %}
+		</ul>
+	</div>
 </div>
 
 {% endblock %}
