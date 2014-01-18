@@ -90,6 +90,7 @@ class FileFormType extends AbstractType
         );
 
         $builder
+            ->add("totalTime")
             ->add('formType')
             ->add('userid')
             ->add('q1', 'choice', array(
