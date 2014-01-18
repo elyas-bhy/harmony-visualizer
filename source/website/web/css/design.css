@@ -135,7 +135,7 @@ body {
 	margin-left: 60px;
 }
 
-.context p {
+.context p, .context ul, .context li {
 	font-family: 'Arvo', Georgia, serif;
 	font-size: 15px;
 	margin-left: 40px;
