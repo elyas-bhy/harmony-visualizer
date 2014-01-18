@@ -11,44 +11,39 @@
 
     	<div class="content">
 		    {{ form_start(form) }}
-		        <h2>Tell us about yourself</h2>
-		        <div>
-		            {{ form_label(form.experience, "What is your level of experience in the world of software development (in terms of years)?") }}
-		            {{ form_errors(form.experience) }}
-		            {{ form_widget(form.experience) }}
-		        </div>
-		        <div>
-		            {{ form_label(form.job, "What is your job description?") }}
-		            {{ form_errors(form.job) }}
-		            {{ form_widget(form.job) }}
-		        </div>
-		        <div>
-		            {{ form_label(form.visualizationExperience, "Have you ever used a visualization tool in a similar context?") }}
-		            {{ form_errors(form.visualizationExperience) }}
-		            {{ form_widget(form.visualizationExperience) }}
-		        </div>
-		        <div>
-		            {{ form_label(form.deficiency, "Do you have a visual deficiency (colour blindness for instance)?") }}
-		            {{ form_errors(form.deficiency) }}
-		            {{ form_widget(form.deficiency) }}
-		        </div>
-		        <div>
-		            {{ form_label(form.contributed, "Did you contribute to an Apache project? If so, indicate your nickname.") }}
-		            {{ form_errors(form.contributed) }}
-		            {{ form_widget(form.contributed) }}
-		        </div>
-		        <div>
-		            {{ form_label(form.email, "If you wish to know the results of this survey, please provide us with your email address.") }}
-		            {{ form_errors(form.email) }}
-		            {{ form_widget(form.email) }}
-		        </div>
-		        {{ form_widget(form._token) }}
-
-		        <div>
-		      	  <button class="btn btn-primary" name="harmonyvisualizer_mainbundle_userdata[submit]" type="submit">Submit</button>
-		    	</div>
-			</form>
-			<div style="clear:both;"></div>
+	        <h2>Tell us about yourself</h2>
+	        <div>
+	            {{ form_label(form.experience, "What is your level of experience in the world of software development (in terms of years)?") }}
+	            {{ form_errors(form.experience) }}
+	            {{ form_widget(form.experience) }}
+	        </div>
+	        <div>
+	            {{ form_label(form.job, "What is your job description?") }}
+	            {{ form_errors(form.job) }}
+	            {{ form_widget(form.job) }}
+	        </div>
+	        <div>
+	            {{ form_label(form.visualizationExperience, "Have you ever used a visualization tool in a similar context?") }}
+	            {{ form_errors(form.visualizationExperience) }}
+	            {{ form_widget(form.visualizationExperience) }}
+	        </div>
+	        <div>
+	            {{ form_label(form.deficiency, "Do you have a visual deficiency (colour blindness for instance)?") }}
+	            {{ form_errors(form.deficiency) }}
+	            {{ form_widget(form.deficiency) }}
+	        </div>
+	        <div>
+	            {{ form_label(form.contributed, "If you have contributed to an Apache project, please indicate your nickname.") }}
+	            {{ form_errors(form.contributed) }}
+	            {{ form_widget(form.contributed) }}
+	        </div>
+	        <div>
+	            {{ form_label(form.email, "If you wish to know the results of this survey, please provide us with your email address.") }}
+	            {{ form_errors(form.email) }}
+	            {{ form_widget(form.email) }}
+	        </div>
+	    
+	        {{ form_widget(form._token) }}
 
 		    <a class="btn btn-default" style="color:black;" href="{{ path('harmony_visualizer_main_homepage') }}">Back to the context</a>
     	</div>

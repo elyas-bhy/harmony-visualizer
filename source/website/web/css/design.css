@@ -82,8 +82,11 @@ body {
 	width:200px;
 	margin:10px auto;
 	color: #fff;
+	margin-top: 30px;
 }
-
+button[type=submit] {
+	margin-top: 30px;
+}
 .blockSurvey {
 	left:0px;
 	height:100%;
@@ -155,12 +158,17 @@ body {
 
 .content a.btn {
 	margin-top: -100px;
-	margin-left: 30px;	
+	margin-left: 30px;
+}
+
+.context header {
+	text-align: center;
 }
 
 .homeUl {
 	list-style-type: none;
 }
+
 .homeUl li {
 	margin:30px;
 }
@@ -172,6 +180,7 @@ body {
 .nextQ {
 	margin-top: 30px;
 }
+
 .blockSurvey input, .blockSurvey select {
 	height: 30px;
 	line-height: 30px;

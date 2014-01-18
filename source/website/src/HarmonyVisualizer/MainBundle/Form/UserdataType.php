@@ -16,10 +16,30 @@ class UserdataType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('experience')
+            ->add('experience', 'choice', array(
+                'choices' => array(
+                    '' => '',
+                    'beginner' => 'beginner',
+                    'novice' => 'novice',
+                    'intermediate' => 'intermediate',
+                    'expert' => 'expert'
+                ),
+            ))
             ->add('job')
-            ->add('visualizationExperience')
-            ->add('deficiency')
+            ->add('visualizationExperience', 'choice', array(
+                'choices' => array(
+                    '' => '',
+                    'Yes' => 'Yes',
+                    'No' => 'No'
+                ),
+            ))
+            ->add('deficiency', 'choice', array(
+                'choices' => array(
+                    '' => '',
+                    'Yes' => 'Yes',
+                    'No' => 'No'
+                ),
+            ))
             ->add('contributed')
         ;
     }
