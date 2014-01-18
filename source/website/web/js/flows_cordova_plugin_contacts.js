@@ -92,6 +92,30 @@
 
 							$('#topdev').html(htmltopdev);
 							$('#topmod').html(htmltopmod);
+
+							$(".par ul li a").click(function(e){
+								e.preventDefault();
+								if($("#contents").css("opacity")==1) {
+									var entity=this.id.split("_");
+									
+									if(entity[0]=='from') {
+										datamovin.drawOutFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),null,true);
+									} else if(entity[0]=='to') {
+										datamovin.drawInFlow(entity[1],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'dst'),null,true);
+									} else {
+										datamovin.drawFlowFromTo(entity[1],entity[2],true);
+										showEntityInfo(datamovin.getPointInfo(entity[1],'src'),entity[2],true);
+									}
+														
+									window.location.hash=this.href.split("#")[1];
+
+								} else {
+									$("#contents").click();
+								}
+								return false;
+							});
 							//----------------------------------------------------------------------------------------
 
 							flowsJson = new Object();
