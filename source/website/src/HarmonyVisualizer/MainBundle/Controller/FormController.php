@@ -60,7 +60,14 @@ class FormController extends Controller
                 ));
                 //return $this->redirect($this->generateUrl('survey_matrix_cordova_plugin_file_transfer'));
             }
-            return $this->redirect($this->generateUrl('formComplete'));
+            $userid = $entity->getUserid();
+            $visuData = $em->getRepository('HarmonyVisualizerMainBundle:Form')->findBy(
+                array('userid' => $userid)
+            );
+
+            return $this->render('HarmonyVisualizerMainBundle:Default:formComplete.html.twig', array(
+                'visuData' => $visuData,
+            ));
         }
 
         return $this->render('HarmonyVisualizerMainBundle:Form:new.html.twig', array(
