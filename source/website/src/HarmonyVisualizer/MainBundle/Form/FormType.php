@@ -17,12 +17,6 @@ class FormType extends AbstractType
         $builder
             ->add('formType')
             ->add('userid')
-            ->add('email')
-            ->add('experience')
-            ->add('job')
-            ->add('visualizationExperience')
-            ->add('deficiency')
-            ->add('contributed')
             ->add('q1')
             ->add('q1Time')
             ->add('q2')
@@ -47,8 +41,6 @@ class FormType extends AbstractType
             ->add('q11Time')
             ->add('q12')
             ->add('q12Time')
-            ->add('q13')
-            ->add('q13Time')
         ;
     }
     

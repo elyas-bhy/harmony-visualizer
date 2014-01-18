@@ -27,93 +27,85 @@
         {{ form_label(form.q1, "Find the most active developer (in terms of contributions).") }}
         {{ form_errors(form.q1) }}
         {{ form_widget(form.q1) }}
-        <button id="1" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="1" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q2" style="display:none;" class="question">
         {{ form_widget(form.q2Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q2, "Find the developer who contributed to the highest number of components.") }}
         {{ form_errors(form.q2) }}
         {{ form_widget(form.q2) }}
-        <button id="2" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="2" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q3" style="display:none;" class="question">
         {{ form_widget(form.q3Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q3, "Find the component which has the highest amount of contributors.") }}
+        {{ form_label(form.q3, "Find the component which has the highest amount of developers.") }}
         {{ form_errors(form.q3) }}
         {{ form_widget(form.q3) }}
-        <button id="3" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="3" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q4" style="display:none;" class="question">
         {{ form_widget(form.q4Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q4, "Find the component which received the highest amount of contributions.") }}
         {{ form_errors(form.q4) }}
         {{ form_widget(form.q4) }}
-        <button id="4" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="4" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q5" style="display:none;" class="question">
         {{ form_widget(form.q5Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q5, "Find the component which received the highest amount of contributions by purplecabbage.") }}
         {{ form_errors(form.q5) }}
         {{ form_widget(form.q5) }}
-        <button id="5" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="5" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q6" style="display:none;" class="question">
         {{ form_widget(form.q6Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q6, "Find the most active developer on the root (“/”) component.") }}
         {{ form_errors(form.q6) }}
         {{ form_widget(form.q6) }}
-        <button id="6" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="6" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q7" style="display:none;" class="question">
         {{ form_widget(form.q7Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q7, "Find a component to which one developer contributed much more than the other developers.") }}
         {{ form_errors(form.q7) }}
         {{ form_widget(form.q7) }}
-        <button id="7" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="7" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q8" style="display:none;" class="question">
         {{ form_widget(form.q8Time, {'attr': {'style': 'display:none;'}}) }}
         {{ form_label(form.q8, "Indicate the total number of contributions of Anis Kadri.") }}
         {{ form_errors(form.q8) }}
         {{ form_widget(form.q8) }}
-        <button id="8" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="8" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q9" style="display:none;" class="question">
         {{ form_widget(form.q9Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q9, "Indicate whether the workload is equally divided amongst developers.") }}
+        {{ form_label(form.q9, "On a scale of 1 to 5, indicate whether the workload is equally divided amongst developers (5/5 being perfectly equal).") }}
         {{ form_errors(form.q9) }}
         {{ form_widget(form.q9) }}
-        <button id="9" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="9" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q10" style="display:none;" class="question">
         {{ form_widget(form.q10Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q10, "Indicate a component which is the product of a large contribution.") }}
+        {{ form_label(form.q10, "On a scale of 1 to 5, does it seems that developers work on the same components (5/5), or is there only one developer per component (1/5) ?") }}
         {{ form_errors(form.q10) }}
         {{ form_widget(form.q10) }}
-        <button id="10" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="10" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q11" style="display:none;" class="question">
         {{ form_widget(form.q11Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q11, "Does it seem that developers work on the same components, or is there only one developer per component?") }}
+        {{ form_label(form.q11, "On a scale of 1 to 5, rate the development team’s composition: is it composed of isolated groups which tend to work together (1/5), or is the team one large group in which all members seem to work together (5/5) ?") }}
         {{ form_errors(form.q11) }}
         {{ form_widget(form.q11) }}
-        <button id="11" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
+        <button id="11" class="nextQ btn btn-primary" type="button" {#disabled="disabled"#}>Next Question</button>
     </div>
     <div id="q12" style="display:none;" class="question">
         {{ form_widget(form.q12Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q12, "Is the team composed of isolated groups which tend to work together, or is the team one large group in which all members seem to work together?") }}
+        {{ form_label(form.q12, "According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?") }}
         {{ form_errors(form.q12) }}
         {{ form_widget(form.q12) }}
-        <button id="12" class="nextQ btn btn-primary" type="button" disabled="disabled">Next Question</button>
-    </div>
-    <div id="q13" style="display:none;" class="question">
-        {{ form_widget(form.q13Time, {'attr': {'style': 'display:none;'}}) }}
-        {{ form_label(form.q13, "According to you, which developer has the most knowledge on the project (i.e. the one which contributed the most to the project globally)?") }}
-        {{ form_errors(form.q13) }}
-        {{ form_widget(form.q13) }}
 
-	    {#<input id="13" type="submit" class="btn btn-primary" disabled="disabled"/>#}
-	    <button disabled="disabled" class="nextQ btn btn-primary" name="harmonyvisualizer_mainbundle_form[submit]" id="13" type="submit">Submit</button>
+	    <button {#disabled="disabled"#} class="nextQ btn btn-primary" name="harmonyvisualizer_mainbundle_form[submit]" id="12" type="submit">Submit</button>
     </div>
     
 	{{ form_widget(form._token) }}
@@ -157,7 +149,7 @@
 
         $('.question_counter').text(currentQuestion + '/' + numQuestions);
 
-        $('.nextQ, #13').click(function() {
+        $('.nextQ, #12').click(function() {
             if($(this).attr('id') != 'unhide') {
                 arreterChrono();
             }
@@ -186,7 +178,7 @@
 
                 if(currentButton.hasClass("nextQ")) {
                     // update question counter
-                    if (currentQuestion < 13)
+                    if (currentQuestion < 12)
                         ++currentQuestion;
                     $('.question_counter').text("");
                     $('.question_counter').text(currentQuestion + '/' + numQuestions);

@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use HarmonyVisualizer\MainBundle\Entity\Form;
 use HarmonyVisualizer\MainBundle\Form\FormType;
+use HarmonyVisualizer\MainBundle\Form\ContactsFormType;
+use HarmonyVisualizer\MainBundle\Form\FileFormType;
 
 /**
  * Form controller.
@@ -36,7 +38,7 @@ class FormController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Form();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity, null);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -74,9 +76,18 @@ class FormController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Form $entity)
+    private function createCreateForm(Form $entity, $currentformtype)
     {
-        $form = $this->createForm(new FormType(), $entity, array(
+        //------------------------------------------------------------
+        if ($currentformtype == "contacts") {
+            $form = new ContactsFormType();
+        } else if ($currentformtype == "file") {
+            $form = new FileFormType();
+        } else {
+            $form = new FormType();
+        }
+        //------------------------------------------------------------
+        $form = $this->createForm($form, $entity, array(
             'action' => $this->generateUrl('form_create'),
             'method' => 'POST',
         ));
@@ -90,10 +101,13 @@ class FormController extends Controller
      * Displays a form to create a new Form entity.
      *
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
+
+        $currentformtype = $request->get('currentformtype');
+
         $entity = new Form();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity, $currentformtype);
 
         return $this->render('HarmonyVisualizerMainBundle:Form:new.html.twig', array(
             'entity' => $entity,

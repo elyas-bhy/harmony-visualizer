@@ -21,21 +21,6 @@ class Form
      */
     private $id;
 
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="userid", type="integer", nullable=true)
-     */
-    private $userid;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     */
-    private $email;
-
     /**
      * @var string
      *
@@ -44,39 +29,11 @@ class Form
     private $formType;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="experience", type="text", nullable=true)
+     * @ORM\Column(name="userid", type="integer", nullable=true)
      */
-    private $experience;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="job", type="text", nullable=true)
-     */
-    private $job;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="visualizationExperience", type="text", nullable=true)
-     */
-    private $visualizationExperience;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="deficiency", type="text", nullable=true)
-     */
-    private $deficiency;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="contributed", type="text", nullable=true)
-     */
-    private $contributed;
+    private $userid;
 
     /**
      * @var string
@@ -246,20 +203,6 @@ class Form
      */ 
     private $q12Time;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="q13", type="text")
-     */
-    private $q13;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="q13Time", type="text", nullable=true)
-     */ 
-    private $q13Time;
-
 
     /**
      * Get id
@@ -269,144 +212,6 @@ class Form
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Form
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set experience
-     *
-     * @param string $experience
-     * @return Form
-     */
-    public function setExperience($experience)
-    {
-        $this->experience = $experience;
-
-        return $this;
-    }
-
-    /**
-     * Get experience
-     *
-     * @return string 
-     */
-    public function getExperience()
-    {
-        return $this->experience;
-    }
-
-    /**
-     * Set job
-     *
-     * @param string $job
-     * @return Form
-     */
-    public function setJob($job)
-    {
-        $this->job = $job;
-
-        return $this;
-    }
-
-    /**
-     * Get job
-     *
-     * @return string 
-     */
-    public function getJob()
-    {
-        return $this->job;
-    }
-
-    /**
-     * Set visualizationExperience
-     *
-     * @param string $visualizationExperience
-     * @return Form
-     */
-    public function setVisualizationExperience($visualizationExperience)
-    {
-        $this->visualizationExperience = $visualizationExperience;
-
-        return $this;
-    }
-
-    /**
-     * Get visualizationExperience
-     *
-     * @return string 
-     */
-    public function getVisualizationExperience()
-    {
-        return $this->visualizationExperience;
-    }
-
-    /**
-     * Set deficiency
-     *
-     * @param string $deficiency
-     * @return Form
-     */
-    public function setDeficiency($deficiency)
-    {
-        $this->deficiency = $deficiency;
-
-        return $this;
-    }
-
-    /**
-     * Get deficiency
-     *
-     * @return string 
-     */
-    public function getDeficiency()
-    {
-        return $this->deficiency;
-    }
-
-    /**
-     * Set contributed
-     *
-     * @param string $contributed
-     * @return Form
-     */
-    public function setContributed($contributed)
-    {
-        $this->contributed = $contributed;
-
-        return $this;
-    }
-
-    /**
-     * Get contributed
-     *
-     * @return string 
-     */
-    public function getContributed()
-    {
-        return $this->contributed;
     }
 
     /**
@@ -982,29 +787,6 @@ class Form
     public function getQ12Time()
     {
         return $this->q12Time;
-    }  
-
-    /**
-     * Set q13Time
-     *
-     * @param string $q13Time
-     * @return Form
-     */
-    public function setQ13Time($q13Time)
-    {
-        $this->q13Time = $q13Time;
-
-        return $this;
-    }
-
-    /**
-     * Get q13Time
-     *
-     * @return string 
-     */
-    public function getQ13Time()
-    {
-        return $this->q13Time;
     }  
 
     /**

@@ -16,7 +16,7 @@
 	{{ render(controller("HarmonyVisualizerMainBundle:Default:matrixContacts")) }}
 </div>
 <div class="blockSurvey">
-	{{ render(controller("HarmonyVisualizerMainBundle:Form:new")) }}
+	{{ render(controller("HarmonyVisualizerMainBundle:Form:new", {'currentformtype':'contacts'})) }}
 </div>
 
 {% endblock %}
