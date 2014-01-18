@@ -144,8 +144,10 @@
 
             //demarrerChrono();
         });
+
         $("#harmonyvisualizer_mainbundle_form_formType").val( $("#formtypetxt").attr("data-formtype") );
         $("#harmonyvisualizer_mainbundle_form_userid").val( $("#userid").attr("data-id") );
+        $('#harmonyvisualizer_mainbundle_form_q1').focus();
         demarrerChrono();
 
         $('.question_counter').text(currentQuestion + '/' + numQuestions);
