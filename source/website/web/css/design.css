@@ -151,7 +151,7 @@ button[type=submit] {
 }
 
 .content {
-	margin-left: 50px;
+	margin-left: 100px;
 	height: auto;
 	width: 340px;
 }
@@ -159,6 +159,10 @@ button[type=submit] {
 .content a.btn {
 	margin-top: -50px;
 	margin-left: 30px;
+}
+
+.content div.question {
+	min-height: 70px;
 }
 
 .context header {
