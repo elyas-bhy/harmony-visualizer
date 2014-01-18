@@ -229,7 +229,7 @@ function DataMovinInteractions(){
 	}
 
 	function handleSelectionSrc(selection) {
-		if (multiselect) {  // multiple selection
+		if (multiselect && (selectedSrcItems.length != 0 || selectedDstItems.length != 0)) {  // multiple selection
 			if (selectedSrcItems.hasOwnProperty(selection.point)) {
 				delete selectedSrcItems[selection.point];
 
@@ -260,7 +260,7 @@ function DataMovinInteractions(){
 	}
 
 	function handleSelectionDst(selection) {
-		if (multiselect) {  // multiple selection
+		if (multiselect && (selectedSrcItems.length != 0 || selectedDstItems.length != 0)) {  // multiple selection
 			if (selectedDstItems.hasOwnProperty(selection.point)) {
 				delete selectedDstItems[selection.point];
 
