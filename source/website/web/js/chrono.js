@@ -14,6 +14,7 @@ var chrono_demarre=false;
 var chrono_ecoule=0;
 var chrono_depart=0;
 var chrono_dernier=0;
+var chrono_total=0;
 
 // variables pour la mise a jour dynamique
 var chrono_champ;
@@ -31,6 +32,7 @@ function arreterChrono() {
 	if (chrono_demarre) {
 		chrono_dernier=(new Date()).getTime();
 		chrono_ecoule+=(chrono_dernier-chrono_depart);
+		chrono_total+=chrono_ecoule;
 		chrono_demarre=false;
 	}
 	return true;
@@ -70,6 +72,13 @@ function RAZChrono() {
 	return true;
 } // fin RAZChrono()
 
+
+// Remet a zero le chronometre et son total
+function RAZChronoTotal() {
+	RAZChrono();
+	chrono_total=0;
+} // fin RAZChronoTotal
+
 // retourne le temps mesure par le chronometre au format HH:MM:SS:CC
 function tempsChrono() {
 	var cnow;
@@ -88,3 +97,22 @@ function tempsChrono() {
 	if (cm<10) cm="0"+cm;
 	return (ch+":"+cm+":"+cs+":"+cc);
 } // fin tempsChrono()
+
+
+function tempsChronoTotal() {
+	var cnow;
+	if (chrono_demarre) {
+		chrono_dernier=(new Date()).getTime();
+		cnow=new Date(chrono_total+(chrono_dernier-chrono_depart));
+	} else {
+		cnow=new Date(chrono_total);
+	}
+	var ch=parseInt(cnow.getHours()) - 1;
+	var cm=cnow.getMinutes();
+	var cs=cnow.getSeconds();
+	var cc=parseInt(cnow.getMilliseconds()/10);
+	if (cc<10) cc="0"+cc;
+	if (cs<10) cs="0"+cs;
+	if (cm<10) cm="0"+cm;
+	return (ch+":"+cm+":"+cs+":"+cc);
+}
