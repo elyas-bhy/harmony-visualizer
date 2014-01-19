@@ -1,5 +1,8 @@
 html,body {background-color:#000;}
 
+.clear {
+	clear:both;
+}
 header h1 {
 	font-family: 'Arvo', Georgia, serif;
 	font-size:31px;
@@ -163,7 +166,6 @@ button[type=submit] {
 	margin: 30px;
 	min-height: 70px;
 	clear: both;
-	vertical-align: center;
 }
 
 .content .left div.question {
@@ -174,12 +176,23 @@ button[type=submit] {
 	float: left;
 }
 
+.blockSurvey form div.center {
+	width: 800px;
+	margin: auto;
+	margin-top: 20px;
+}
+.blockSurvey form .btn {
+	margin-left: 20px;
+}
 .content div.left {
 	height: auto;
-	width: 50%;
+	width: 300px;
 	float: left;
+	margin: 0 50px;
 }
-
+.content div.left div {
+	height: 100px;
+}
 .content div.right {
 	height: auto;
 	width: 50%;
@@ -208,8 +221,5 @@ button[type=submit] {
 }
 
 .blockSurvey input, .blockSurvey select {
-	height: 30px;
-	line-height: 30px;
-	min-height: 30px;
-	padding-left: 5px;
+	padding: 5px;
 }
