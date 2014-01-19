@@ -181,7 +181,7 @@ button[type=submit] {
 	margin: auto;
 	margin-top: 20px;
 }
-.blockSurvey form .btn {
+.blockSurvey form div.center .btn {
 	margin-left: 20px;
 }
 .content div.left {
