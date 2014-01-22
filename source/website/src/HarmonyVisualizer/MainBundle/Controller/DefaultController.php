@@ -40,18 +40,127 @@ class DefaultController extends Controller
             ORDER BY u.id, f.formType
         ';
         $resSql = $conn->fetchAll($sql);
+
+        $answerContacts = array(
+            'q1' => 'Piotr Zalewa',
+            'q2' => 'Steven Gill',
+            'q3' => '/',
+            'q4' => '/',
+            'q5' => 'src/wp',
+            'q6' => 'Steven Gill',
+            'q7' => 'src/firefoxos',
+            'q8' => '13',
+            'q9' => '2',
+            'q10' => '4',
+            'q11' => '3',
+            'q12' => 'Steven Gill'
+        );
+        $answerFile = array(
+            'q1' => 'Andrew Grieve',
+            'q2' => 'Steven Gill',
+            'q3' => '/',
+            'q4' => '/',
+            'q5' => 'www/windows8',
+            'q6' => 'Steven Gill',
+            'q7' => '/',
+            'q8' => '8',
+            'q9' => '2',
+            'q10' => '2',
+            'q11' => '2',
+            'q12' => 'Steven Gill'
+        );
+
         $questions = array();
+        $data = array();
+        $data['cordova-plugin-contacts matrix']['q1'] = 0;
+        $data['cordova-plugin-contacts matrix']['q2'] = 0;
+        $data['cordova-plugin-contacts matrix']['q3'] = 0;
+        $data['cordova-plugin-contacts matrix']['q4'] = 0;
+        $data['cordova-plugin-contacts matrix']['q5'] = 0;
+        $data['cordova-plugin-contacts matrix']['q6'] = 0;
+        $data['cordova-plugin-contacts matrix']['q7'] = 0;
+        $data['cordova-plugin-contacts matrix']['q8'] = 0;
+        $data['cordova-plugin-contacts matrix']['q9'] = 0;
+        $data['cordova-plugin-contacts matrix']['q10'] = 0;
+        $data['cordova-plugin-contacts matrix']['q11'] = 0;
+        $data['cordova-plugin-contacts matrix']['q12'] = 0;
+        $data['cordova-plugin-contacts visu']['q1'] = 0;
+        $data['cordova-plugin-contacts visu']['q2'] = 0;
+        $data['cordova-plugin-contacts visu']['q3'] = 0;
+        $data['cordova-plugin-contacts visu']['q4'] = 0;
+        $data['cordova-plugin-contacts visu']['q5'] = 0;
+        $data['cordova-plugin-contacts visu']['q6'] = 0;
+        $data['cordova-plugin-contacts visu']['q7'] = 0;
+        $data['cordova-plugin-contacts visu']['q8'] = 0;
+        $data['cordova-plugin-contacts visu']['q9'] = 0;
+        $data['cordova-plugin-contacts visu']['q10'] = 0;
+        $data['cordova-plugin-contacts visu']['q11'] = 0;
+        $data['cordova-plugin-contacts visu']['q12'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q1'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q2'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q3'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q4'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q5'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q6'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q7'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q8'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q9'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q10'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q11'] = 0;
+        $data['cordova-plugin-file-transfer matrix']['q12'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q1'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q2'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q3'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q4'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q5'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q6'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q7'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q8'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q9'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q10'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q11'] = 0;
+        $data['cordova-plugin-file-transfer visu']['q12'] = 0;
+
+        $total = array();
+        $total['cordova-plugin-contacts matrix'] = 0;
+        $total['cordova-plugin-contacts visu'] = 0;
+        $total['cordova-plugin-file-transfer matrix'] = 0;
+        $total['cordova-plugin-file-transfer visu'] = 0;
         foreach ($resSql as $k => $val) {
-            foreach ($val as $key => $value) {
-                if (strlen($key) < 4 && substr($key, 0, 1) == 'q')
-                    $questions[$k][$key] = $value;
+            if ($val['formType'] == 'cordova-plugin-contacts matrix' || $val['formType'] == 'cordova-plugin-contacts visu') {
+                foreach ($answerContacts as $key => $value) {
+                    if ($value == $val[$key]) {
+                        $data[$val['formType']][$key] += 1;
+                    }
+                }
+            }
+            else if ($val['formType'] == 'cordova-plugin-file-transfer matrix' || $val['formType'] == 'cordova-plugin-file-transfer visu') {
+                foreach ($answerFile as $key => $value) {
+                    if ($value == $val[$key]) {
+                        $data[$val['formType']][$key] += 1;
+                    }
+                }
+            }
+
+            if ($val['formType'] == 'cordova-plugin-contacts matrix') {
+                $total['cordova-plugin-contacts matrix']++;
+            }
+            else if ($val['formType'] == 'cordova-plugin-contacts visu') {
+                $total['cordova-plugin-contacts visu']++;
+            }
+            else if ($val['formType'] == 'cordova-plugin-file-transfer matrix') {
+                $total['cordova-plugin-file-transfer matrix']++;
+            }
+            else if ($val['formType'] == 'cordova-plugin-file-transfer visu') {
+                $total['cordova-plugin-file-transfer visu']++;
             }
         }
 
         //var_dump($resSql);
+        //var_dump($data);
         //var_dump($questions);
 
-        $questionsHeader = array(
+        $questions = array(
             'q1' => "Find the most active developer (in terms of contributions).",
             'q2' => "Find the developer who contributed to the highest number of components.",
             'q3' => "Find the component which has the highest amount of developers.",
@@ -68,8 +177,9 @@ class DefaultController extends Controller
 
         return $this->render('HarmonyVisualizerMainBundle:Default:surveyResults.html.twig', array(
             'resSql' => $resSql,
+            'data' => $data,
             'questions' => $questions,
-            'questionsHeader' => $questionsHeader
+            'total' => $total
         ));
     }
     public function visuContactsAction()

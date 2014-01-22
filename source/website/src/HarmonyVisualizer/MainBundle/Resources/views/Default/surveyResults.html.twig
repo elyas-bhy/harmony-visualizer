@@ -19,9 +19,13 @@
 	</div>
 
 	<style type="text/css">
+		table {
+			margin-bottom: 50px;
+		}
 		table td {
 			border: 1px solid #fff;
 			padding: 5px;
+			text-align: center;
 		}
 	</style>
 
@@ -31,34 +35,23 @@
 		<table>
 			<tr>
 				<td>Project</td>
-				{% for q in questionsHeader %}
+				{% for q in questions %}
 				<td>{{ q }}</td>
 				{% endfor %}
 			</tr>
+			{% for project in data|keys %}
 			<tr>
-				<td>cordova-plugin-contacts matrix</td>
-				{% for q in questionsHeader %}
-				<td></td>
+				<td>
+					{{ project }}
+				</td>
+				
+				{% for q in questions|keys %}
+				<td>
+					{{ data[project][q] }} / {{ total[project] }}
+				</td>
 				{% endfor %}
 			</tr>
-			<tr>
-				<td>cordova-plugin-file-transfer matrix</td>
-				{% for q in questionsHeader %}
-				<td></td>
-				{% endfor %}
-			</tr>
-			<tr>
-				<td>cordova-plugin-contacts visu</td>
-				{% for q in questionsHeader %}
-				<td></td>
-				{% endfor %}
-			</tr>
-			<tr>
-				<td>cordova-plugin-file-transfer visu</td>
-				{% for q in questionsHeader %}
-				<td></td>
-				{% endfor %}
-			</tr>
+			{% endfor %}
 		</table>
 
 	</div>
