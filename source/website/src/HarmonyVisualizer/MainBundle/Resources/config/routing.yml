@@ -59,3 +59,9 @@ survey_matrix_cordova_plugin_contacts:
 survey_matrix_cordova_plugin_file_transfer:
     pattern:  /survey-matrix-cordova-plugin-file-transfer
     defaults: { _controller: HarmonyVisualizerMainBundle:Default:matrixFileTransferForm }
+
+
+
+survey_results:
+    pattern:  /survey-results
+    defaults: { _controller: HarmonyVisualizerMainBundle:Default:surveyResults }
