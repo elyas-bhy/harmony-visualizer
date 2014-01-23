@@ -1,0 +1,28 @@
+\section{Visualisation}
+
+Given the inadequacies we had noticed on the example [cite focusvisu], that if you were to expand the amount of developers and module displayed, it would rapidly become unusable. We set upon creating own visualisation.
+However, we felt that the Focus metric was not very intuitive, given the complexity of the formulas required to calculate it [cite annex formulas]. Therefore we decided to calculate workload distribution.
+
+\subsection{Workload Distribution}
+
+What is workload distribution?
+It is the proportion of contributions each developer has made to each component.
+We define a contribution as a commit to the repository.
+And a component is a directory which contains source code.
+Note: It would have been interesting to expand the definition of contribution to only contain commits of source code, but that is not the case here.\\
+
+By calculating the proportions of contributions that a developer has on each module, by mining data from git repositories with the Harmony[cite Harmony] framework, we were able to calculate the worload distribution. That is to say, how much did each developer contribute, and to which components?
+Once we had our data, we set upon creating our visualisation. Using the framework extracted from a website [cite visu website], we created our own website, with an interactive visualisation[cite visu] of the data we had extracted.\\[0.3cm]
+As with the visualisation from \emph{Dual Ecological Mesures in Software Development}[cite] the size of a developer represents his total amount of contributions, and the size of a component, represents the total amount of contributions it has received, and an edge's size also depends on the amount of contributions it represents.
+Given that size is not alway the best quantifier of values, that is to say it is often difficult to estimate a value from the size of an element, we created an information redundancy with colors. Blue colors represent developers and components with few contributions, and the spectrum extends to red as that amount increases.
+We chose to keep the size of elements, because it makes it easier for people with vision impairments such as colorblindness to use our tool.
+With this visualisation, we made it possible to view one developers contributions to each component of the project, by simply clicking on the developer's name. And we also made it possible to select multiple developers at once in order to view all their contributions at once. This allows us to see which developers have worked on the same components, and to detect possible collaborations.\\
+Selecting every developer allows us to see how the workload was truly distributed as a whole. It displays a lot of information at once, making it sometimes difficult to descern some of the finer details, but it also allows us to determine how the team interacts.
+For instance, it will be possible to see if developers tend to work in small teams, or as one large team, and even if developers tend to work alone (if for instance each component has one developer that contributed the major part of it's code).\\[0.3cm]
+
+On the other hand, it is also possible to select components, and get the opposite view. That is to say all the contributions it has received from each developer. This gives us an easily discernable view of how the team created that component.  This is the exact opposite view from selecting every developer, but the information has been filtered down to a simple component, giving less clutter and making it easier to determine which developers have worked on this component, and what proportion of their work it represents, as well as what proportion of the component does it represent.\\
+Selecting multiple components is also a possibility, and can be used to view how large a proportion of developers work/time is devoted to a group of components.\\[0.3cm]
+
+Each element also has a popup display which contains the numerical counterparts of the edges, thus making it easy to discern between two edges with similar sizes.
+On the component side, the popup indicates the percentage of contributions the top developers have made towards it, sorted in decreasing order, and on the developer side, we have the top components to which he has contributed, represented as a percentage of the total amount of his contributions.
+Clicking an entry within these popups will isolate the edge it represents, and clicking it a second time will scroll the page to the opposite end of that edge.
