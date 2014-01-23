@@ -1,6 +1,6 @@
-\subsection{Dual Ecological Measures of Focus in Software Development\\ \textit{D. Posnett, R. D’Souza, R. Devanbu, V. Filkov (ICSE'2013)}}
+\subsection{Dual Ecological Measures of Focus in Software Development\\ \textit{D. Posnett, R. D'Souza, R. Devanbu, V. Filkov (ICSE'2013)}}
 
-This paper took an interesting approach to measuring the relation between component and developer. Using a biological analogy with prey/predator type relationships between components and developers\cite{Posnett}. That is to say that modules prey on a developer's time. Therefore, in this visualisation, we have two points of view. On the one hand, the developers, and the contributions they have made to each component (a larger edge represents more contributions), and on the other hand, we have the components, and the contributions they have received. As in the following figure:
+This paper took an interesting approach to measuring the relationship between component and developer. Using a biological analogy with prey/predator type relationships between components and developers\cite{Posnett}. That is to say that modules prey on a developer's time. Therefore, in this visualisation we have two points of view. On the one hand, the developers and the contributions they have made to each component (a larger edge represents a higher number of contributions), and on the other hand, we have the components and the contributions they have received. As in the following figure:
 
 \begin{figure}[H]
 \centering
@@ -9,9 +9,9 @@ This paper took an interesting approach to measuring the relation between compon
 \label{fig:focus}
 \end{figure}
 
-This paper evokes the notion of Focus, both from the developers' point of view and the components'.
+This paper evokes the notion of \emph{focus}, both from the developers' point of view and the components'.
 \\[0.4cm]
-\textbf{DAF: Developer’s Attention Focus}
+\textbf{DAF: Developer's Attention Focus}
 \begin{itemize}
 \item Human attention and cognition are finite resources. If they are spread across many tasks, we can usually see a degradation in performance, and errors, and thus the quality of work will suffer. This is the same with all things, and especially in software development.
 \item This metric is designed to measure how focused a developer is on his work, and thus give an indication of the quality of his work compared to his potential.
@@ -23,7 +23,7 @@ This paper evokes the notion of Focus, both from the developers' point of view a
 \end{itemize}
 
 Components are viewed as predators, which hunt developers' cognitive resources. When there is a large amount of contributors on a component, it can "feed" and thus thrive.
-Developers are viewed as prey, whose limited cognitive ressources are divided amoung the components that are "hunting" them.
+Developers are viewed as prey, whose limited cognitive ressources are divided among the components that are "hunting" them.
 
 Therefore, a developer with a high amount of commits on a single component will have higher focus, whereas a developer with a large amount of commits on several components will have lower focus.
 This gives us an idea of the limitations of ownership, because in the second case, the developer might still be considered as owner of several modules, without having concentrated his efforts on these modules.
@@ -37,11 +37,6 @@ Given this information, there a some questions to be raised:
 \item Is there any correlation between a high focus and a low amount of bugs?
 \end{itemize}
 
-\textbf{Conclusions:}
-\begin{itemize}
-\item Project leaders tend to have lower levels of Focus than other Developers.
-\item High focus implies less bugs introduced.
-\item Increasing the Module Activity Focus (MAF) has a negative impact on the quality of that module.
-\end{itemize}
+The authors of this article have determined that project leaders tend to have lower levels of focus than other developers, and that high focus implies less bugs introduced. They also determined that increasing the Module Activity Focus (MAF) has a negative impact on the quality of that module.\\
 
 This paper and it's visualisation is what inspired us the most when deciding what kind of visualisation we should create.
