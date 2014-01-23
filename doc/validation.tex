@@ -1,30 +1,23 @@
 \section{Validation}
 
-\subsection{Context}
+\subsection{Survey Context}
 
-This survey is being conducted for a university project which involves creating a visualisation of version control systems (VCS) data, namely git, in order to facilitate the identification of workload distribution between developers on a given project.
-This survey is a part of an empirical study which aims to evaluate the usefulness of our visualisation tool.
+As a step towards validating the efficiency of our visualisation, we established an empirical study to measure its performance.
 We chose to compare our visualisation with raw data (in tabular format) in order to obtain a first impression of the limitations of our tool when compared to the most basic form of data presentation.
-For this analysis, we chose two Apache projects: cordova-plugin-file-transfer (project A1) and cordova-plugin-contacts (project A2). Larger projects will rapidly become difficult to read data in tabular format, thus potentially biasing the survey in favor of our tool, which would not respect the concept of an empirical study. In order to conduct a thorough study, we would need to conduct the survey on several projects of varying sizes, however we have used our best judgement to choose two projects which will hopefully best resemble the results of a more thorough study.
+For this analysis, we chose two Apache projects: cordova-plugin-contacts (project A) and cordova-plugin-file-transfer (project B). Larger projects will rapidly become difficult to read data in tabular format, thus potentially biasing the survey in favor of our tool, which would not respect the concept of an empirical study. In order to conduct a thorough study, we would need to conduct the survey on several projects of varying sizes. However we have used our best judgement to choose two projects which will hopefully best resemble the results of a more thorough study.
 
 In this survey, we will be interrogating people with an IT background (namely developers), on visualisations of open-source projects.
-
-This visualisation represents the distribution of developer contributions to the components of a project. We define a developer as any person having contributed to the git repository of the project, and component as a folder in the projects filesystem which contains at least one file that is not of directory nature.
 
 During the course of this survey, we will be taking into consideration the level of experience and status of the subjects that are answering the questions, in order to establish whether or not there exists a correlation between the level of expertise of a developer, and his/her ability to correctly answer our survey.
 
 
 \subsection{Experimental Protocol}
 
-In order to underline an eventual difference in efficiency between our visualization and a tabular view, we need to compare the time efficiency of both views on different test subjects. Thus, one test group will be provided with the visualisation of project A1 and the tabular equivalent for project A2. The second test group will be provided with the opposite combination.
+In order to underline an eventual difference in efficiency between our visualization and a tabular view, we need to compare the time efficiency of both views on different test subjects. Thus, one test group will be provided with the visualisation of project A and the tabular equivalent for project B. The second test group will be provided with the opposite combination.
 
-To measure the efficiency of both views, we will simply record the time required by the participant to complete the survey. In order to do so, participants will be required to fill an online form, and will be provided with either of the two combinations mentioned above.
+To measure the efficiency of both views, we will simply record the time required by the participant to complete the survey. In order to do so, participants will be required to fill an online form\footnote{\url{http://ryan.herbert.emi.u-bordeaux1.fr/harmony-visualizer/source/website/web/}}, and will be provided with either of the two combinations mentioned above.
 
-In order to compare the efficiency of a view compared to another, we need to calculate several performance indicators, such as:
-Median of the participant’s elapsed time: for the fastest half, calculate the distribution of people according to their test group. This data indicates whether our visualization tool is useful for a large number of people or not.
-Compare the time performance median of both test groups: this data indicates the difference in efficiency of a view compared to the other.
-Boxplots: depicts groups of numerical data through their quartiles. This data displays differences between populations without making any assumptions of the underlying statistical distribution
-
+In order to compare the efficiency of a view compared to another, we need to calculate several performance indicators. For this, we use boxplots to display differences in performance through their quartiles. We can then determine whether our visualization tool is useful for a large number of people or not, and the difference in efficiency of a view compared to the other.
 
 \subsection{Definitions}
 \begin{itemize}
